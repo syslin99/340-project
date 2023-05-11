@@ -93,6 +93,17 @@ button {
     margin: 10px;
     min-width: 10%;
     font-family: monospace;
+    border: 1px solid;
+    border-radius: 5px;
+
+}
+
+button:hover {
+    background-color: tan;
+}
+
+a:hover {
+    color: tan;
 }
 
 fieldset {
