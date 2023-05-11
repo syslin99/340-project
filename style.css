@@ -28,6 +28,8 @@ html body {
 
 .content {
     display: grid;
+    grid-template-columns: auto auto;
+
 }
 
 /* Search styling */
@@ -153,7 +155,23 @@ fieldset.delete-fieldset {
     align-items: center;
 } 
 
+
 .delete-operations {
     grid-column: 1/span 2;
 }
 
+.page-title {
+    grid-column: 1/span 2;
+}
+
+.search-grouping {
+    grid-column: 1/span 2;
+}
+
+.table-grouping {
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+.operation-grouping {
+}

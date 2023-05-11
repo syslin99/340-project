@@ -8,9 +8,9 @@
     <div id = "header" class="header-appearance">
         <h3><Strong>Gamer Gang</Strong></h3>
         <div class="header-menu">
-            <a class="menu-items" href="#">Home</a>
-            <a class="menu-items" href="#">Employees</a>
-            <a class="menu-items" href="#">Customers</a>
+            <a class="menu-items" href="index.html">Home</a>
+            <a class="menu-items" href="employees.html">Employees</a>
+            <a class="menu-items" href="customers.html">Customers</a>
             <a class="menu-items" href="products.html">Products</a>
             <a class="menu-items" href="types.html">Types</a>
             <a class="menu-items" href="sales.html">Sales</a>
@@ -20,7 +20,7 @@
     <div class="content">
         <h1><strong>Sales</strong></h1>
 
-        <div class="search-sl-ps">
+        <div class="search-sl-ps search-grouping">
             <div class="search-center">
                 <input class="search-components search-bar" type="text" name="search" placeholder="2 (id_sale)">
                 <button class="search-components search-reset">Search</button>
@@ -32,114 +32,120 @@
             </div>
         </div>
 
-        <div class="table-sl" id = "sales_table">
-            <table>
-                <tr class="table-header">
-                    <th class="table-header">ID</th>
-                    <th class="table-header">Date</th>
-                    <th class="table-header">Total Price</th>
-                    <th class="table-header">Customer ID</th>
-                    <th class="table-header-end">Employee ID</th>
-                </tr>
-                <tr>
-                    <th>2</th>
-                    <th>2023-01-13</th>
-                    <th>24.98</th>
-                    <th>3</th>
-                    <th>1</th>
-                </tr>
-            </table>
+        
+        <div class="operation-grouping">
+            <div id = "add_grouping" class="add-grouping">
+                <legend><strong>Add Sale</strong></legend>
+                    <fieldset>
+                        <label>Date:</label> 
+                        <input type="text" name="date">
+                        <label>Total Price:</label>
+                        <input type="text" name="total_price">
+                        <label>Customer ID:</label>
+                        <input type="text" name="id_customer">
+                        <label>Employee ID:</label>
+                        <input type="text" name="id_employee"> 
+                        <div class="add-operations">
+                            <button>Add</button>
+                            <button>Cancel</button>
+                        </div>
+    
+                    </fieldset>
+        
+            </div>
+        
+            <div id = "update_grouping" class="update-grouping">
+                <legend><strong>Update Sale</strong></legend>
+                    <fieldset>
+                        <label>Date:</label> 
+                        <input type="text" name="date" placeholder="2023-01-13">
+                        <label>Total Price:</label>
+                        <input type="text" name="total_price" placeholder="24.98">
+                        <label>Customer ID:</label>
+                        <input type="text" name="id_customer" placeholder="3">
+                        <label>Employee ID:</label>
+                        <input type="text" name="id_employee" placeholder="1">                    
+                        <div class="update-operations">
+                            <button>Update</button>
+                            <button>Cancel</button>
+                        </div>
+    
+                    </fieldset>
+            </div>
+    
+            <div id = "add_grouping" class="add-grouping">
+                <legend><strong>Add Product_Sale</strong></legend>
+                    <fieldset>
+                        <label>Product ID:</label> 
+                        <input type="text" name="id_product">
+                        <label>Sale ID:</label>
+                        <input type="text" name="id_sale">   
+                        <div class="add-operations">
+                            <button>Add</button>
+                            <button>Cancel</button>
+    
+                        </div>
+                    </fieldset>
+        
+            </div>
+        
+            <div id = "update_grouping" class="update-grouping">
+                <legend><strong>Update Product_Sale</strong></legend>
+                    <fieldset>
+                        <label>Product ID:</label> 
+                        <input type="text" name="id_product" placeholder="2">
+                        <label>Sale ID:</label>
+                        <input type="text" name="id_sale" placeholder="2">   
+                        <div class="update-operations">
+                            <button>Update</button>
+                            <button>Cancel</button>
+                        </div>
+    
+                    </fieldset>
+            </div>
+
         </div>
 
-        <div class="table-ps" id = "products_sales_table">
-            <table>
-                <tr class="table-header">
-                    <th class="table-header">ID</th>
-                    <th class="table-header">Product ID</th>
-                    <th class="table-header-end">Sale ID</th>
-                </tr>
-                <tr>
-                    <th>2</th>
-                    <th>2</th>
-                    <th>2</th>
-                </tr>
-                <tr>
-                    <th>3</th>
-                    <th>3</th>
-                    <th>2</th>
-                </tr>
-            </table>
-        </div>
-
+        
+        <div class="table-grouping">
+            <div class="table-sl" id = "sales_table">
+                <table>
+                    <tr class="table-header">
+                        <th class="table-header">ID</th>
+                        <th class="table-header">Date</th>
+                        <th class="table-header">Total Price</th>
+                        <th class="table-header">Customer ID</th>
+                        <th class="table-header-end">Employee ID</th>
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        <th>2023-01-13</th>
+                        <th>24.98</th>
+                        <th>3</th>
+                        <th>1</th>
+                    </tr>
+                </table>
+            </div>
     
-        <div id = "add_grouping" class="add-grouping">
-            <legend><strong>Add Sale</strong></legend>
-                <fieldset>
-                    <label>Date:</label> 
-                    <input type="text" name="date">
-                    <label>Total Price:</label>
-                    <input type="text" name="total_price">
-                    <label>Customer ID:</label>
-                    <input type="text" name="id_customer">
-                    <label>Employee ID:</label>
-                    <input type="text" name="id_employee"> 
-                    <div class="add-operations">
-                        <button>Add</button>
-                        <button>Cancel</button>
-                    </div>
-
-                </fieldset>
-    
-        </div>
-    
-        <div id = "update_grouping" class="update-grouping">
-            <legend><strong>Update Sale</strong></legend>
-                <fieldset>
-                    <label>Date:</label> 
-                    <input type="text" name="date" placeholder="2023-01-13">
-                    <label>Total Price:</label>
-                    <input type="text" name="total_price" placeholder="24.98">
-                    <label>Customer ID:</label>
-                    <input type="text" name="id_customer" placeholder="3">
-                    <label>Employee ID:</label>
-                    <input type="text" name="id_employee" placeholder="1">                    
-                    <div class="update-operations">
-                        <button>Update</button>
-                        <button>Cancel</button>
-                    </div>
-
-                </fieldset>
-        </div>
-
-        <div id = "add_grouping" class="add-grouping">
-            <legend><strong>Add Product_Sale</strong></legend>
-                <fieldset>
-                    <label>Product ID:</label> 
-                    <input type="text" name="id_product">
-                    <label>Sale ID:</label>
-                    <input type="text" name="id_sale">   
-                    <div class="add-operations">
-                        <button>Add</button>
-                        <button>Cancel</button>
-
-                    </div>
-                </fieldset>
-    
-        </div>
-    
-        <div id = "update_grouping" class="update-grouping">
-            <legend><strong>Update Product_Sale</strong></legend>
-                <fieldset>
-                    <label>Product ID:</label> 
-                    <input type="text" name="id_product" placeholder="2">
-                    <label>Sale ID:</label>
-                    <input type="text" name="id_sale" placeholder="2">   
-                    <div class="update-operations">
-                        <button>Update</button>
-                        <button>Cancel</button>
-                    </div>
-
-                </fieldset>
+            <div class="table-ps" id = "products_sales_table">
+                <table>
+                    <tr class="table-header">
+                        <th class="table-header">ID</th>
+                        <th class="table-header">Product ID</th>
+                        <th class="table-header-end">Sale ID</th>
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        <th>2</th>
+                        <th>2</th>
+                    </tr>
+                    <tr>
+                        <th>3</th>
+                        <th>3</th>
+                        <th>2</th>
+                    </tr>
+                </table>
+            </div>
         </div>
 
     </div>
