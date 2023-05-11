@@ -98,7 +98,7 @@ fieldset {
 
 table {
     border: 1px solid;
-    border-radius: 3px;
+    border-radius: 10px;
     min-width: 60%;
 }
 
@@ -114,6 +114,9 @@ legend {
 
 .table-cs, .table-em, .table-pd, .table-tp, .table-sl, .table-ps {
     justify-self: center;
+    display: grid;
+    align-self: flex-start;
+    justify-items: center;
 }
 
 th {
@@ -131,6 +134,14 @@ th {
 
 .table-header-end {
     border-bottom: 1px solid;
+}
+
+.table-header-left {
+    border-top-left-radius: 10px;
+}
+
+.table-header-right {
+    border-top-right-radius: 10px;
 }
 
 /* Group styling */
@@ -171,6 +182,15 @@ fieldset.delete-fieldset {
 .table-grouping {
     display: grid;
     grid-template-rows: auto auto;
+    align-items: center;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    
+}
+
+.item2 {
+    border-top: 1px solid;
+
 }
 
 .operation-grouping {
