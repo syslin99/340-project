@@ -12,8 +12,8 @@
             <a class="menu-items" href="#">Employees</a>
             <a class="menu-items" href="#">Customers</a>
             <a class="menu-items" href="products.html">Products</a>
-            <a class="menu-items" href="sales.html">Sales</a>
             <a class="menu-items" href="types.html">Types</a>
+            <a class="menu-items" href="sales.html">Sales</a>
         </div>
     </div>
 
@@ -23,11 +23,11 @@
         <div class="table-pd" id = "products_table">
             <table>
                 <tr class="table-header">
-                    <th class="table-header">id_product</th>
-                    <th class="table-header">name</th>
-                    <th class="table-header">price</th>
-                    <th class="table-header">stock</th>
-                    <th class="table-header-end">id_type</th>
+                    <th class="table-header">ID</th>
+                    <th class="table-header">Name</th>
+                    <th class="table-header">Price</th>
+                    <th class="table-header">Stock</th>
+                    <th class="table-header-end">Type ID</th>
                 </tr>
                 <tr>
                     <th>1</th>
@@ -42,13 +42,13 @@
         <div id = "add_grouping" class="add-grouping">
             <legend><strong>Add Product</strong></legend>
                 <fieldset>
-                    <label>name:</label> 
+                    <label>Name:</label> 
                     <input type="text" name="fname">
-                    <label>price:</label>
+                    <label>Price:</label>
                     <input type="text" name="price">
-                    <label>stock:</label>
+                    <label>Stock:</label>
                     <input type="text" name="stock">
-                    <label>id_type:</label>
+                    <label>Type ID:</label>
                     <select name="id_type">
                         <option value="N/A">&nbsp;</option>
                         <option value="1">Game</option>
@@ -66,13 +66,13 @@
         <div id = "update_grouping" class="update-grouping">
             <legend><strong>Update Product</strong></legend>
                 <fieldset>
-                    <label>name:</label> 
+                    <label>Name:</label> 
                     <input type="text" name="name" placeholder="Elden Ring">
-                    <label>price:</label>
+                    <label>Price:</label>
                     <input type="text" name="price" placeholder="59.99">
-                    <label>stock:</label>
+                    <label>Stock:</label>
                     <input type="text" name="stock" placeholder="4">
-                    <label>id_type:</label>
+                    <label>Type ID:</label>
                     <select name="id_type">
                         <option value="N/A">&nbsp;</option>
                         <option value="1" selected>Game</option>
@@ -89,15 +89,15 @@
         <div id = "delete_grouping" class="delete-grouping">
             <legend><strong>Delete Product</strong></legend>
                 <fieldset class="delete-fieldset">
-                    <label class="delete-group-labels">Product ID:</label>
+                    <label class="delete-group-labels">ID:</label>
                     <p id="delete_id">1</p>
-                    <label class="delete-group-labels">name:</label>
+                    <label class="delete-group-labels">Name:</label>
                     <p id="delete_name">Elden Ring</p>
-                    <label class="delete-group-labels">price:</label>
+                    <label class="delete-group-labels">Price:</label>
                     <p id="delete_price">59.99</p>                    
-                    <label class="delete-group-labels">stock:</label>
+                    <label class="delete-group-labels">Stock:</label>
                     <p id="delete_stock">5</p>
-                    <label class="delete-group-labels">id_type:</label>
+                    <label class="delete-group-labels">Type ID:</label>
                     <p id="delete_id_type">1</p>
                     <div class="delete-operations">
                         <button>Delete</button>

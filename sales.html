@@ -6,14 +6,14 @@
 </head>
 <body>
     <div id = "header" class="header-appearance">
-        <h2><Strong>Gamer Gang</Strong></h2>
+        <h3><Strong>Gamer Gang</Strong></h3>
         <div class="header-menu">
             <a class="menu-items" href="#">Home</a>
             <a class="menu-items" href="#">Employees</a>
             <a class="menu-items" href="#">Customers</a>
             <a class="menu-items" href="products.html">Products</a>
-            <a class="menu-items" href="sales.html">Sales</a>
             <a class="menu-items" href="types.html">Types</a>
+            <a class="menu-items" href="sales.html">Sales</a>
         </div>
     </div>
 
@@ -35,11 +35,11 @@
         <div class="table-sl" id = "sales_table">
             <table>
                 <tr class="table-header">
-                    <th class="table-header">id_sale</th>
-                    <th class="table-header">date</th>
-                    <th class="table-header">total_price</th>
-                    <th class="table-header">id_customer</th>
-                    <th class="table-header-end">id_employee</th>
+                    <th class="table-header">ID</th>
+                    <th class="table-header">Date</th>
+                    <th class="table-header">Total Price</th>
+                    <th class="table-header">Customer ID</th>
+                    <th class="table-header-end">Employee ID</th>
                 </tr>
                 <tr>
                     <th>2</th>
@@ -54,9 +54,9 @@
         <div class="table-ps" id = "products_sales_table">
             <table>
                 <tr class="table-header">
-                    <th class="table-header">id_product_sale</th>
-                    <th class="table-header">id_product</th>
-                    <th class="table-header-end">id_sale</th>
+                    <th class="table-header">ID</th>
+                    <th class="table-header">Product ID</th>
+                    <th class="table-header-end">Sale ID</th>
                 </tr>
                 <tr>
                     <th>2</th>
@@ -75,13 +75,13 @@
         <div id = "add_grouping" class="add-grouping">
             <legend><strong>Add Sale</strong></legend>
                 <fieldset>
-                    <label>date:</label> 
+                    <label>Date:</label> 
                     <input type="text" name="date">
-                    <label>total_price:</label>
+                    <label>Total Price:</label>
                     <input type="text" name="total_price">
-                    <label>id_customer:</label>
+                    <label>Customer ID:</label>
                     <input type="text" name="id_customer">
-                    <label>id_employee:</label>
+                    <label>Employee ID:</label>
                     <input type="text" name="id_employee"> 
                     <div class="add-operations">
                         <button>Add</button>
@@ -95,13 +95,13 @@
         <div id = "update_grouping" class="update-grouping">
             <legend><strong>Update Sale</strong></legend>
                 <fieldset>
-                    <label>date:</label> 
+                    <label>Date:</label> 
                     <input type="text" name="date" placeholder="2023-01-13">
-                    <label>total_price:</label>
+                    <label>Total Price:</label>
                     <input type="text" name="total_price" placeholder="24.98">
-                    <label>id_customer:</label>
+                    <label>Customer ID:</label>
                     <input type="text" name="id_customer" placeholder="3">
-                    <label>id_employee:</label>
+                    <label>Employee ID:</label>
                     <input type="text" name="id_employee" placeholder="1">                    
                     <div class="update-operations">
                         <button>Update</button>
@@ -114,9 +114,9 @@
         <div id = "add_grouping" class="add-grouping">
             <legend><strong>Add Product_Sale</strong></legend>
                 <fieldset>
-                    <label>id_product:</label> 
+                    <label>Product ID:</label> 
                     <input type="text" name="id_product">
-                    <label>id_sale:</label>
+                    <label>Sale ID:</label>
                     <input type="text" name="id_sale">   
                     <div class="add-operations">
                         <button>Add</button>
@@ -130,9 +130,9 @@
         <div id = "update_grouping" class="update-grouping">
             <legend><strong>Update Product_Sale</strong></legend>
                 <fieldset>
-                    <label>id_product:</label> 
+                    <label>Product ID:</label> 
                     <input type="text" name="id_product" placeholder="2">
-                    <label>id_sale:</label>
+                    <label>Sale ID:</label>
                     <input type="text" name="id_sale" placeholder="2">   
                     <div class="update-operations">
                         <button>Update</button>
