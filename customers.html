@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers</title>
+</head>
+<body>
+    <h1>Gamer Gang</h1>
+    <nav>
+        <a href="products.html">Products</a> |
+        <a href="customers.html">Customers</a> |
+        <a href="types.html">Types</a> |
+        <a href="employees.html">Employees</a> |
+        <a href="sales.html">Sales</a>
+    </nav>
+    <hr>
+
+    <!--READ-->
+    <div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>E-mail</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Jake Williams</td>
+                <td>jakew@woah.com</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Sarah Koohr</td>
+                <td>sarak@woah.com</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Miles Warner</td>
+                <td>milew@woah.com</td>
+            </tr>
+        </table>
+        <br>
+        <br>
+    </div>
+
+    <!--CREATE-->
+    <div>
+        <form>
+            <fieldset>
+                <legend><strong>Add Customer</strong></legend>
+                <p>
+                    <label for="name">Name: </label>
+                    <input type="text" name="name" placeholder="Sally Johnson" required/>
+                </p>
+                <p>
+                    <label for="email">E-mail: </label>
+                    <input type="email" name="email" placeholder="name@example.com"/>
+                </p>
+            </fieldset>
+            <input type="submit" value="Add"/>
+            <input type="button" value="Cancel"/>
+        </form>
+        <br>
+        <br>
+    </div>
+
+    <!--UPDATE-->
+    <div>
+        <form>
+            <fieldset>
+                <legend><strong>Update Customer</strong></legend>
+                <p>
+                    <label for="id">ID: </label>
+                    <input type="number" name="id" required/>
+                </p>
+                <p>
+                    <label for="name">Name: </label>
+                    <input type="text" name="name"/>
+                </p>
+                <p>
+                    <label for="email">E-mail: </label>
+                    <input type="email" name="email"/>
+                </p>
+            </fieldset>
+            <input type="submit" value="Update"/>
+            <input type="button" value="Cancel"/>
+        </form>
+        <br>
+        <br>
+    </div>
+
+    <!--DELETE-->
+    <div>
+        <form>
+            <fieldset>
+                <legend><strong>Delete Customer</strong></legend>
+                <p>
+                    <label for="id">ID: </label>
+                    <input type="number" name="id" required/>
+                </p>
+            </fieldset>
+            <input type="submit" value="Delete"/>
+            <input type="button" value="Cancel"/>
+        </form>
+    </div>
+
+</body>
+</html>
