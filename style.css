@@ -69,6 +69,7 @@ a {
 }
 
 h1 {
+    font-size: 40px;
     margin: 0;
     padding: 10px;
 }
@@ -96,7 +97,10 @@ table {
     border: 1px solid;
     border-radius: 3px;
     min-width: 60%;
+}
 
+legend {
+    font-size: x-large;
 }
 
 /* Table styling */
