@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<head>
+    <meta charset= "utf-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Sales</title>
+</head>
+<body>
+    <div id = "header" class="header-appearance">
+        <h1>Sales</h1>
+    </div>
+
+    <div class="content">
+
+        <div class="search-sl-ps">
+            <input type="text" name="search" placeholder="2 (id_sale)">
+            <button>Search</button>
+            <button>Reset</button>
+        </div>
+
+        <h3>Results for id_sale: 2</h3>
+        <div class="table-sl" id = "sales_table">
+            <table>
+                <tr class="table-header">
+                    <th class="table-header">id_sale</th>
+                    <th class="table-header">date</th>
+                    <th class="table-header">total_price</th>
+                    <th class="table-header">id_customer</th>
+                    <th class="table-header-end">id_employee</th>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <th>2023-01-13</th>
+                    <th>24.98</th>
+                    <th>3</th>
+                    <th>1</th>
+                </tr>
+            </table>
+        </div>
+
+        <div class="table-ps" id = "products_sales_table">
+            <table>
+                <tr class="table-header">
+                    <th class="table-header">id_product_sale</th>
+                    <th class="table-header">id_product</th>
+                    <th class="table-header">id_sale</th>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <th>2</th>
+                    <th>2</th>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <th>3</th>
+                    <th>2</th>
+                </tr>
+            </table>
+        </div>
+
+    
+        <div id = "add_grouping" class="add-grouping">
+            <legend><strong>Add Sale</strong></legend>
+                <fieldset>
+                    <label>date:</label> 
+                    <input type="text" name="date">
+                    <label>total_price:</label>
+                    <input type="text" name="total_price">
+                    <label>id_customer:</label>
+                    <input type="text" name="id_customer">
+                    <label>id_employee:</label>
+                    <input type="text" name="id_employee">    
+                </fieldset>
+                <button>Add</button>
+                <button>Cancel</button>
+    
+        </div>
+    
+        <div id = "update_grouping" class="update-grouping">
+            <legend><strong>Update Sale</strong></legend>
+                <fieldset>
+                    <label>date:</label> 
+                    <input type="text" name="date" placeholder="2023-01-13">
+                    <label>total_price:</label>
+                    <input type="text" name="total_price" placeholder="24.98">
+                    <label>id_customer:</label>
+                    <input type="text" name="id_customer" placeholder="3">
+                    <label>id_employee:</label>
+                    <input type="text" name="id_employee" placeholder="1">                    
+                </fieldset>
+            <button>Update</button>
+            <button>Cancel</button>
+        </div>
+
+        <div id = "add_grouping" class="add-grouping">
+            <legend><strong>Add Product_Sale</strong></legend>
+                <fieldset>
+                    <label>id_product:</label> 
+                    <input type="text" name="id_product">
+                    <label>id_sale:</label>
+                    <input type="text" name="id_sale">   
+                </fieldset>
+                <button>Add</button>
+                <button>Cancel</button>
+    
+        </div>
+    
+        <div id = "update_grouping" class="update-grouping">
+            <legend><strong>Update Product_Sale</strong></legend>
+                <fieldset>
+                    <label>id_product:</label> 
+                    <input type="text" name="id_product" placeholder="2">
+                    <label>id_sale:</label>
+                    <input type="text" name="id_sale" placeholder="2">   
+                </fieldset>
+            <button>Update</button>
+            <button>Cancel</button>
+        </div>
+
+    </div>
+
+</body>

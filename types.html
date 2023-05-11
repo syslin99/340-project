@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+    <meta charset= "utf-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Types</title>
+</head>
+<body>
+    <div id = "header" class="header-appearance">
+        <h1>Types</h1>
+    </div>
+
+    <div class="content">
+        <div class="table-tp" id = "types_table">
+            <table>
+                <tr class="table-header">
+                    <th class="table-header">id_type</th>
+                    <th class="table-header">description</th>
+                    
+                </tr>
+                <tr>
+                    <th>1</th>
+                    <th>Game</th>
+                </tr>
+            </table>
+        </div>
+    
+        <div id = "add_grouping" class="add-grouping">
+            <legend><strong>Add Type</strong></legend>
+                <fieldset>
+                    <label>description:</label> 
+                    <input type="text" name="description">
+                </fieldset>
+                <button>Add</button>
+                <button>Cancel</button>
+    
+        </div>
+    
+        <div id = "update_grouping" class="update-grouping">
+            <legend><strong>Update Type</strong></legend>
+                <fieldset>     
+                    <label>id_type:</label>
+                    <p>1</p>            
+                    <label>description:</label> 
+                    <input type="text" name="description" placeholder="Game">                  
+                </fieldset>
+            <button>Update</button>
+            <button>Cancel</button>
+        </div>
+    
+        <div id = "delete_grouping" class="delete-grouping">
+            <legend><strong>Delete Type</strong></legend>
+                <fieldset>
+                    <label class="delete-group-labels">id_type:</label>
+                    <p id="delete_id">1</p>
+                    <label class="delete-group-labels">description:</label>
+                    <p id="delete_name">Game</p>
+                </fieldset>
+                <button>Delete</button>
+                <button>Cancel</button>
+    
+        </div>
+
+    </div>
+
+</body>

@@ -1,0 +1,38 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.header-appearance {
+    color: light;
+}
+
+.table-pd, .table-tp, .table-sl, .table-ps, .add-grouping, .update-grouping, .delete-grouping {
+    margin-top: 2%;
+}
+
+/* --- Table styling --- */
+table {
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+th {
+    padding: 8px;
+    
+    /* Will place border on bottom of row unless it is the final row of the table*/
+    /* border-bottom: 1px solid; */
+}
+
+.table-header {
+    background-color: lightgreen;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.table-header-end {
+    border-bottom: 1px solid;
+}
+
+label {
+    display: block;
+}
+
