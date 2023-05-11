@@ -39,14 +39,17 @@ html body {
 }
 
 .search-center {
+    grid-column: 1/span 2;
     display: flex;
     justify-content: center;
     width: 100%;
 }
 
 .search-sides {
+    grid-column: 2;
     display: flex;
-    width: 100%;
+    width: 85%;
+    align-self: flex-end;
     align-items: center;
     justify-content: space-between;
 }
@@ -60,7 +63,7 @@ html body {
 .search-components {
     margin-left: 10px;
     min-width: 10%;
-    max-width: 30%;
+    max-width: 60%;
 }
 
 /* General component styling */
