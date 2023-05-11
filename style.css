@@ -1,8 +1,69 @@
-html {
+html body {
+    margin: 0;
+    margin-top: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.content {
+    padding: 2%;
+}
+
+/* Header Styling */
 .header-appearance {
-    color: light;
+    background-color: lightgreen;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.header-menu {
+    margin-left: auto;
+}
+
+.menu-items {
+    display: inline;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.search-sl-ps {
+    display: inline;
+}
+
+.search-center {
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar {
+    width: 20%;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.search-components {
+    margin-left: 10px;
+}
+
+
+a {
+    color: black;
+    text-decoration-line: none;
+}
+
+h1 {
+    margin: 0;
+    padding: 10px;
+}
+
+h2 {
+    padding: 10px;
+    margin: 0;
+}
+
+h3 {
+    margin: 0;
 }
 
 .table-pd, .table-tp, .table-sl, .table-ps, .add-grouping, .update-grouping, .delete-grouping {
@@ -35,4 +96,5 @@ th {
 label {
     display: block;
 }
+
 
