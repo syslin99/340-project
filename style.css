@@ -1,0 +1,158 @@
+html body {
+    margin: 0;
+    margin-top: 0;
+    font-family: monospace;
+}
+
+.content {
+    padding: 2%;
+}
+
+/* Header Styling */
+.header-appearance {
+    background-color: lightgreen;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.header-menu {
+    margin-left: auto;
+}
+
+.menu-items {
+    display: inline;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.content {
+    display: grid;
+}
+
+/* Search styling */
+.search-sl-ps {
+    display: grid;
+    justify-items: center;
+}
+
+.search-center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.search-sides {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-bar {
+    width: 30%;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.search-components {
+    margin-left: 10px;
+    min-width: 10%;
+    max-width: 30%;
+}
+
+/* General component styling */
+
+a {
+    color: black;
+    text-decoration-line: none;
+}
+
+h1 {
+    font-size: 40px;
+    margin: 0;
+    padding: 10px;
+}
+
+h2 {
+    padding: 10px;
+    margin: 0;
+}
+
+h3 {
+    margin: 0;
+}
+
+button {
+    margin: 10px;
+    min-width: 10%;
+    font-family: monospace;
+}
+
+fieldset {
+    border-radius: 10px;
+}
+
+table {
+    border: 1px solid;
+    border-radius: 3px;
+    min-width: 60%;
+}
+
+legend {
+    font-size: x-large;
+}
+
+/* Table styling */
+
+.table-pd, .table-tp, .table-sl, .table-ps, .add-grouping, .update-grouping, .delete-grouping {
+    margin-top: 2%;
+}
+
+.table-pd, .table-tp, .table-sl, .table-ps {
+    justify-self: center;
+}
+
+th {
+    padding: 8px;
+    
+    /* Will place border on bottom of row unless it is the final row of the table*/
+    /* border-bottom: 1px solid; */
+}
+
+.table-header {
+    background-color: lightgreen;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.table-header-end {
+    border-bottom: 1px solid;
+}
+
+/* Group styling */
+
+.add-grouping {
+    display: grid;
+}
+
+.add-operations, .update-operations, .delete-operations {
+    display: flex;
+    justify-content: flex-end;
+}
+
+label {
+    display: block;
+}
+
+/* Delete group styling */
+fieldset.delete-fieldset {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+} 
+
+.delete-operations {
+    grid-column: 1/span 2;
+}
+
