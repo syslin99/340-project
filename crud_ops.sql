@@ -167,3 +167,4 @@ VALUES (:idProductInput, :idSaleInput);
     UPDATE `Product_Sales`
     SET `id_product` = :idProductInput, `id_sale` = :idSaleInput
     WHERE `id_product_sale` = :idInput;
+
