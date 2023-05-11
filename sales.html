@@ -6,7 +6,7 @@
 </head>
 <body>
     <div id = "header" class="header-appearance">
-        <h2>Gamer Gang</h2>
+        <h2><Strong>Gamer Gang</Strong></h2>
         <div class="header-menu">
             <a class="menu-items" href="#">Home</a>
             <a class="menu-items" href="#">Employees</a>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="content">
-        <h1>Sales</h1>
+        <h1><strong>Sales</strong></h1>
 
         <div class="search-sl-ps">
             <div class="search-center">
@@ -26,10 +26,12 @@
                 <button class="search-components search-reset">Search</button>
 
             </div>
-            <button class="search-components">Reset</button>
+            <div class="search-sides">
+                <h3 class="search-components">Results for id_sale: 2</h3>
+                <button class="search-components search-reset">Reset</button>
+            </div>
         </div>
 
-        <h3>Results for id_sale: 2</h3>
         <div class="table-sl" id = "sales_table">
             <table>
                 <tr class="table-header">
@@ -54,7 +56,7 @@
                 <tr class="table-header">
                     <th class="table-header">id_product_sale</th>
                     <th class="table-header">id_product</th>
-                    <th class="table-header">id_sale</th>
+                    <th class="table-header-end">id_sale</th>
                 </tr>
                 <tr>
                     <th>2</th>
@@ -80,10 +82,13 @@
                     <label>id_customer:</label>
                     <input type="text" name="id_customer">
                     <label>id_employee:</label>
-                    <input type="text" name="id_employee">    
+                    <input type="text" name="id_employee"> 
+                    <div class="add-operations">
+                        <button>Add</button>
+                        <button>Cancel</button>
+                    </div>
+
                 </fieldset>
-                <button>Add</button>
-                <button>Cancel</button>
     
         </div>
     
@@ -98,9 +103,12 @@
                     <input type="text" name="id_customer" placeholder="3">
                     <label>id_employee:</label>
                     <input type="text" name="id_employee" placeholder="1">                    
+                    <div class="update-operations">
+                        <button>Update</button>
+                        <button>Cancel</button>
+                    </div>
+
                 </fieldset>
-            <button>Update</button>
-            <button>Cancel</button>
         </div>
 
         <div id = "add_grouping" class="add-grouping">
@@ -110,9 +118,12 @@
                     <input type="text" name="id_product">
                     <label>id_sale:</label>
                     <input type="text" name="id_sale">   
+                    <div class="add-operations">
+                        <button>Add</button>
+                        <button>Cancel</button>
+
+                    </div>
                 </fieldset>
-                <button>Add</button>
-                <button>Cancel</button>
     
         </div>
     
@@ -123,9 +134,12 @@
                     <input type="text" name="id_product" placeholder="2">
                     <label>id_sale:</label>
                     <input type="text" name="id_sale" placeholder="2">   
+                    <div class="update-operations">
+                        <button>Update</button>
+                        <button>Cancel</button>
+                    </div>
+
                 </fieldset>
-            <button>Update</button>
-            <button>Cancel</button>
         </div>
 
     </div>

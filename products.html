@@ -6,7 +6,7 @@
 </head>
 <body>
     <div id = "header" class="header-appearance">
-        <h2>Gamer Gang</h2>
+        <h2><Strong>Gamer Gang</Strong></h2>
         <div class="header-menu">
             <a class="menu-items" href="#">Home</a>
             <a class="menu-items" href="#">Employees</a>
@@ -55,10 +55,11 @@
                         <option value="2">DLC</option>
                         <option value="3">In-game Currency</option>   
                     </select>
-
+                    <div class="add-operations">
+                        <button>Add</button>
+                        <button>Cancel</button>
+                    </div>
                 </fieldset>
-                <button>Add</button>
-                <button>Cancel</button>
     
         </div>
     
@@ -78,14 +79,16 @@
                         <option value="2">DLC</option>
                         <option value="3">In-game Currency</option>   
                     </select>
+                    <div class="update-operations">
+                        <button>Update</button>
+                        <button>Cancel</button>
+                    </div>
                 </fieldset>
-            <button>Update</button>
-            <button>Cancel</button>
         </div>
     
         <div id = "delete_grouping" class="delete-grouping">
             <legend><strong>Delete Product</strong></legend>
-                <fieldset>
+                <fieldset class="delete-fieldset">
                     <label class="delete-group-labels">Product ID:</label>
                     <p id="delete_id">1</p>
                     <label class="delete-group-labels">name:</label>
@@ -96,9 +99,12 @@
                     <p id="delete_stock">5</p>
                     <label class="delete-group-labels">id_type:</label>
                     <p id="delete_id_type">1</p>
+                    <div class="delete-operations">
+                        <button>Delete</button>
+                        <button>Cancel</button>
+                        
+                    </div>
                 </fieldset>
-                <button>Delete</button>
-                <button>Cancel</button>
     
         </div>
 
