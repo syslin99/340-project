@@ -39,14 +39,17 @@ html body {
 }
 
 .search-center {
+    grid-column: 1/span 2;
     display: flex;
     justify-content: center;
     width: 100%;
 }
 
 .search-sides {
+    grid-column: 2;
     display: flex;
-    width: 100%;
+    width: 85%;
+    align-self: flex-end;
     align-items: center;
     justify-content: space-between;
 }
@@ -60,7 +63,7 @@ html body {
 .search-components {
     margin-left: 10px;
     min-width: 10%;
-    max-width: 30%;
+    max-width: 60%;
 }
 
 /* General component styling */
@@ -90,6 +93,17 @@ button {
     margin: 10px;
     min-width: 10%;
     font-family: monospace;
+    border: 1px solid;
+    border-radius: 5px;
+
+}
+
+button:hover {
+    background-color: tan;
+}
+
+a:hover {
+    color: tan;
 }
 
 fieldset {
@@ -98,7 +112,7 @@ fieldset {
 
 table {
     border: 1px solid;
-    border-radius: 3px;
+    border-radius: 10px;
     min-width: 60%;
 }
 
@@ -114,6 +128,9 @@ legend {
 
 .table-cs, .table-em, .table-pd, .table-tp, .table-sl, .table-ps {
     justify-self: center;
+    display: grid;
+    align-self: flex-start;
+    justify-items: center;
 }
 
 th {
@@ -131,6 +148,14 @@ th {
 
 .table-header-end {
     border-bottom: 1px solid;
+}
+
+.table-header-left {
+    border-top-left-radius: 10px;
+}
+
+.table-header-right {
+    border-top-right-radius: 10px;
 }
 
 /* Group styling */
@@ -171,6 +196,15 @@ fieldset.delete-fieldset {
 .table-grouping {
     display: grid;
     grid-template-rows: auto auto;
+    align-items: center;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    
+}
+
+.item2 {
+    border-top: 1px solid;
+
 }
 
 .operation-grouping {
