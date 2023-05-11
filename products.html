@@ -6,11 +6,11 @@
 </head>
 <body>
     <div id = "header" class="header-appearance">
-        <h2><Strong>Gamer Gang</Strong></h2>
+        <h3><Strong>Gamer Gang</Strong></h3>
         <div class="header-menu">
-            <a class="menu-items" href="#">Home</a>
-            <a class="menu-items" href="#">Employees</a>
-            <a class="menu-items" href="#">Customers</a>
+            <a class="menu-items" href="index.html">Home</a>
+            <a class="menu-items" href="employees.html">Employees</a>
+            <a class="menu-items" href="customers.html">Customers</a>
             <a class="menu-items" href="products.html">Products</a>
             <a class="menu-items" href="types.html">Types</a>
             <a class="menu-items" href="sales.html">Sales</a>
@@ -19,93 +19,99 @@
 
 
     <div class="content">
-        <h1>Products</h1>
-        <div class="table-pd" id = "products_table">
-            <table>
-                <tr class="table-header">
-                    <th class="table-header">ID</th>
-                    <th class="table-header">Name</th>
-                    <th class="table-header">Price</th>
-                    <th class="table-header">Stock</th>
-                    <th class="table-header-end">Type ID</th>
-                </tr>
-                <tr>
-                    <th>1</th>
-                    <th>Elden Ring</th>
-                    <th>59.99</th>
-                    <th>4</th>
-                    <th>1</th>
-                </tr>
-            </table>
+        <h1 class="page-title">Products</h1>
+        
+        <div class="operation-grouping">
+            <div id = "add_grouping" class="add-grouping">
+                <legend><strong>Add Product</strong></legend>
+                    <fieldset>
+                        <label>Name:</label> 
+                        <input type="text" name="fname">
+                        <label>Price:</label>
+                        <input type="text" name="price">
+                        <label>Stock:</label>
+                        <input type="text" name="stock">
+                        <label>Type ID:</label>
+                        <select name="id_type">
+                            <option value="N/A">&nbsp;</option>
+                            <option value="1">Game</option>
+                            <option value="2">DLC</option>
+                            <option value="3">In-game Currency</option>   
+                        </select>
+                        <div class="add-operations">
+                            <button>Add</button>
+                            <button>Cancel</button>
+                        </div>
+                    </fieldset>
+        
+            </div>
+        
+            <div id = "update_grouping" class="update-grouping">
+                <legend><strong>Update Product</strong></legend>
+                    <fieldset>
+                        <label>Name:</label> 
+                        <input type="text" name="name" placeholder="Elden Ring">
+                        <label>Price:</label>
+                        <input type="text" name="price" placeholder="59.99">
+                        <label>Stock:</label>
+                        <input type="text" name="stock" placeholder="4">
+                        <label>Type ID:</label>
+                        <select name="id_type">
+                            <option value="N/A">&nbsp;</option>
+                            <option value="1" selected>Game</option>
+                            <option value="2">DLC</option>
+                            <option value="3">In-game Currency</option>   
+                        </select>
+                        <div class="update-operations">
+                            <button>Update</button>
+                            <button>Cancel</button>
+                        </div>
+                    </fieldset>
+            </div>
+        
+            <div id = "delete_grouping" class="delete-grouping">
+                <legend><strong>Delete Product</strong></legend>
+                    <fieldset class="delete-fieldset">
+                        <label class="delete-group-labels">ID:</label>
+                        <p id="delete_id">1</p>
+                        <label class="delete-group-labels">Name:</label>
+                        <p id="delete_name">Elden Ring</p>
+                        <label class="delete-group-labels">Price:</label>
+                        <p id="delete_price">59.99</p>                    
+                        <label class="delete-group-labels">Stock:</label>
+                        <p id="delete_stock">5</p>
+                        <label class="delete-group-labels">Type ID:</label>
+                        <p id="delete_id_type">1</p>
+                        <div class="delete-operations">
+                            <button>Delete</button>
+                            <button>Cancel</button>
+                            
+                        </div>
+                    </fieldset>
+        
+            </div>
+
         </div>
-    
-        <div id = "add_grouping" class="add-grouping">
-            <legend><strong>Add Product</strong></legend>
-                <fieldset>
-                    <label>Name:</label> 
-                    <input type="text" name="fname">
-                    <label>Price:</label>
-                    <input type="text" name="price">
-                    <label>Stock:</label>
-                    <input type="text" name="stock">
-                    <label>Type ID:</label>
-                    <select name="id_type">
-                        <option value="N/A">&nbsp;</option>
-                        <option value="1">Game</option>
-                        <option value="2">DLC</option>
-                        <option value="3">In-game Currency</option>   
-                    </select>
-                    <div class="add-operations">
-                        <button>Add</button>
-                        <button>Cancel</button>
-                    </div>
-                </fieldset>
-    
-        </div>
-    
-        <div id = "update_grouping" class="update-grouping">
-            <legend><strong>Update Product</strong></legend>
-                <fieldset>
-                    <label>Name:</label> 
-                    <input type="text" name="name" placeholder="Elden Ring">
-                    <label>Price:</label>
-                    <input type="text" name="price" placeholder="59.99">
-                    <label>Stock:</label>
-                    <input type="text" name="stock" placeholder="4">
-                    <label>Type ID:</label>
-                    <select name="id_type">
-                        <option value="N/A">&nbsp;</option>
-                        <option value="1" selected>Game</option>
-                        <option value="2">DLC</option>
-                        <option value="3">In-game Currency</option>   
-                    </select>
-                    <div class="update-operations">
-                        <button>Update</button>
-                        <button>Cancel</button>
-                    </div>
-                </fieldset>
-        </div>
-    
-        <div id = "delete_grouping" class="delete-grouping">
-            <legend><strong>Delete Product</strong></legend>
-                <fieldset class="delete-fieldset">
-                    <label class="delete-group-labels">ID:</label>
-                    <p id="delete_id">1</p>
-                    <label class="delete-group-labels">Name:</label>
-                    <p id="delete_name">Elden Ring</p>
-                    <label class="delete-group-labels">Price:</label>
-                    <p id="delete_price">59.99</p>                    
-                    <label class="delete-group-labels">Stock:</label>
-                    <p id="delete_stock">5</p>
-                    <label class="delete-group-labels">Type ID:</label>
-                    <p id="delete_id_type">1</p>
-                    <div class="delete-operations">
-                        <button>Delete</button>
-                        <button>Cancel</button>
-                        
-                    </div>
-                </fieldset>
-    
+
+        <div class="table-grouping">
+            <div class="table-pd" id = "products_table">
+                <table>
+                    <tr class="table-header">
+                        <th class="table-header">ID</th>
+                        <th class="table-header">Name</th>
+                        <th class="table-header">Price</th>
+                        <th class="table-header">Stock</th>
+                        <th class="table-header-end">Type ID</th>
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <th>Elden Ring</th>
+                        <th>59.99</th>
+                        <th>4</th>
+                        <th>1</th>
+                    </tr>
+                </table>
+            </div>
         </div>
 
     </div>

@@ -6,7 +6,7 @@
 </head>
 <body>
     <div id = "header" class="header-appearance">
-        <h2><strong>Gamer Gang</strong></h2>
+        <h3><strong>Gamer Gang</strong></h3>
         <div class="header-menu">
             <a class="menu-items" href="index.html">Home</a>
             <a class="menu-items" href="employees.html">Employees</a>
@@ -18,61 +18,65 @@
     </div>
 
     <div class="content">
-        <h1><strong>Types</strong></h1>
+        <h1 class="page-title"><strong>Types</strong></h1>
 
-        <div class="table-tp" id = "types_table">
-            <table>
-                <tr class="table-header">
-                    <th class="table-header">ID</th>
-                    <th class="table-header">Description</th>
-                    
-                </tr>
-                <tr>
-                    <th>1</th>
-                    <th>Game</th>
-                </tr>
-            </table>
-        </div>
+        
+        <div class="operation-grouping">
+            <div id = "add_grouping" class="add-grouping">
+                <legend><strong>Add Type</strong></legend>
+                    <fieldset>
+                        <label>Description:</label> 
+                        <input type="text" name="description">
+                        <div class="add-operations">
+                            <button>Add</button>
+                            <button>Cancel</button>
+                        </div>
     
-        <div id = "add_grouping" class="add-grouping">
-            <legend><strong>Add Type</strong></legend>
-                <fieldset>
-                    <label>Description:</label> 
-                    <input type="text" name="description">
-                    <div class="add-operations">
-                        <button>Add</button>
-                        <button>Cancel</button>
-                    </div>
+                    </fieldset>
+        
+            </div>
+        
+            <div id = "update_grouping" class="update-grouping">
+                <legend><strong>Update Type</strong></legend>
+                    <fieldset>               
+                        <label>Description:</label> 
+                        <input type="text" name="description" placeholder="Game">                  
+                        <div class="update-operations">
+                            <button>Update</button>
+                            <button>Cancel</button>
+                        </div>
+                    </fieldset>
+            </div>
+        
+            <div id = "delete_grouping" class="delete-grouping">
+                <legend><strong>Delete Type</strong></legend>
+                    <fieldset class="delete-fieldset">
+                        <label class="delete-group-labels">ID:</label>
+                        <p id="delete_id">1</p>
+                        <label class="delete-group-labels">Description:</label>
+                        <p id="delete_name">Game</p>
+                        <div class="delete-operations">
+                            <button>Delete</button>
+                            <button>Cancel</button>
+                        </div>
+                    </fieldset>
+            </div>
+        </div>
 
-                </fieldset>
-    
-        </div>
-    
-        <div id = "update_grouping" class="update-grouping">
-            <legend><strong>Update Type</strong></legend>
-                <fieldset>               
-                    <label>Description:</label> 
-                    <input type="text" name="description" placeholder="Game">                  
-                    <div class="update-operations">
-                        <button>Update</button>
-                        <button>Cancel</button>
-                    </div>
-                </fieldset>
-        </div>
-    
-        <div id = "delete_grouping" class="delete-grouping">
-            <legend><strong>Delete Type</strong></legend>
-                <fieldset class="delete-fieldset">
-                    <label class="delete-group-labels">ID:</label>
-                    <p id="delete_id">1</p>
-                    <label class="delete-group-labels">Description:</label>
-                    <p id="delete_name">Game</p>
-                    <div class="delete-operations">
-                        <button>Delete</button>
-                        <button>Cancel</button>
-                    </div>
-                </fieldset>
-    
+        <div class="table-grouping">
+            <div class="table-tp" id = "types_table">
+                <table>
+                    <tr class="table-header">
+                        <th class="table-header">ID</th>
+                        <th class="table-header">Description</th>
+                        
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <th>Game</th>
+                    </tr>
+                </table>
+            </div>
         </div>
 
     </div>
