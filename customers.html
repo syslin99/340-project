@@ -1,109 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Customers</title>
 </head>
 <body>
-    <h1>Gamer Gang</h1>
-    <nav>
-        <a href="products.html">Products</a> |
-        <a href="customers.html">Customers</a> |
-        <a href="types.html">Types</a> |
-        <a href="employees.html">Employees</a> |
-        <a href="sales.html">Sales</a>
-    </nav>
-    <hr>
-
-    <!--READ-->
-    <div>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>E-mail</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Jake Williams</td>
-                <td>jakew@woah.com</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Sarah Koohr</td>
-                <td>sarak@woah.com</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Miles Warner</td>
-                <td>milew@woah.com</td>
-            </tr>
-        </table>
-        <br>
-        <br>
+    <div id = "header" class="header-appearance">
+        <h3><Strong>Gamer Gang</Strong></h3>
+        <div class="header-menu">
+            <a class="menu-items" href="index.html">Home</a>
+            <a class="menu-items" href="employees.html">Employees</a>
+            <a class="menu-items" href="customers.html">Customers</a>
+            <a class="menu-items" href="products.html">Products</a>
+            <a class="menu-items" href="types.html">Types</a>
+            <a class="menu-items" href="sales.html">Sales</a>
+        </div>
     </div>
 
-    <!--CREATE-->
-    <div>
-        <form>
-            <fieldset>
+    <div class="content">
+        <h1 class="page-title"><strong>Customers</strong></h1>
+
+        <div class="operation-grouping">
+            <div id="add_grouping" class="add-grouping">
                 <legend><strong>Add Customer</strong></legend>
-                <p>
+                <fieldset>
                     <label for="name">Name: </label>
                     <input type="text" name="name" placeholder="Sally Johnson" required/>
-                </p>
-                <p>
                     <label for="email">E-mail: </label>
                     <input type="email" name="email" placeholder="name@example.com"/>
-                </p>
-            </fieldset>
-            <input type="submit" value="Add"/>
-            <input type="button" value="Cancel"/>
-        </form>
-        <br>
-        <br>
-    </div>
+                    <div class="add-operations">
+                        <button>Add</button>
+                        <button>Cancel</button>
+                    </div>
+                </fieldset>
+            </div>
 
-    <!--UPDATE-->
-    <div>
-        <form>
-            <fieldset>
+            <div id="update_grouping" class="update-grouping">
                 <legend><strong>Update Customer</strong></legend>
-                <p>
+                <fieldset>
                     <label for="id">ID: </label>
                     <input type="number" name="id" required/>
-                </p>
-                <p>
                     <label for="name">Name: </label>
                     <input type="text" name="name"/>
-                </p>
-                <p>
                     <label for="email">E-mail: </label>
                     <input type="email" name="email"/>
-                </p>
-            </fieldset>
-            <input type="submit" value="Update"/>
-            <input type="button" value="Cancel"/>
-        </form>
-        <br>
-        <br>
-    </div>
+                    <div class="update-operations">
+                        <button>Update</button>
+                        <button>Cancel</button>
+                    </div>
+                </fieldset>
+            </div>
 
-    <!--DELETE-->
-    <div>
-        <form>
-            <fieldset>
+            <div id="delete_grouping" class="delete-grouping">
                 <legend><strong>Delete Customer</strong></legend>
-                <p>
+                <fieldset>
                     <label for="id">ID: </label>
                     <input type="number" name="id" required/>
-                </p>
-            </fieldset>
-            <input type="submit" value="Delete"/>
-            <input type="button" value="Cancel"/>
-        </form>
-    </div>
+                    <div class="delete-operations">
+                        <button>Delete</button>
+                        <button>Cancel</button>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
 
+        <div class="table-grouping">
+            <div class="table-cs" id="customers_table">
+                <table>
+                    <tr class="table-header">
+                        <th class="table-header">ID</th>
+                        <th class="table-header">Name</th>
+                        <th class="table-header">E-mail</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Jake Williams</td>
+                        <td>jakew@woah.com</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Sarah Koohr</td>
+                        <td>sarak@woah.com</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Miles Warner</td>
+                        <td>milew@woah.com</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>

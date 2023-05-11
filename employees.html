@@ -1,133 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Employees</title>
 </head>
 <body>
-    <h1>Gamer Gang</h1>
-    <nav>
-        <a href="products.html">Products</a> |
-        <a href="customers.html">Customers</a> |
-        <a href="types.html">Types</a> |
-        <a href="employees.html">Employees</a> |
-        <a href="sales.html">Sales</a>
-    </nav>
-    <hr>
-
-    <!--READ-->
-    <div>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Rate</th>
-                <th>Hours</th>
-                <th>Sales</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Joel Villamor</td>
-                <td>21.50</td>
-                <td>154</td>
-                <td>22</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Samantha Lin</td>
-                <td>21.50</td>
-                <td>150</td>
-                <td>19</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Kelly Walker</td>
-                <td>19.50</td>
-                <td>82</td>
-                <td>7</td>
-            </tr>
-        </table>
-        <br>
-        <br>
+    <div id = "header" class="header-appearance">
+        <h3><Strong>Gamer Gang</Strong></h3>
+        <div class="header-menu">
+            <a class="menu-items" href="index.html">Home</a>
+            <a class="menu-items" href="employees.html">Employees</a>
+            <a class="menu-items" href="customers.html">Customers</a>
+            <a class="menu-items" href="products.html">Products</a>
+            <a class="menu-items" href="types.html">Types</a>
+            <a class="menu-items" href="sales.html">Sales</a>
+        </div>
     </div>
 
-    <!--CREATE-->
-    <div>
-        <form>
-            <fieldset>
+    <div class="content">
+        <h1 class="page-title"><strong>Employees</strong></h1>
+
+        <div class="operation-grouping">
+            <div id="add_grouping" class="add-grouping">
                 <legend><strong>Add Employee</strong></legend>
-                <p>
+                <fieldset>
                     <label for="name">Name: </label>
                     <input type="text" name="name" placeholder="Sally Johnson" required/>
-                </p>
-                <p>
                     <label for="rate">Rate: </label>
                     <input type="number" min="0" step="0.01" name="rate" placeholder="19.50"/>
-                </p>
-                <p>
                     <label for="hours">Hours: </label>
                     <input type="number" min="0" name="hours" placeholder="0"/>
-                </p>
-                <p>
                     <label for="sales">Sales: </label>
                     <input type="number" min="0" name="sales" placeholder="0"/>
-                </p>
-            </fieldset>
-            <input type="submit" value="Add"/>
-            <input type="button" value="Cancel"/>
-        </form>
-        <br>
-        <br>
-    </div>
+                    <div class="add-operations">
+                        <button>Add</button>
+                        <button>Cancel</button>
+                    </div>
+                </fieldset>
+            </div>
 
-    <!--UPDATE-->
-    <div>
-        <form>
-            <fieldset>
+            <div id="update-grouping" class="update-grouping">
                 <legend><strong>Update Employee</strong></legend>
-                <p>
+                <fieldset>
                     <label for="id">ID: </label>
                     <input type="number" name="id" required/>
-                </p>
-                <p>
                     <label for="name">Name: </label>
                     <input type="text" name="name"/>
-                </p>
-                <p>
                     <label for="rate">Rate: </label>
                     <input type="number" min="0" step="0.01" name="rate"/>
-                </p>
-                <p>
                     <label for="hours">Hours: </label>
                     <input type="number" min="0" name="hours"/>
-                </p>
-                <p>
                     <label for="sales">Sales: </label>
                     <input type="number" min="0" name="sales"/>
-                </p>
-            </fieldset>
-            <input type="submit" value="Update"/>
-            <input type="button" value="Cancel"/>
-        </form>
-        <br>
-        <br>
-    </div>
+                    <div class="update-operations">
+                        <button>Update</button>
+                        <button>Cancel</button>
+                    </div>
+                </fieldset>
+            </div>
 
-    <!--DELETE-->
-    <div>
-        <form>
-            <fieldset>
+            <div id="delete_grouping" class="delete-grouping">
                 <legend><strong>Delete Employee</strong></legend>
-                <p>
+                <fieldset>
                     <label for="id">ID: </label>
                     <input type="number" name="id" required/>
-                </p>
-            </fieldset>
-            <input type="submit" value="Delete"/>
-            <input type="button" value="Cancel"/>
-        </form>
+                    <div class="delete-operations">
+                        <button>Delete</button>
+                        <button>Cancel</button>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="table-grouping">
+            <div class="table-em" id="employees_table">
+                <table>
+                    <tr class="table-header">
+                        <th class="table-header">ID</th>
+                        <th class="table-header">Name</th>
+                        <th class="table-header">Rate</th>
+                        <th class="table-header">Hours</th>
+                        <th class="table-header">Sales</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Joel Villamor</td>
+                        <td>21.50</td>
+                        <td>154</td>
+                        <td>22</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Samantha Lin</td>
+                        <td>21.50</td>
+                        <td>150</td>
+                        <td>19</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Kelly Walker</td>
+                        <td>19.50</td>
+                        <td>82</td>
+                        <td>7</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
     </div>
 
+    
+    </div>
 </body>
 </html>

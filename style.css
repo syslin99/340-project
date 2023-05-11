@@ -108,7 +108,7 @@ legend {
 
 /* Table styling */
 
-.table-pd, .table-tp, .table-sl, .table-ps, .add-grouping, .update-grouping, .delete-grouping {
+.table-cs, .table-em, .table-pd, .table-tp, .table-sl, .table-ps, .add-grouping, .update-grouping, .delete-grouping {
     margin-top: 2%;
 }
 
