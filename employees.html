@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employees</title>
+</head>
+<body>
+    <h1>Gamer Gang</h1>
+    <nav>
+        <a href="products.html">Products</a> |
+        <a href="customers.html">Customers</a> |
+        <a href="types.html">Types</a> |
+        <a href="employees.html">Employees</a> |
+        <a href="sales.html">Sales</a>
+    </nav>
+    <hr>
+
+    <!--READ-->
+    <div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Rate</th>
+                <th>Hours</th>
+                <th>Sales</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Joel Villamor</td>
+                <td>21.50</td>
+                <td>154</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Samantha Lin</td>
+                <td>21.50</td>
+                <td>150</td>
+                <td>19</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Kelly Walker</td>
+                <td>19.50</td>
+                <td>82</td>
+                <td>7</td>
+            </tr>
+        </table>
+        <br>
+        <br>
+    </div>
+
+    <!--CREATE-->
+    <div>
+        <form>
+            <fieldset>
+                <legend><strong>Add Employee</strong></legend>
+                <p>
+                    <label for="name">Name: </label>
+                    <input type="text" name="name" placeholder="Sally Johnson" required/>
+                </p>
+                <p>
+                    <label for="rate">Rate: </label>
+                    <input type="number" min="0" step="0.01" name="rate" placeholder="19.50"/>
+                </p>
+                <p>
+                    <label for="hours">Hours: </label>
+                    <input type="number" min="0" name="hours" placeholder="0"/>
+                </p>
+                <p>
+                    <label for="sales">Sales: </label>
+                    <input type="number" min="0" name="sales" placeholder="0"/>
+                </p>
+            </fieldset>
+            <input type="submit" value="Add"/>
+            <input type="button" value="Cancel"/>
+        </form>
+        <br>
+        <br>
+    </div>
+
+    <!--UPDATE-->
+    <div>
+        <form>
+            <fieldset>
+                <legend><strong>Update Employee</strong></legend>
+                <p>
+                    <label for="id">ID: </label>
+                    <input type="number" name="id" required/>
+                </p>
+                <p>
+                    <label for="name">Name: </label>
+                    <input type="text" name="name"/>
+                </p>
+                <p>
+                    <label for="rate">Rate: </label>
+                    <input type="number" min="0" step="0.01" name="rate"/>
+                </p>
+                <p>
+                    <label for="hours">Hours: </label>
+                    <input type="number" min="0" name="hours"/>
+                </p>
+                <p>
+                    <label for="sales">Sales: </label>
+                    <input type="number" min="0" name="sales"/>
+                </p>
+            </fieldset>
+            <input type="submit" value="Update"/>
+            <input type="button" value="Cancel"/>
+        </form>
+        <br>
+        <br>
+    </div>
+
+    <!--DELETE-->
+    <div>
+        <form>
+            <fieldset>
+                <legend><strong>Delete Employee</strong></legend>
+                <p>
+                    <label for="id">ID: </label>
+                    <input type="number" name="id" required/>
+                </p>
+            </fieldset>
+            <input type="submit" value="Delete"/>
+            <input type="button" value="Cancel"/>
+        </form>
+    </div>
+
+</body>
+</html>
