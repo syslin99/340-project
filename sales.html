@@ -41,10 +41,26 @@
                         <input type="text" name="date">
                         <label>Total Price:</label>
                         <input type="text" name="total_price">
-                        <label>Customer ID:</label>
-                        <input type="text" name="id_customer">
-                        <label>Employee ID:</label>
-                        <input type="text" name="id_employee"> 
+                        <label>Customer Name:</label>
+                        <select name="name_customer">
+                            <option value="N/A">&nbsp;</option>
+                            <option value="1">Jake Williams</option>
+                            <option value="2">Sarah Koohr</option>
+                            <option value="3">Miles Warner</option>   
+                        </select>
+                        <label>Employee Name:</label>
+                        <select name="name_employee">
+                            <option value="N/A">&nbsp;</option>
+                            <option value="1">Joel Villamor</option>
+                            <option value="2">Samantha Lin</option>
+                            <option value="3">Kelly Walker</option>   
+                        </select>
+                        <div class="add-sale-grid">
+                            <label>Add Products:</label>
+                            <button class="add-components-button">+</button>
+                        </div>
+                        
+                        <!-- <input type="text" name="id_employee">  -->
                         <div class="add-operations">
                             <button>Add</button>
                             <button>Cancel</button>
@@ -61,12 +77,43 @@
                         <input type="text" name="id" placeholder="2">
                         <label>Date:</label> 
                         <input type="text" name="date" placeholder="2023-01-13">
-                        <label>Total Price:</label>
-                        <input type="text" name="total_price" placeholder="24.98">
-                        <label>Customer ID:</label>
-                        <input type="text" name="id_customer" placeholder="3">
-                        <label>Employee ID:</label>
-                        <input type="text" name="id_employee" placeholder="1">                    
+                        <label>Customer Name:</label>
+                        <select name="name_customer">
+                            <option value="N/A">&nbsp;</option>
+                            <option value="1">Jake Williams</option>
+                            <option value="2">Sarah Koohr</option>
+                            <option value="3" selected>Miles Warner</option>   
+                        </select>
+                        <label>Employee Name:</label>
+                        <select name="name_employee">
+                            <option value="N/A">&nbsp;</option>
+                            <option value="1" selected>Joel Villamor</option>
+                            <option value="2">Samantha Lin</option>
+                            <option value="3">Kelly Walker</option>   
+                        </select>
+                        <div class="add-sale-grid">
+                            <label class="add-components">Add Products:</label>
+                            <label class="add-components">Price:</label>
+                            <label class="add-components">Quantity:</label>
+                            <select class="add-components" name="name_employee">
+                                <option value="N/A">&nbsp;</option>
+                                <option value="1">Elden Ring</option>
+                                <option value="2" selected>Animal Crossing</option>
+                                <option value="3">5,000 Bells</option>   
+                            </select>
+                            <p class="add-components">19.99</p>
+                            <input class="add-components" type="text" placeholder="1">
+                            <select class="add-components" name="name_employee">
+                                <option value="N/A">&nbsp;</option>
+                                <option value="1">Elden Ring</option>
+                                <option value="2">Animal Crossing</option>
+                                <option value="3" selected>5,000 Bells</option>   
+                            </select>
+                            <p class="add-components">4.99</p>
+                            <input class="add-components" type="text" placeholder="1">
+                            <button class="add-components-button">+</button>
+                        </div>
+
                         <div class="update-operations">
                             <button>Update</button>
                             <button>Cancel</button>

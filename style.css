@@ -245,8 +245,20 @@ fieldset.delete-fieldset {
 
 .item2 {
     border-top: 1px solid;
-
 }
 
-.operation-grouping {
+.add-sale-grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+}
+
+.add-components {
+    max-width: 90%;
+}
+
+.add-components-button {
+    grid-column: 1/span 3;
+    justify-self: center;
+    width: 80%;
 }
