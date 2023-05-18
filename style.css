@@ -70,7 +70,6 @@ html body {
 .content {
     display: grid;
     grid-template-columns: auto auto;
-
 }
 
 /* Search styling */
@@ -176,9 +175,10 @@ legend {
 
 th {
     padding: 8px;
-    
-    /* Will place border on bottom of row unless it is the final row of the table*/
-    /* border-bottom: 1px solid; */
+}
+
+td {
+    text-align: center;
 }
 
 .table-header {

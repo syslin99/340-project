@@ -39,8 +39,6 @@
                     <fieldset>
                         <label>Date:</label> 
                         <input type="text" name="date">
-                        <label>Total Price:</label>
-                        <input type="text" name="total_price">
                         <label>Customer Name:</label>
                         <select name="name_customer">
                             <option value="N/A">&nbsp;</option>
@@ -95,20 +93,10 @@
                             <label class="add-components">Add Products:</label>
                             <label class="add-components">Price:</label>
                             <label class="add-components">Quantity:</label>
-                            <select class="add-components" name="name_employee">
-                                <option value="N/A">&nbsp;</option>
-                                <option value="1">Elden Ring</option>
-                                <option value="2" selected>Animal Crossing</option>
-                                <option value="3">5,000 Bells</option>   
-                            </select>
+                            <p class="add-components">Animal Crossing</p>
                             <p class="add-components">19.99</p>
                             <input class="add-components" type="text" placeholder="1">
-                            <select class="add-components" name="name_employee">
-                                <option value="N/A">&nbsp;</option>
-                                <option value="1">Elden Ring</option>
-                                <option value="2">Animal Crossing</option>
-                                <option value="3" selected>5,000 Bells</option>   
-                            </select>
+                            <p class="add-components">5,000 Bells</p>
                             <p class="add-components">4.99</p>
                             <input class="add-components" type="text" placeholder="1">
                             <button class="add-components-button">+</button>
@@ -131,15 +119,15 @@
                         <th class="table-header table-header-left">ID</th>
                         <th class="table-header">Date</th>
                         <th class="table-header">Total Price</th>
-                        <th class="table-header">Customer ID</th>
-                        <th class="table-header-end table-header-right">Employee ID</th>
+                        <th class="table-header">Customer Name</th>
+                        <th class="table-header-end table-header-right">Employee Name</th>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>2023-01-13</td>
                         <td>24.98</td>
-                        <td>3</td>
-                        <td>1</td>
+                        <td>Miles Warner</td>
+                        <td>Joel Villamor</td>
                     </tr>
                 </table>
             </div>
@@ -148,18 +136,21 @@
                     <table>
                         <tr class="table-header">
                             <th class="table-header table-header-left">ID</th>
+                            <th class="table-header">Sale ID</th>
                             <th class="table-header">Product</th>
-                            <th class="table-header-end table-header-right">Sale ID</th>
+                            <th class="table-header-end table-header-right">Quantity</th>
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>Animal Crossing</td>
                             <td>2</td>
+                            <td>Animal Crossing</td>
+                            <td>1</td>
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td>5,000 Bells</td>
                             <td>2</td>
+                            <td>5,000 Bells</td>
+                            <td>1</td>
                         </tr>
                     </table>
                 </div>
