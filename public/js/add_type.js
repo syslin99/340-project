@@ -59,7 +59,7 @@ addRowToTable = (data) => {
     deleteCell = document.createElement('button');
     deleteCell.innerHTML = 'Delete';
     deleteCell.onclick = function() {
-        deletePerson(newRow.id_type);
+        deleteType(newRow.id_type);
     };
 
     // Add the cells to the row

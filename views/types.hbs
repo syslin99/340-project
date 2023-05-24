@@ -14,7 +14,7 @@
     {{!-- Body --}}
     <tbody>
         {{#each data}}
-        <tr data-value={{this.id}}>
+        <tr data-value={{this.id_type}}>
             <td>{{this.id_type}}</td>
             <td>{{this.description}}</td>
             <td><button onclick='deleteType({{this.id_type}})'>Delete</button></td>
