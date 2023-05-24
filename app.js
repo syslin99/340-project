@@ -58,6 +58,23 @@ app.post('/add-type', function (req, res) {
 
 });
 
+// Delete a Type
+app.delete('/delete-type', function (req, res, next) {
+    let data = req.body;
+    let typeID = parseInt(data.id_type);
+    
+    let deleteType = `DELETE FROM Types
+        WHERE id_type = ?;`;
+    db.pool.query(deleteType, [typeID], function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
+
 
 /* Listener */
 app.listen(PORT, function () {

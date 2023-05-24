@@ -14,9 +14,10 @@
     {{!-- Body --}}
     <tbody>
         {{#each data}}
-        <tr>
+        <tr data-value={{this.id}}>
             <td>{{this.id_type}}</td>
             <td>{{this.description}}</td>
+            <td><button onclick='deleteType({{this.id_type}})'>Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
@@ -37,3 +38,4 @@
 
 {{!-- Embed JS to handle DOM manipulation and AJAX request --}}
 <script src="./js/add_type.js"></script>
+<script src="./js/delete_type.js"></script>

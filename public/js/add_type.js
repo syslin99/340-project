@@ -51,14 +51,24 @@ addRowToTable = (data) => {
     let row = document.createElement('tr');
     let idCell = document.createElement('td');
     let descriptionCell = document.createElement('td');
+    let deleteCell = document.createElement('td');
 
     // Fill the cells
     idCell.innerText = newRow.id_type;
     descriptionCell.innerText = newRow.description;
+    deleteCell = document.createElement('button');
+    deleteCell.innerHTML = 'Delete';
+    deleteCell.onclick = function() {
+        deletePerson(newRow.id_type);
+    };
 
     // Add the cells to the row
     row.appendChild(idCell);
     row.appendChild(descriptionCell);
+    row.appendChild(deleteCell);
+
+    // Add a row attribute so deleteRow can find the newly added row
+    row.setAttribute('data-value', newRow.id_type);
 
     // Add the row to the table
     currentTable.appendChild(row);
