@@ -1,0 +1,23 @@
+{
+  "name": "gamer-gang-web-interface",
+  "version": "1.0.0",
+  "description": "Database and web-based UI for a video game store that tracks its customers, employees, products, and sales and supports CRUD operations for these entities. The database is pre-populated with sample data. The web interface is for the administrator and is not a customer-facing website.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syslin99/340-project.git"
+  },
+  "author": "Samantha Lin, Joel Villamor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/syslin99/340-project/issues"
+  },
+  "homepage": "https://github.com/syslin99/340-project#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "forever": "^4.0.3"
+  }
+}
