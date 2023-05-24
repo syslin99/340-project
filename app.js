@@ -17,7 +17,10 @@ app.set('view engine', '.hbs');
 /* Routes */
 app.get('/', function (req, res) {
 
-    res.render('types');
+    let selectTypes = `SELECT * FROM Types;`;
+    db.pool.query(selectTypes, function (error, rows, fields) {
+        res.render('types', {data: rows});
+    });
 
 });
 
