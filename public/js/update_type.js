@@ -29,6 +29,10 @@ updateTypeForm.addEventListener('submit', function (e) {
             // Update the data in the table
             updateRow(xhttp.response, idValue);
 
+            // Clear fields
+            idInput.value = '';
+            descriptionInput.value = '';
+
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -45,16 +49,11 @@ function updateRow(data, typeID) {
     let parsedData = JSON.parse(data);
     let currentTable = document.getElementById('types-table');
 
-    console.log(parsedData)
-    console.log(typeID)
-
     for (let i = 0, row; row = currentTable.rows[i]; i++) {
         if (currentTable.rows[i].getAttribute('data-value') == typeID) {
             let updateRowIndex = currentTable.getElementsByTagName('tr')[i];
-            let td = updateRowIndex.getElementsByTagName('td'[1]);
-            console.log(td)
+            let td = updateRowIndex.getElementsByTagName('td')[1];
             td.innerHTML = parsedData[0].description;
-            console.log(td)
         }
     }
 }
