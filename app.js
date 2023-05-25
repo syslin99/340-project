@@ -14,20 +14,43 @@ var db = require('./database/db-connector');
 // Handlebars
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');
-app.engine('.hbs', engine({extname: ".hbs"}));
+app.engine('.hbs', engine({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
 
 /* Routes */
 
-// Render Types page
+// Render Home page
 app.get('/', function (req, res) {
+    res.render('index');
+});
+
+// Render Employees page
+app.get('/employees', function (req, res) {
+    res.render('employees');
+});
+// Render Customers page
+app.get('/customers', function (req, res) {
+    res.render('customers');
+});
+// Render Products page
+app.get('/products', function (req, res) {
+    res.render('products');
+});
+
+// Render Types page
+app.get('/types', function (req, res) {
 
     let selectTypes = `SELECT * FROM Types;`;
     db.pool.query(selectTypes, function (error, rows, fields) {
         res.render('types', {data: rows});
     });
 
+});
+
+// Render Sales page
+app.get('/sales', function (req, res) {
+    res.render('sales');
 });
 
 // Submit Add Type form

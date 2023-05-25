@@ -1,0 +1,75 @@
+<div class="content">
+    <h1 class="page-title"><strong>Customers</strong></h1>
+
+    <div class="operation-grouping">
+        <div id="add_grouping" class="add-grouping">
+            <legend><strong>Add Customer</strong></legend>
+            <fieldset>
+                <label for="name">Name: </label>
+                <input type="text" name="name" placeholder="Sally Johnson" required/>
+                <label for="email">E-mail: </label>
+                <input type="email" name="email" placeholder="name@example.com"/>
+                <div class="add-operations">
+                    <button>Add</button>
+                    <button>Cancel</button>
+                </div>
+            </fieldset>
+        </div>
+
+        <div id="update_grouping" class="update-grouping">
+            <legend><strong>Update Customer</strong></legend>
+            <fieldset>
+                <label for="id">ID: </label>
+                <input type="number" name="id" required/>
+                <label for="name">Name: </label>
+                <input type="text" name="name"/>
+                <label for="email">E-mail: </label>
+                <input type="email" name="email"/>
+                <div class="update-operations">
+                    <button>Update</button>
+                    <button>Cancel</button>
+                </div>
+            </fieldset>
+        </div>
+
+        <div id="delete_grouping" class="delete-grouping">
+            <legend><strong>Delete Customer</strong></legend>
+            <fieldset>
+                <label for="id">ID: </label>
+                <input type="number" name="id" required/>
+                <div class="delete-operations">
+                    <button>Delete</button>
+                    <button>Cancel</button>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="table-grouping">
+        <div class="table-cs" id="customers_table">
+            <table>
+                <tr class="table-header">
+                    <th class="table-header table-header-left">ID</th>
+                    <th class="table-header">Name</th>
+                    <th class="table-header-end table-header-right">E-mail</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Jake Williams</td>
+                    <td>jakew@woah.com</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Sarah Koohr</td>
+                    <td>sarak@woah.com</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Miles Warner</td>
+                    <td>milew@woah.com</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>

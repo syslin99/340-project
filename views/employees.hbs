@@ -1,0 +1,94 @@
+<div class="content">
+    <h1 class="page-title"><strong>Employees</strong></h1>
+
+    <div class="operation-grouping">
+        <div id="add_grouping" class="add-grouping">
+            <legend><strong>Add Employee</strong></legend>
+            <fieldset>
+                <label for="name">Name: </label>
+                <input type="text" name="name" placeholder="Sally Johnson" required/>
+                <label for="rate">Rate: </label>
+                <input type="number" min="0" step="0.01" name="rate" placeholder="19.50"/>
+                <label for="hours">Hours: </label>
+                <input type="number" min="0" name="hours" placeholder="0"/>
+                <label for="sales">Sales: </label>
+                <input type="number" min="0" name="sales" placeholder="0"/>
+                <div class="add-operations">
+                    <button>Add</button>
+                    <button>Cancel</button>
+                </div>
+            </fieldset>
+        </div>
+
+        <div id="update-grouping" class="update-grouping">
+            <legend><strong>Update Employee</strong></legend>
+            <fieldset>
+                <label for="id">ID: </label>
+                <input type="number" name="id" required/>
+                <label for="name">Name: </label>
+                <input type="text" name="name"/>
+                <label for="rate">Rate: </label>
+                <input type="number" min="0" step="0.01" name="rate"/>
+                <label for="hours">Hours: </label>
+                <input type="number" min="0" name="hours"/>
+                <label for="sales">Sales: </label>
+                <input type="number" min="0" name="sales"/>
+                <div class="update-operations">
+                    <button>Update</button>
+                    <button>Cancel</button>
+                </div>
+            </fieldset>
+        </div>
+
+        <div id="delete_grouping" class="delete-grouping">
+            <legend><strong>Delete Employee</strong></legend>
+            <fieldset>
+                <label for="id">ID: </label>
+                <input type="number" name="id" required/>
+                <div class="delete-operations">
+                    <button>Delete</button>
+                    <button>Cancel</button>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="table-grouping">
+        <div class="table-em" id="employees_table">
+            <table>
+                <tr class="table-header">
+                    <th class="table-header table-header-left">ID</th>
+                    <th class="table-header">Name</th>
+                    <th class="table-header">Rate</th>
+                    <th class="table-header">Hours</th>
+                    <th class="table-header-end table-header-right">Sales</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Joel Villamor</td>
+                    <td>21.50</td>
+                    <td>154</td>
+                    <td>22</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Samantha Lin</td>
+                    <td>21.50</td>
+                    <td>150</td>
+                    <td>19</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Kelly Walker</td>
+                    <td>19.50</td>
+                    <td>82</td>
+                    <td>7</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+</div>
