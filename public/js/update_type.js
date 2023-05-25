@@ -43,6 +43,14 @@ updateTypeForm.addEventListener('submit', function (e) {
 
 });
 
+updateTypeForm.addEventListener('reset', function(e) {
+    let idInput = document.getElementById('input-id-update');
+    let descriptionInput = document.getElementById('input-description-update')
+
+    idInput.innerText = ""
+    descriptionInput.innerText = ""
+
+})
 
 // Update row in Types table
 function updateRow(data, typeID) {

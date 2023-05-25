@@ -201,6 +201,14 @@ td {
 
 /* Group styling */
 
+.button {
+    margin: 10px;
+    min-width: 10%;
+    font-family: monospace;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
 .add-grouping {
     display: grid;
 }
@@ -215,12 +223,15 @@ label {
 }
 
 /* Delete group styling */
-fieldset.delete-fieldset {
+form.delete-fieldset {
     display: grid;
     grid-template-columns: auto auto;
     align-items: center;
 } 
 
+.input-id-delete {
+    width: 20%;
+}
 
 .delete-operations {
     grid-column: 1/span 2;

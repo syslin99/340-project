@@ -4,12 +4,12 @@ addTypeForm.addEventListener('submit', function (e) {
 
     // Prevent form submission
     e.preventDefault();
-
     // Get form fields
     let descriptionInput = document.getElementById('input-description');
     // Get values from form fields
     let descriptionValue = descriptionInput.value; 
-
+    
+    console.log("Submitted!")
     // Package data into JS object
     let data = {
         description: descriptionValue
@@ -38,6 +38,13 @@ addTypeForm.addEventListener('submit', function (e) {
 
 });
 
+// On press of Cancel, clear fields
+addTypeForm.addEventListener('reset', function(e) {
+    let descriptionInput = document.getElementById('input-description')
+
+    descriptionInput.innerText = ""
+})
+
 
 // Create new row in Types table
 addRowToTable = (data) => {
@@ -56,16 +63,19 @@ addRowToTable = (data) => {
     // Fill the cells
     idCell.innerText = newRow.id_type;
     descriptionCell.innerText = newRow.description;
-    deleteCell = document.createElement('button');
-    deleteCell.innerHTML = 'Delete';
-    deleteCell.onclick = function() {
-        deleteType(newRow.id_type);
-    };
+
+    // Alternate method of deletion used -----------
+    // deleteCell = document.createElement('button');
+    // deleteCell.innerHTML = 'Delete';
+    // deleteCell.onclick = function() {
+        // deleteType(newRow.id_type);
+    // };
 
     // Add the cells to the row
     row.appendChild(idCell);
     row.appendChild(descriptionCell);
-    row.appendChild(deleteCell);
+    
+    // row.appendChild(deleteCell);
 
     // Add a row attribute so deleteRow can find the newly added row
     row.setAttribute('data-value', newRow.id_type);

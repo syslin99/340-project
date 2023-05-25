@@ -1,55 +1,76 @@
-<h1>Types</h1>
 
 
-{{!-- Display Types table --}}
-<table id='types-table'>
-    {{!-- Header --}}
-    <thead>
-        <tr>
-            {{#each data.[0]}}
-            <th>{{@key}}</th>
-            {{/each}}
-        </tr>
-    </thead>
-    {{!-- Body --}}
-    <tbody>
-        {{#each data}}
-        <tr data-value={{this.id_type}}>
-            <td>{{this.id_type}}</td>
-            <td>{{this.description}}</td>
-            <td><button onclick='deleteType({{this.id_type}})'>Delete</button></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+<div class="content">
+    <h1 class="page-title"><strong>Types</strong></h1>
 
+    
+    <div class="operation-grouping">
+        <div id = "add_grouping" class="add-grouping">
+            <legend><strong>Add Type</strong></legend>
+                <fieldset>
+                    <form id="add-type-form">
+                        <label for="input-description">Description:</label> 
+                        <input type="text" name="input-description" id="input-description">
+                        <div class="add-operations">
+                            <input type="submit" class="button" value="Add">
+                            <input type="reset" class="button" value="Cancel"> 
+                        </div>
+                    </form>
+                </fieldset>    
+        </div>
+    
+        <div id = "update_grouping" class="update-grouping">
+            <legend><strong>Update Type</strong></legend>
+                <fieldset>
+                    <form id="update-type-form">
+                        <label>ID:</label>
+                        <input type="text" name="input-id" id="input-id-update"> 
+                        <label for="input-description">Description:</label> 
+                        <input type="text" name="input-description" id="input-description-update">                  
+                        <div class="update-operations">
+                            <input type="submit" class="button" value="Update">
+                            <input type="reset" class="button" value="Cancel"> 
+                        </div>
+                    </form>
+                </fieldset>
+        </div>
+    
+        <div id = "delete_grouping" class="delete-grouping">
+            <legend><strong>Delete Type</strong></legend>
+                <fieldset>
+                    <form id="delete-type-form" class="delete-fieldset">
+                        <label class="delete-group-labels">ID:</label>
+                        <input type="text" class="input-id-delete" name="input-id" id="input-id-delete" oninput='updateForm()'>
+                        <label class="delete-group-labels">Description:</label>
+                        <p id="delete-name"></p>
+                        <div class="delete-operations">
+                            <input type="submit" class="button" value="Delete">
+                            <input type="reset" class="button" value="Cancel"> 
+                        </div>
+                    </form>
+                </fieldset>
+        </div>
+    </div>
 
-{{!-- Form to add a Type --}}
-<h2>Add a Type</h2>
-<p>To add a new type, enter its information below and click 'Submit'!</p>
-<form id='add-type-form'>
-    {{!-- Description --}}
-    <label for='input-description'>Description: </label>
-    <input type='text' name='input-description' id='input-description'>
+    <div class="table-grouping">
+        <div class="table-tp">
+            <table id="types-table">
+                <tr class="table-header">
+                    <th class="table-header table-header-left">ID</th>
+                    <th class="table-header table-header-right">Description</th>
+                    
+                </tr>
+                {{#each data}}
+                <tr data-value={{this.id_type}}>
+                    <td>{{this.id_type}}</td>
+                    <td>{{this.description}}</td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
 
-    <input type='submit'>
-</form>
-
-
-{{!-- Form to update a Type --}}
-<h2>Update a Type</h2>
-<p>To update a type, select its ID below.</p>
-<form id='update-type-form'>
-    {{!-- ID --}}
-    <label for='input-id'>ID: </label>
-    <input type='text' name='input-id' id='input-id-update'>
-    {{!-- Description --}}
-    <label for='input-description'>Description: </label>
-    <input type='text' name='input-description' id='input-description-update'>
-
-    <input type='submit'>
-</form>
-
+</div>
 
 {{!-- Embed JS to handle DOM manipulation and AJAX request --}}
 <script src="./js/add_type.js"></script>
