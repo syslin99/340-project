@@ -62,7 +62,7 @@ app.post('/add-type', function (req, res) {
 app.delete('/delete-type', function (req, res, next) {
     let data = req.body;
     let typeID = parseInt(data.id_type);
-    
+
     let deleteType = `DELETE FROM Types
         WHERE id_type = ?;`;
     db.pool.query(deleteType, [typeID], function (error, rows, fields) {
@@ -73,6 +73,35 @@ app.delete('/delete-type', function (req, res, next) {
             res.sendStatus(204);
         }
     });
+});
+
+// Update a Type
+app.put('/update-type', function (req, res, next) {
+    let data = req.body;
+    let typeID = parseInt(data.id_type);
+    let description = data.description;
+
+    let updateType = `UPDATE Types
+        SET description = ?
+        WHERE id_type = ?;`;
+    db.pool.query(updateType, [description, typeID], function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            let selectType = `SELECT * FROM Types
+                WHERE id_type = ?;`;
+            db.pool.query(selectType, [typeID], function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            });
+        }
+    })
+
 });
 
 

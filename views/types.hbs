@@ -36,6 +36,22 @@
 </form>
 
 
+{{!-- Form to update a Type --}}
+<h2>Update a Type</h2>
+<p>To update a type, select its ID below.</p>
+<form id='update-type-form'>
+    {{!-- ID --}}
+    <label for='input-id'>ID: </label>
+    <input type='text' name='input-id' id='input-id-update'>
+    {{!-- Description --}}
+    <label for='input-description'>Description: </label>
+    <input type='text' name='input-description' id='input-description-update'>
+
+    <input type='submit'>
+</form>
+
+
 {{!-- Embed JS to handle DOM manipulation and AJAX request --}}
 <script src="./js/add_type.js"></script>
 <script src="./js/delete_type.js"></script>
+<script src="./js/update_type.js"></script>
