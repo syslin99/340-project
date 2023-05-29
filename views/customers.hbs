@@ -41,7 +41,11 @@
             <fieldset>
                 <form id="delete-customer-form" class="delete-fieldset">
                     <label for="id">ID: </label>
-                    <input type="number" name="id" id="input-id-delete"/>
+                    <input type="number" class="input-id-delete" name="id" id="input-id-delete" oninput="updateForm()"/>
+                    <label class="delete-group-labels">Name: </label>
+                    <p id="delete-name"></p>        
+                    <label class="delete-group-labels">Email: </label>
+                    <p id="delete-email"></p>        
                     <div class="delete-operations">
                         <input type="submit" class="button" value="Delete">
                         <input type="reset" class="button" value="Cancel"> 

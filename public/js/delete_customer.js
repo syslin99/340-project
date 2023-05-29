@@ -1,7 +1,7 @@
 let deleteCustomerForm = document.getElementById('delete-customer-form')
 let idInput = document.getElementById('input-id-delete')
-// let nameCustomer = document.getElementById('input-name-delete')
-// let emailCustomer = document.getElementById('input-email-delete')
+let nameCustomer = document.getElementById('delete-name')
+let emailCustomer = document.getElementById('delete-email')
 
 deleteCustomerForm.addEventListener('submit', function(e) {
     e.preventDefault()
@@ -31,15 +31,16 @@ function deleteCustomer (customerID) {
             // Delete the data from the table
             deleteRow(customerID);
 
+            
         }
         else if (xhttp.readyState == 4 && xhttp.status != 204) {
             console.log("There was an error with the input.")
         }
     }
-
+    
     idInput.value = ""
-    // descInput.innerText = ""
-
+    nameCustomer.value = ""
+    emailCustomer.value = ""
     // Send AJAX request
     xhttp.send(JSON.stringify(data));
 
@@ -61,23 +62,28 @@ function deleteRow (customerID) {
 
 deleteCustomerForm.addEventListener('reset', function(e) {
     idInput.innerText = ""
+    nameCustomer.innerText = ""
+    emailCustomer.innerText = ""
 })
 
-// Not being used YET.
 
-// function updateForm () {
-//     let deleteForm = document.getElementById('input-id-delete')
-//     let customerID = deleteForm.value
-//     let updatedField = document.getElementById('delete-name')
-//     let currentTable = document.getElementById('types-table')
-//     let specVal = ""
+function updateForm () {
+    let deleteForm = document.getElementById('input-id-delete')
+    let customerID = deleteForm.value
+    let updatedName = document.getElementById('delete-name')
+    let updatedEmail = document.getElementById('delete-email')
+    let currentTable = document.getElementById('customers-table')
+    let specName = ""
+    let specEmail = ""
 
-//     for (let i = 0, row; row = currentTable.rows[i]; i++) {
-//         if (currentTable.rows[i].getAttribute('data-value') == customerID) {
-//             let specRow = currentTable.getElementsByTagName('tr')[i]
-//             specVal = specRow.getElementsByTagName('td')[1].textContent
-//         }
-//     }
+    for (let i = 0, row; row = currentTable.rows[i]; i++) {
+        if (currentTable.rows[i].getAttribute('data-value') == customerID) {
+            let specRow = currentTable.getElementsByTagName('tr')[i]
+            specName = specRow.getElementsByTagName('td')[1].textContent
+            specEmail = specRow.getElementsByTagName('td')[2].textContent
+        }
+    }
 
-//     updatedField.innerText = specVal
-// }
+    updatedName.innerText = specName
+    updatedEmail.innerText = specEmail
+}

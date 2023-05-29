@@ -27,8 +27,13 @@ app.get('/', function (req, res) {
 
 // Render Employees page
 app.get('/employees', function (req, res) {
-    res.render('employees');
+    let selectEmployees = `SELECT * FROM Employees;`
+    db.pool.query(selectEmployees, function (error, rows, fields) {
+        res.render('employees', {data: rows})
+    })
+
 });
+
 // Render Customers page
 app.get('/customers', function (req, res) {
     let selectCustomers = `SELECT * FROM Customers;`;
@@ -139,10 +144,10 @@ app.post('/add-customer', function (req, res) {
     // Capture incoming data
     let data = req.body;
 
-    // Add type
-    addTypes = `INSERT INTO Customers (name, email)
+    // Add Customer
+    addCustomers = `INSERT INTO Customers (name, email)
         VALUES ('${data.name}', '${data.email}');`;
-    db.pool.query(addTypes, function (error, rows, fields) {
+    db.pool.query(addCustomers, function (error, rows, fields) {
         if (error) {
             console.log(error)
             res.sendStatus(400);
@@ -205,6 +210,83 @@ app.put('/update-customer', function (req, res, next) {
         }
     })
 
+});
+
+/* -------------- Employees -------------- */
+
+// Submit Add Employee form
+app.post('/add-employee', function (req, res) {
+
+    // Capture incoming data
+    let data = req.body;
+
+    // Add Employee
+    addEmployees = `INSERT INTO Employees (name, hourly_rate, hours_worked, total_sales)
+        VALUES ('${data.name}', '${data.hourly_rate}', '${data.hours_worked}', '${data.total_sales}');`;
+    db.pool.query(addEmployees, function (error, rows, fields) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            selectEmployees = `SELECT * FROM Employees;`;
+            db.pool.query(selectEmployees, function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            });
+        }
+    });
+
+});
+
+// Delete an Employee
+app.delete('/delete-employee', function (req, res, next) {
+    let data = req.body;
+    let employeeID = parseInt(data.id_employee);
+    let deleteEmployee = `DELETE FROM Employees
+    WHERE id_employee = ?;`;
+    db.pool.query(deleteEmployee, [employeeID], function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
+
+// Update an Employee
+app.put('/update-employee', function (req, res, next) {
+    let data = req.body
+    let employeeID = parseInt(data.id_employee)
+    let name = data.name
+    let rate = data.hourly_rate
+    let hours = data.hours_worked
+    let sales = data.total_sales
+
+    let updateEmployee = `UPDATE Employees
+        SET name = '${name}', hourly_rate = '${rate}', hours_worked = '${hours}', total_sales = '${sales}'
+        WHERE id_employee = '${employeeID}';`
+    db.pool.query(updateEmployee, function (error, rows, fields) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400)
+        } else {
+            let selectEmployee = `SELECT * FROM Employees
+                WHERE id_employee = ?;`
+            db.pool.query(selectEmployee, [employeeID], function (error, rows, fields) {
+                if (error) {
+                    console.log(error)
+                    res.sendStatus(400)
+                } else {
+                    res.send(rows)
+                }
+            })
+        }
+    })
 });
 
 

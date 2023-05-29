@@ -5,57 +5,72 @@
         <div id="add_grouping" class="add-grouping">
             <legend><strong>Add Employee</strong></legend>
             <fieldset>
-                <label for="name">Name: </label>
-                <input type="text" name="name" placeholder="Sally Johnson" required/>
-                <label for="rate">Rate: </label>
-                <input type="number" min="0" step="0.01" name="rate" placeholder="19.50"/>
-                <label for="hours">Hours: </label>
-                <input type="number" min="0" name="hours" placeholder="0"/>
-                <label for="sales">Sales: </label>
-                <input type="number" min="0" name="sales" placeholder="0"/>
-                <div class="add-operations">
-                    <button>Add</button>
-                    <button>Cancel</button>
-                </div>
+                <form id="add-employee-form">
+                    <label for="name">Name: </label>
+                    <input type="text" name="name" id="input-name"/>
+                    <label for="rate">Rate: </label>
+                    <input type="number" min="0" step="0.01" name="rate" id="input-rate"/>
+                    <label for="hours">Hours: </label>
+                    <input type="number" min="0" name="hours" id="input-hours"/>
+                    <label for="sales">Sales: </label>
+                    <input type="number" min="0" name="sales" id="input-sales"/>
+                    <div class="add-operations">
+                        <input type="submit" class="button" value="Add">
+                        <input type="reset" class="button" value="Cancel"> 
+                    </div>
+                </form>
             </fieldset>
         </div>
 
         <div id="update-grouping" class="update-grouping">
             <legend><strong>Update Employee</strong></legend>
             <fieldset>
-                <label for="id">ID: </label>
-                <input type="number" name="id" required/>
-                <label for="name">Name: </label>
-                <input type="text" name="name"/>
-                <label for="rate">Rate: </label>
-                <input type="number" min="0" step="0.01" name="rate"/>
-                <label for="hours">Hours: </label>
-                <input type="number" min="0" name="hours"/>
-                <label for="sales">Sales: </label>
-                <input type="number" min="0" name="sales"/>
-                <div class="update-operations">
-                    <button>Update</button>
-                    <button>Cancel</button>
-                </div>
+                <form id="update-employee-form">
+                    <label for="id">ID: </label>
+                    <input type="number" name="id" id="input-id-update"/>
+                    <label for="name">Name: </label>
+                    <input type="text" name="name" id="input-name-update"/>
+                    <label for="rate">Rate: </label>
+                    <input type="number" min="0" name="rate" id="input-rate-update"/>
+                    <label for="hours">Hours: </label>
+                    <input type="number" min="0" name="hours" id="input-hours-update"/>
+                    <label for="sales">Sales: </label>
+                    <input type="number" min="0" name="sales" id="input-sales-update"/>
+                    <div class="update-operations">
+                        <input type="submit" class="button" value="Update">
+                        <input type="reset" class="button" value="Cancel"> 
+                    </div>
+                </form>
             </fieldset>
         </div>
 
         <div id="delete_grouping" class="delete-grouping">
             <legend><strong>Delete Employee</strong></legend>
             <fieldset>
-                <label for="id">ID: </label>
-                <input type="number" name="id" required/>
-                <div class="delete-operations">
-                    <button>Delete</button>
-                    <button>Cancel</button>
-                </div>
+                <form id="delete-employee-form" class="delete-fieldset">
+                    <label for="id">ID: </label>
+                    <input type="number" name="id" class="input-id-delete" id="input-id-delete" oninput="updateForm()"/>
+                    <label class="delete-group-labels">Name:</label>
+                    <p id="delete-name"></p>
+                    <label class="delete-group-labels">Rate:</label>
+                    <p id="delete-rate"></p>
+                    <label class="delete-group-labels">Hours:</label>
+                    <p id="delete-hours"></p>
+                    <label class="delete-group-labels">Sales:</label>
+                    <p id="delete-sales"></p>
+
+                    <div class="delete-operations">
+                        <input type="submit" class="button" value="Delete">
+                        <input type="reset" class="button" value="Cancel"> 
+                    </div>
+                </form>
             </fieldset>
         </div>
     </div>
 
     <div class="table-grouping">
-        <div class="table-em" id="employees_table">
-            <table>
+        <div class="table-em">
+            <table id="employees-table">
                 <tr class="table-header">
                     <th class="table-header table-header-left">ID</th>
                     <th class="table-header">Name</th>
@@ -63,27 +78,16 @@
                     <th class="table-header">Hours</th>
                     <th class="table-header-end table-header-right">Sales</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Joel Villamor</td>
-                    <td>21.50</td>
-                    <td>154</td>
-                    <td>22</td>
+                {{#each data}}
+                <tr data-value={{this.id_employee}}>
+                    {{!-- Input --}}
+                    <td>{{this.id_employee}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.hourly_rate}}</td>
+                    <td>{{this.hours_worked}}</td>
+                    <td>{{this.total_sales}}</td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Samantha Lin</td>
-                    <td>21.50</td>
-                    <td>150</td>
-                    <td>19</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Kelly Walker</td>
-                    <td>19.50</td>
-                    <td>82</td>
-                    <td>7</td>
-                </tr>
+                {{/each}}
             </table>
         </div>
     </div>
@@ -91,4 +95,7 @@
 </div>
 
 
-</div>
+{{!-- Embed JS to handle DOM manipulation and AJAX request --}}
+<script src="./js/add_employee.js"></script>
+<script src="./js/delete_employee.js"></script>
+<script src="./js/update_employee.js"></script>

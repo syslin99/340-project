@@ -56,7 +56,6 @@ updateCustomerForm.addEventListener('reset', function(e) {
     idInput.innerText = ""
     nameInput.innerText = ""
     emailInput.innerText = ""
-
 })
 
 // Update row in Types table

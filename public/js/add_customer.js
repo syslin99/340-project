@@ -41,7 +41,6 @@ addCustomerForm.addEventListener('reset', function(e) {
 
 addRowToTable = (data) => {
     let currentTable = document.getElementById('customers-table');
-    let newRowIndex = currentTable.rows.length
 
     let parsedData = JSON.parse(data)
     let newRow = parsedData[parsedData.length - 1]
