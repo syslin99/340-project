@@ -6,7 +6,7 @@ var app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
-PORT = 3024;
+PORT = 3030;
 
 // Database
 var db = require('./database/db-connector');
@@ -31,7 +31,10 @@ app.get('/employees', function (req, res) {
 });
 // Render Customers page
 app.get('/customers', function (req, res) {
-    res.render('customers');
+    let selectCustomers = `SELECT * FROM Customers;`;
+    db.pool.query(selectCustomers, function (error, rows, fields) {
+        res.render('customers', {data: rows});
+    });
 });
 // Render Products page
 app.get('/products', function (req, res) {
@@ -126,6 +129,84 @@ app.put('/update-type', function (req, res, next) {
     })
 
 });
+
+
+/* -------------- Customers -------------- */
+
+// Submit Add Customer form
+app.post('/add-customer', function (req, res) {
+
+    // Capture incoming data
+    let data = req.body;
+
+    // Add type
+    addTypes = `INSERT INTO Customers (name, email)
+        VALUES ('${data.name}', '${data.email}');`;
+    db.pool.query(addTypes, function (error, rows, fields) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            selectCustomers = `SELECT * FROM Customers;`;
+            db.pool.query(selectCustomers, function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            });
+        }
+    });
+
+});
+
+// Delete a Customer
+app.delete('/delete-customer', function (req, res, next) {
+    let data = req.body;
+    let customerID = parseInt(data.id_customer);
+    let deleteCustomer = `DELETE FROM Customers
+    WHERE id_customer = ?;`;
+    db.pool.query(deleteCustomer, [customerID], function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
+
+// Update a Customer
+app.put('/update-customer', function (req, res, next) {
+    let data = req.body
+    let customerID = parseInt(data.id_customer)
+    let name = data.name
+    let email = data.email
+
+    let updateCustomer = `UPDATE Customers
+        SET name = '${name}', email = '${email}'
+        WHERE id_customer = '${customerID}';`
+    db.pool.query(updateCustomer, function (error, rows, fields) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400)
+        } else {
+            let selectCustomer = `SELECT * FROM Customers
+                WHERE id_customer = ?;`
+            db.pool.query(selectCustomer, [customerID], function (error, rows, fields) {
+                if (error) {
+                    console.log(error)
+                    res.sendStatus(400)
+                } else {
+                    res.send(rows)
+                }
+            })
+        }
+    })
+
+});
+
 
 
 /* Listener */

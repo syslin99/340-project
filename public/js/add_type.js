@@ -58,7 +58,6 @@ addRowToTable = (data) => {
     let row = document.createElement('tr');
     let idCell = document.createElement('td');
     let descriptionCell = document.createElement('td');
-    let deleteCell = document.createElement('td');
 
     // Fill the cells
     idCell.innerText = newRow.id_type;
