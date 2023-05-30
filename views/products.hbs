@@ -1,83 +1,110 @@
 <div class="content">
     <h1 class="page-title">Products</h1>
     
+    {{!-- CRUD operation forms --}}
     <div class="operation-grouping">
+
+        {{!-- Form to Add Products --}}
         <div id = "add_grouping" class="add-grouping">
             <legend><strong>Add Product</strong></legend>
                 <fieldset>
-                    <label>Name:</label> 
-                    <input type="text" name="fname">
-                    <label>Price:</label>
-                    <input type="text" name="price">
-                    <label>Stock:</label>
-                    <input type="text" name="stock">
-                    <label>Type:</label>
-                    <select name="id_type">
-                        <option value="N/A">&nbsp;</option>
-                        <option value="1">Game</option>
-                        <option value="2">DLC</option>
-                        <option value="3">In-game Currency</option>   
-                    </select>
-                    <div class="add-operations">
-                        <button>Add</button>
-                        <button>Cancel</button>
-                    </div>
+                    <form id='add-product-form'>
+                        {{!-- Name --}}
+                        <label for='input-name'>Name:</label> 
+                        <input type='text' name='input-name' id='input-name' required>
+                        {{!-- Price --}}
+                        <label for='input-price'>Price:</label>
+                        <input type='number' min='0' step='0.01' name="input-price" id='input-price' required>
+                        {{!-- Stock --}}
+                        <label for='input-stock'>Stock:</label>
+                        <input type='number' min='0' name='input-stock' id='input-stock'>
+                        {{!-- Type --}}
+                        <label for='input-type'>Type:</label>
+                        <select name='input-type' id='input-type' required>
+                            <option value=''>Select a Type</option>
+                            {{#each types}}
+                            <option value='{{this.id_type}}'>{{this.description}}</option>
+                            {{/each}}
+                        </select>
+
+                        <div class="add-operations">
+                            <input type='submit' class='button' value='Add'>
+                            <input type='reset' class='button' value='Cancel'>
+                        </div>
+                    </form>
                 </fieldset>
-    
         </div>
     
+        {{!-- Form to Update Products --}}
         <div id = "update_grouping" class="update-grouping">
             <legend><strong>Update Product</strong></legend>
                 <fieldset>
-                    <label>ID:</label>
-                    <input type="text" name="id" placeholder="1">
-                    <label>Name:</label> 
-                    <input type="text" name="name" placeholder="Elden Ring">
-                    <label>Price:</label>
-                    <input type="text" name="price" placeholder="59.99">
-                    <label>Stock:</label>
-                    <input type="text" name="stock" placeholder="4">
-                    <label>Type:</label>
-                    <select name="id_type">
-                        <option value="N/A">&nbsp;</option>
-                        <option value="1">Game</option>
-                        <option value="2">DLC</option>
-                        <option value="3">In-game Currency</option>   
-                    </select>
-                    <div class="update-operations">
-                        <button>Update</button>
-                        <button>Cancel</button>
-                    </div>
+                    <form id='update-product-form'>
+                        {{!-- ID --}}
+                        <label for='input-id-update'>ID:</label>
+                        <input type='number' name='input-id-update' id='input-id-update'>
+                        {{!-- Name --}}
+                        <label for='input-name-update'>Name:</label>
+                        <input type='text' name='input-name-update' id='input-name-update'>
+                        {{!-- Price --}}
+                        <label for='input-price-update'>Price:</label>
+                        <input type='number' min='0' step='0.01' name='input-price-update' id='input-price-update'>
+                        {{!-- Stock --}}
+                        <label for='input-stock-update'>Stock:</label>
+                        <input type='number' min='0' name='input-stock-update' id='input-stock-update'>
+                        {{!-- Type --}}
+                        <label for='input-type-update'>Type:</label>
+                        <select name='input-type-update' id='input-type-update'>
+                            <option value=''>Select a Type</option>
+                            {{#each types}}
+                            <option value='{{this.id_type}}'>{{this.description}}</option>
+                            {{/each}}
+                        </select>
+
+                        <div class='update-operations'>
+                            <input type='submit' class='button' value='Update'>
+                            <input type='reset' class='button' value='Cancel'>
+                        </div>
+                    </form>
                 </fieldset>
         </div>
     
+        {{!-- Form to Delete Products --}}
         <div id = "delete_grouping" class="delete-grouping">
             <legend><strong>Delete Product</strong></legend>
-                <fieldset class="delete-fieldset">
-                    <label class="delete-group-labels">ID:</label>
-                    <p id="delete_id">1</p>
-                    <label class="delete-group-labels">Name:</label>
-                    <p id="delete_name">Elden Ring</p>
-                    <label class="delete-group-labels">Price:</label>
-                    <p id="delete_price">59.99</p>                    
-                    <label class="delete-group-labels">Stock:</label>
-                    <p id="delete_stock">5</p>
-                    <label class="delete-group-labels">Type:</label>
-                    <p id="delete_id_type">Game</p>
-                    <div class="delete-operations">
-                        <button>Delete</button>
-                        <button>Cancel</button>
-                        
-                    </div>
+                <fieldset>
+                    <form id='delete-product-form' class='delete-fieldset'>
+                        {{!-- ID --}}
+                        <label for='input-id-delete'>ID:</label>
+                        <input type='number' class='input-id-delete' name='input-id-delete' id='input-id-delete' oninput='populateForm()'>
+                        {{!-- Name --}}
+                        <label class='delete-group-labels'>Name:</label>
+                        <p id='delete-name'></p>
+                        {{!-- Price --}}
+                        <label class='delete-group-labels'>Price:</label>
+                        <p id='delete-price'></p>
+                        {{!-- Stock --}}
+                        <label class='delete-group-labels'>Stock:</label>
+                        <p id='delete-stock'></p>
+                        {{!-- Type --}}
+                        <label class='delete-group-labels'>Type:</label>
+                        <p id='delete-type'></p>
+                    
+                        <div class='delete-operations'>
+                            <input type='submit' class='button' value='Delete'>
+                            <input type='reset' class='button' value='Cancel'>
+                        </div>
+                    </form>
                 </fieldset>
-    
         </div>
 
     </div>
 
+    {{!-- Display Products Table --}}
     <div class="table-grouping">
-        <div class="table-pd" id = "products_table">
-            <table>
+        <div class="table-pd">
+            <table id="products-table">
+                {{!-- Header --}}
                 <tr class="table-header">
                     <th class="table-header table-header-left">ID</th>
                     <th class="table-header">Name</th>
@@ -85,15 +112,24 @@
                     <th class="table-header">Stock</th>
                     <th class="table-header-end table-header-right">Type</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Elden Ring</td>
-                    <td>59.99</td>
-                    <td>4</td>
-                    <td>Game</td>
+                {{!-- Body --}}
+                {{#each data}}
+                <tr data-value={{this.id_product}}>
+                    <td>{{this.id_product}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.price}}</td>
+                    <td>{{this.stock}}</td>
+                    <td>{{this.type}}</td>
                 </tr>
+                {{/each}}
             </table>
         </div>
     </div>
 
 </div>
+
+
+{{!-- Embed JS to handle DOM manipulation and AJAX request --}}
+<script src='./js/add_product.js'></script>
+<script src='./js/update_product.js'></script>
+<script src='./js/delete_product.js'></script>

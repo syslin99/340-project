@@ -41,9 +41,33 @@ app.get('/customers', function (req, res) {
         res.render('customers', {data: rows});
     });
 });
+
 // Render Products page
 app.get('/products', function (req, res) {
-    res.render('products');
+
+    // Display products
+    let selectProducts = `SELECT * FROM Products;`;
+    db.pool.query(selectProducts, function (error, rows, fields) {
+        let products = rows;
+
+        // Use type description instead of FK
+        let selectTypes = `SELECT * FROM Types;`;
+        db.pool.query(selectTypes, function (error, rows, fields) {
+            let types = rows;
+
+            // Create map reference for displaying type in products table
+            let typemap = {};
+            types.map(type => {
+                let id = parseInt(type.id_type, 10);
+                typemap[id] = type['description'];
+            });
+            // Add type description
+            products = products.map(product => {
+                return Object.assign(product, {type: typemap[product.id_type]})
+            });
+            return res.render('products', {data: products, types: types})
+        });
+    });
 });
 
 // Render Types page
@@ -289,6 +313,98 @@ app.put('/update-employee', function (req, res, next) {
     })
 });
 
+/* -------------- Products -------------- */
+
+// Submit Add Product Form
+app.post('/add-product', function (req, res) {
+
+    // Capture incoming data
+    let data = req.body;
+    // Capture NULL values
+    let stock = parseInt(data.stock);
+    if (isNaN(stock)) {
+        stock = 0;
+    }
+
+    // Add product to database
+    addProduct = `INSERT INTO Products (name, price, stock, id_type)
+        VALUES ('${data.name}', ${data.price}, ${stock}, ${data.id_type});`;
+    db.pool.query(addProduct, function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            // Display newly added product
+            selectProducts = `SELECT id_product, name, price, stock, description as type
+                FROM Products
+                JOIN Types ON Products.id_type = Types.id_type;`;
+            db.pool.query(selectProducts, function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            });
+        }
+    });
+
+});
+
+// Submit Update Product Form
+app.put('/update-product', function (req, res, next) {
+
+    // Capture incoming data
+    let data = req.body;
+    let productID = parseInt(data.id_product);
+
+    // Update product in database
+    updateProduct = `UPDATE Products
+        SET name = '${data.name}', price = ${data.price}, stock = ${data.stock}, id_type = ${data.id_type}
+        WHERE id_product = ${productID};`;
+    db.pool.query(updateProduct, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            // Display newly updated product
+            selectProduct = `SELECT id_product, name, price, stock, description as type
+                FROM Products
+                JOIN Types ON Products.id_type = Types.id_type
+                WHERE id_product = ?;`;
+            db.pool.query(selectProduct, [productID], function(error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            });
+        }
+    });
+
+});
+
+// Submit Delete Product Form
+app.delete('/delete-product', function (req, res, next) {
+    
+    // Capture incoming data
+    let data = req.body;
+    let productID = parseInt(data.id_product);
+
+    // Delete product from database
+    deleteProduct = `DELETE FROM Products
+        WHERE id_product = ?;`;
+    db.pool.query(deleteProduct, [productID], function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+
+});
 
 
 /* Listener */
