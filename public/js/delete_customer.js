@@ -39,8 +39,8 @@ function deleteCustomer (customerID) {
     }
     
     idInput.value = ""
-    nameCustomer.value = ""
-    emailCustomer.value = ""
+    nameCustomer.innerText = ""
+    emailCustomer.innerText = ""
     // Send AJAX request
     xhttp.send(JSON.stringify(data));
 

@@ -53,10 +53,10 @@ function deleteProduct (productID) {
 
             // Clear the input fields for another transaction
             idInput.value = '';
-            nameProduct.value = '';
-            priceProduct.value = '';
-            stockProduct.value = '';
-            typeProduct.value = '';
+            nameProduct.innerText = '';
+            priceProduct.innerText = '';
+            stockProduct.innerText = '';
+            typeProduct.innerText = '';
 
         } else if (xhttp.readyState == 4 && xhttp.status != 204) {
             console.log('There was an error with the input.')
