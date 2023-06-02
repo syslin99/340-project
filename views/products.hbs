@@ -42,19 +42,19 @@
                     <form id='update-product-form'>
                         {{!-- ID --}}
                         <label for='input-id-update'>ID:</label>
-                        <input type='number' name='input-id-update' id='input-id-update'>
+                        <input type='number' name='input-id-update' id='input-id-update' required>
                         {{!-- Name --}}
                         <label for='input-name-update'>Name:</label>
-                        <input type='text' name='input-name-update' id='input-name-update'>
+                        <input type='text' name='input-name-update' id='input-name-update' required>
                         {{!-- Price --}}
                         <label for='input-price-update'>Price:</label>
-                        <input type='number' min='0' step='0.01' name='input-price-update' id='input-price-update'>
+                        <input type='number' min='0' step='0.01' name='input-price-update' id='input-price-update' required>
                         {{!-- Stock --}}
                         <label for='input-stock-update'>Stock:</label>
                         <input type='number' min='0' name='input-stock-update' id='input-stock-update'>
                         {{!-- Type --}}
                         <label for='input-type-update'>Type:</label>
-                        <select name='input-type-update' id='input-type-update'>
+                        <select name='input-type-update' id='input-type-update' required>
                             <option value=''>Select a Type</option>
                             {{#each types}}
                             <option value='{{this.id_type}}'>{{this.description}}</option>
@@ -76,7 +76,7 @@
                     <form id='delete-product-form' class='delete-fieldset'>
                         {{!-- ID --}}
                         <label for='input-id-delete'>ID:</label>
-                        <input type='number' class='input-id-delete' name='input-id-delete' id='input-id-delete' oninput='populateForm()'>
+                        <input type='number' class='input-id-delete' name='input-id-delete' id='input-id-delete' oninput='populateForm()' required>
                         {{!-- Name --}}
                         <label class='delete-group-labels'>Name:</label>
                         <p id='delete-name'></p>

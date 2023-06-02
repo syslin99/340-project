@@ -10,7 +10,7 @@
                 <fieldset>
                     <form id="add-type-form">
                         <label for="input-description">Description:</label> 
-                        <input type="text" name="input-description" id="input-description">
+                        <input type="text" name="input-description" id="input-description" required>
                         <div class="add-operations">
                             <input type="submit" class="button" value="Add">
                             <input type="reset" class="button" value="Cancel"> 
@@ -24,9 +24,9 @@
                 <fieldset>
                     <form id="update-type-form">
                         <label>ID:</label>
-                        <input type="text" name="input-id" id="input-id-update"> 
+                        <input type="text" name="input-id" id="input-id-update" required> 
                         <label for="input-description">Description:</label> 
-                        <input type="text" name="input-description" id="input-description-update">                  
+                        <input type="text" name="input-description" id="input-description-update" required>                  
                         <div class="update-operations">
                             <input type="submit" class="button" value="Update">
                             <input type="reset" class="button" value="Cancel"> 
@@ -40,7 +40,7 @@
                 <fieldset>
                     <form id="delete-type-form" class="delete-fieldset">
                         <label class="delete-group-labels">ID:</label>
-                        <input type="text" class="input-id-delete" name="input-id" id="input-id-delete" oninput='updateForm()'>
+                        <input type="text" class="input-id-delete" name="input-id" id="input-id-delete" oninput='updateForm()' required>
                         <label class="delete-group-labels">Description:</label>
                         <p id="delete-name"></p>
                         <div class="delete-operations">

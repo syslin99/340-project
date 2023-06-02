@@ -7,7 +7,7 @@
             <fieldset>
                 <form id="add-employee-form">
                     <label for="name">Name: </label>
-                    <input type="text" name="name" id="input-name"/>
+                    <input type="text" name="name" id="input-name" required/>
                     <label for="rate">Rate: </label>
                     <input type="number" min="0" step="0.01" name="rate" id="input-rate"/>
                     <label for="hours">Hours: </label>
@@ -27,9 +27,9 @@
             <fieldset>
                 <form id="update-employee-form">
                     <label for="id">ID: </label>
-                    <input type="number" name="id" id="input-id-update"/>
+                    <input type="number" name="id" id="input-id-update" required/>
                     <label for="name">Name: </label>
-                    <input type="text" name="name" id="input-name-update"/>
+                    <input type="text" name="name" id="input-name-update" required/>
                     <label for="rate">Rate: </label>
                     <input type="number" min="0" name="rate" id="input-rate-update"/>
                     <label for="hours">Hours: </label>
@@ -49,7 +49,7 @@
             <fieldset>
                 <form id="delete-employee-form" class="delete-fieldset">
                     <label for="id">ID: </label>
-                    <input type="number" name="id" class="input-id-delete" id="input-id-delete" oninput="updateForm()"/>
+                    <input type="number" name="id" class="input-id-delete" id="input-id-delete" oninput="updateForm()" required/>
                     <label class="delete-group-labels">Name:</label>
                     <p id="delete-name"></p>
                     <label class="delete-group-labels">Rate:</label>

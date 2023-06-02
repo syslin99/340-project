@@ -23,9 +23,9 @@
             <fieldset>
                 <form id="update-customer-form">
                     <label for="id">ID: </label>
-                    <input type="number" name="id" id="input-id-update"/>
+                    <input type="number" name="id" id="input-id-update" required/>
                     <label for="name">Name: </label>
-                    <input type="text" name="name" id="input-name-update"/>
+                    <input type="text" name="name" id="input-name-update" required/>
                     <label for="email">E-mail: </label>
                     <input type="email" name="email" id="input-email-update"/>
                     <div class="update-operations">
@@ -41,7 +41,7 @@
             <fieldset>
                 <form id="delete-customer-form" class="delete-fieldset">
                     <label for="id">ID: </label>
-                    <input type="number" class="input-id-delete" name="id" id="input-id-delete" oninput="updateForm()"/>
+                    <input type="number" class="input-id-delete" name="id" id="input-id-delete" oninput="updateForm()" required/>
                     <label class="delete-group-labels">Name: </label>
                     <p id="delete-name"></p>        
                     <label class="delete-group-labels">Email: </label>
