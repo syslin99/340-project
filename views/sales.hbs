@@ -1,7 +1,23 @@
 <div class="content">
-    <h1><strong>Sales</strong></h1>
+    <h1 class='page-title'>Sales</h1>
 
+
+    {{!-- Search bar --}}
     <div class="search-sl-ps search-grouping">
+        <form id='search-sale' method='GET' action='/sales'>
+            <div class='search-center'>
+                <label for='sale'>Search by Sale: </label>
+                <input class='search-components search-bar' type='number' name='sale' id='sale'>
+                
+                <input type='submit' class='search-components button' value='Submit'>
+            </div>
+            <div class='search-sides'>
+                <h3 class='search-components'>Results for id_sale: TODO</h3>
+                <a href='/sales'><button class='search-components'>Reset</button></a>
+            </div>
+        </form>
+    </div>
+    {{!-- <div class="search-sl-ps search-grouping">
         <div class="search-center">
             <input class="search-components search-bar" type="text" name="search" placeholder="2 (id_sale)">
             <button class="search-components search-reset">Search</button>
@@ -11,10 +27,13 @@
             <h3 class="search-components">Results for id_sale: 2</h3>
             <button class="search-components search-reset">Reset</button>
         </div>
-    </div>
+    </div> --}}
 
     
+    {{!-- CRUD operation forms --}}
     <div class="operation-grouping">
+
+        {{!-- Form to Add Sales --}}
         <div id = "add_grouping" class="add-grouping">
             <legend><strong>Add Sale</strong></legend>
                 <fieldset>
@@ -39,16 +58,14 @@
                         <button class="add-components-button">+</button>
                     </div>
                     
-                    <!-- <input type="text" name="id_employee">  -->
                     <div class="add-operations">
                         <button>Add</button>
                         <button>Cancel</button>
                     </div>
-
                 </fieldset>
-    
         </div>
     
+        {{!-- Form to Update Sales --}}
         <div id = "update_grouping" class="update-grouping">
             <legend><strong>Update Sale</strong></legend>
                 <fieldset>
@@ -87,15 +104,19 @@
                         <button>Update</button>
                         <button>Cancel</button>
                     </div>
-
                 </fieldset>
         </div>
+
     </div>
 
-    
+
+    {{!-- Display Tables --}}
     <div class="table-grouping">
-        <div class="table-sl" id = "sales_table">
-            <table>
+
+        {{!-- Display Sales Table --}}
+        <div class="table-sl">
+            <table id='sales-table'>
+                {{!-- Header --}}
                 <tr class="table-header">
                     <th class="table-header table-header-left">ID</th>
                     <th class="table-header">Date</th>
@@ -103,39 +124,46 @@
                     <th class="table-header">Customer Name</th>
                     <th class="table-header-end table-header-right">Employee Name</th>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>2023-01-13</td>
-                    <td>24.98</td>
-                    <td>Miles Warner</td>
-                    <td>Joel Villamor</td>
+                {{!-- Body --}}
+                {{#each salesData}}
+                <tr data-value={{this.id_sale}}>
+                    <td>{{this.id_sale}}</td>
+                    <td>{{this.date}}</td>
+                    <td>{{this.total_price}}</td>
+                    <td>{{this.customer}}</td>
+                    <td>{{this.employee}}</td>
                 </tr>
+                {{/each}}
             </table>
         </div>
+
+        {{!-- Display Product Sales Table --}}
         <div class="item2">
-            <div class="table-ps" id = "products_sales_table">
-                <table>
+            <div class="table-ps">
+                <table id='product-sales-table'>
+                    {{!-- Header --}}
                     <tr class="table-header">
                         <th class="table-header table-header-left">ID</th>
                         <th class="table-header">Sale ID</th>
                         <th class="table-header">Product</th>
                         <th class="table-header-end table-header-right">Quantity</th>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>Animal Crossing</td>
-                        <td>1</td>
+                    {{!-- Body --}}
+                    {{#each productsalesData}}
+                    <tr data-value={{this.id_product_sale}}>
+                        <td>{{this.id_product_sale}}</td>
+                        <td>{{this.id_sale}}</td>
+                        <td>{{this.product}}</td>
+                        <td>{{this.quantity}}</td>
                     </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>2</td>
-                        <td>5,000 Bells</td>
-                        <td>1</td>
-                    </tr>
+                    {{/each}}
                 </table>
             </div>
         </div>
+
     </div>
 
 </div>
+
+
+{{!-- Embed JS to handle DOM manipulation and AJAX request --}}

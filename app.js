@@ -14,6 +14,7 @@ var db = require('./database/db-connector');
 // Handlebars
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');
+const { resetColumns } = require('forever/lib/forever/cli');
 app.engine('.hbs', engine({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
@@ -82,7 +83,87 @@ app.get('/types', function (req, res) {
 
 // Render Sales page
 app.get('/sales', function (req, res) {
-    res.render('sales');
+
+    let selectSales;
+    let selectProductSales;
+    // Show all Sales
+    if (req.query.sale === undefined) {
+        selectSales = `SELECT id_sale, DATE_FORMAT(date, '%Y-%m-%d') AS date, total_price, id_customer, id_employee
+            FROM Sales;`;
+        selectProductSales = `SELECT * FROM Product_Sales;`;
+    }
+    // Show search results
+    else {
+        selectSales = `SELECT id_sale, DATE_FORMAT(date, '%Y-%m-%d') AS date, total_price, id_customer, id_employee
+            FROM Sales
+            WHERE id_sale LIKE '${req.query.sale}%';`;
+        selectProductSales = `SELECT * FROM Product_Sales
+            WHERE id_sale LIKE '${req.query.sale}%';`;
+    }
+
+
+    // Display Sales
+    db.pool.query(selectSales, function(error, rows, fields) {
+        let sales = rows;
+
+        // Use customer name instead of FK
+        let selectCustomers = `SELECT * FROM Customers;`;
+        db.pool.query(selectCustomers, function(error, rows, fields) {
+            let customers = rows;
+            // Create map reference for displaying customer in sales table
+            let customermap = {};
+            customers.map(customer => {
+                let id = parseInt(customer.id_customer, 10);
+                customermap[id] = customer['name'];
+            });
+            // Add customer name
+            sales = sales.map(sale => {
+                return Object.assign(sale, {customer: customermap[sale.id_customer]})
+            });
+
+            // Use employee name instead of FK
+            let selectEmployees = `SELECT * FROM Employees;`;
+            db.pool.query(selectEmployees, function(error, rows, fields) {
+                let employees = rows;
+                // Create map reference for dispaying employee in sales table
+                let employeemap = {};
+                employees.map(employee => {
+                    let id = parseInt(employee.id_employee, 10);
+                    employeemap[id] = employee['name'];
+                });
+                // Add employee name
+                sales = sales.map(sale => {
+                    return Object.assign(sale, {employee: employeemap[sale.id_employee]})
+                });
+
+
+                // Display Product Sales
+                db.pool.query(selectProductSales, function(error, rows, fields) {
+                    let productsales = rows;
+
+                    // Use product name instead of FK
+                    let selectProducts = `SELECT * FROM Products;`;
+                    db.pool.query(selectProducts, function(error, rows, fields) {
+                        let products = rows;
+                        // Create map reference for displaying product in product_sales table
+                        let productmap = {};
+                        products.map(product => {
+                            let id = parseInt(product.id_product, 10);
+                            productmap[id] = product['name'];
+                        });
+                        // Add product name
+                        productsales = productsales.map(productsale => {
+                            return Object.assign(productsale, {product: productmap[productsale.id_product]})
+                        });
+
+                        return res.render('sales', {salesData: sales, productsalesData: productsales, customers: customers, employees: employees, products: products})
+                    });
+                });
+
+            });
+        });
+    });
+
 });
 
 // Submit Add Type form
