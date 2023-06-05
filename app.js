@@ -86,11 +86,13 @@ app.get('/sales', function (req, res) {
 
     let selectSales;
     let selectProductSales;
+    let resultPhrase; 
     // Show all Sales
-    if (req.query.sale === undefined) {
+    if (req.query.sale === undefined || req.query.sale === '') {
         selectSales = `SELECT id_sale, DATE_FORMAT(date, '%Y-%m-%d') AS date, total_price, id_customer, id_employee
             FROM Sales;`;
         selectProductSales = `SELECT * FROM Product_Sales;`;
+        resultPhrase = '';
     }
     // Show search results
     else {
@@ -99,6 +101,7 @@ app.get('/sales', function (req, res) {
             WHERE id_sale LIKE '${req.query.sale}%';`;
         selectProductSales = `SELECT * FROM Product_Sales
             WHERE id_sale LIKE '${req.query.sale}%';`;
+        resultPhrase = `Results for id_sale ${req.query.sale}`;
     }
 
 
@@ -156,7 +159,7 @@ app.get('/sales', function (req, res) {
                             return Object.assign(productsale, {product: productmap[productsale.id_product]})
                         });
 
-                        return res.render('sales', {salesData: sales, productsalesData: productsales, customers: customers, employees: employees, products: products})
+                        return res.render('sales', {resultPhrase: resultPhrase, salesData: sales, productsalesData: productsales, customers: customers, employees: employees, products: products})
                     });
                 });
 

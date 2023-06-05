@@ -9,25 +9,14 @@
                 <label for='sale'>Search by Sale: </label>
                 <input class='search-components search-bar' type='number' name='sale' id='sale'>
                 
-                <input type='submit' class='search-components button' value='Submit'>
+                <input type='submit' class='search-components search-reset button' value='Submit'>
+                <a href='/sales'><button class='search-components search-reset'>Reset</button></a>
             </div>
             <div class='search-sides'>
-                <h3 class='search-components'>Results for id_sale: TODO</h3>
-                <a href='/sales'><button class='search-components'>Reset</button></a>
+                <h3 class='search-components'>{{resultPhrase}}</h3>
             </div>
         </form>
     </div>
-    {{!-- <div class="search-sl-ps search-grouping">
-        <div class="search-center">
-            <input class="search-components search-bar" type="text" name="search" placeholder="2 (id_sale)">
-            <button class="search-components search-reset">Search</button>
-
-        </div>
-        <div class="search-sides">
-            <h3 class="search-components">Results for id_sale: 2</h3>
-            <button class="search-components search-reset">Reset</button>
-        </div>
-    </div> --}}
 
     
     {{!-- CRUD operation forms --}}
