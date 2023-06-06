@@ -85,9 +85,6 @@ function updateRow(data, saleID) {
     for (let i = 0, row; row = salesTable.rows[i]; i++) {
         // Find row to be updated
         if (salesTable.rows[i].getAttribute('data-value') == saleID) {
-
-            console.log('found row');
-
             // Retrieve row and cells
             let updateRowIndex = salesTable.getElementsByTagName('tr')[i];
             let dateTD = updateRowIndex.getElementsByTagName('td')[1];
