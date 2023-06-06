@@ -26,31 +26,37 @@
         <div id = "add_grouping" class="add-grouping">
             <legend><strong>Add Sale</strong></legend>
                 <fieldset>
-                    <label>Date:</label> 
-                    <input type="text" name="date">
-                    <label>Customer Name:</label>
-                    <select name="name_customer">
-                        <option value="N/A">&nbsp;</option>
-                        <option value="1">Jake Williams</option>
-                        <option value="2">Sarah Koohr</option>
-                        <option value="3">Miles Warner</option>   
-                    </select>
-                    <label>Employee Name:</label>
-                    <select name="name_employee">
-                        <option value="N/A">&nbsp;</option>
-                        <option value="1">Joel Villamor</option>
-                        <option value="2">Samantha Lin</option>
-                        <option value="3">Kelly Walker</option>   
-                    </select>
-                    <div class="add-sale-grid">
-                        <label>Add Products:</label>
-                        <button class="add-components-button">+</button>
-                    </div>
-                    
-                    <div class="add-operations">
-                        <button>Add</button>
-                        <button>Cancel</button>
-                    </div>
+                    <form id='add-sale-form'>
+                        {{!-- Date --}}
+                        <label for='input-date'>Date:</label>
+                        <input type='date' name='input-date' id='input-date' required>
+                        {{!-- Customer Name --}}
+                        <label for='input-customer'>Customer Name:</label>
+                        <select name='input-customer' id='input-customer' required>
+                            <option value=''>Select a Customer</option>
+                            {{#each customers}}
+                            <option value='{{this.id_customer}}'>{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                        {{!-- Employee Name --}}
+                        <label for='input-employee'>Employee Name:</label>
+                        <select name='input-employee' id='input-employee' required>
+                            <option value=''>Select an Employee</option>
+                            {{#each employees}}
+                            <option value='{{this.id_employee}}'>{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                        {{!-- Products --}}
+                        <div class="add-sale-grid">
+                            <label>Add Products:</label>
+                            <button class="add-components-button">+</button>
+                        </div>
+
+                        <div class='add-operations'>
+                            <input type='submit' class='button'value='Add'>
+                            <input type='reset' class='button'value='Cancel'>
+                        </div>
+                    </form>
                 </fieldset>
         </div>
     
@@ -58,41 +64,48 @@
         <div id = "update_grouping" class="update-grouping">
             <legend><strong>Update Sale</strong></legend>
                 <fieldset>
-                    <label>ID:</label>
-                    <input type="text" name="id" placeholder="2">
-                    <label>Date:</label> 
-                    <input type="text" name="date" placeholder="2023-01-13">
-                    <label>Customer Name:</label>
-                    <select name="name_customer">
-                        <option value="N/A">&nbsp;</option>
-                        <option value="1">Jake Williams</option>
-                        <option value="2">Sarah Koohr</option>
-                        <option value="3" selected>Miles Warner</option>   
-                    </select>
-                    <label>Employee Name:</label>
-                    <select name="name_employee">
-                        <option value="N/A">&nbsp;</option>
-                        <option value="1" selected>Joel Villamor</option>
-                        <option value="2">Samantha Lin</option>
-                        <option value="3">Kelly Walker</option>   
-                    </select>
-                    <div class="add-sale-grid">
-                        <label class="add-components">Add Products:</label>
-                        <label class="add-components">Price:</label>
-                        <label class="add-components">Quantity:</label>
-                        <p class="add-components">Animal Crossing</p>
-                        <p class="add-components">19.99</p>
-                        <input class="add-components" type="text" placeholder="1">
-                        <p class="add-components">5,000 Bells</p>
-                        <p class="add-components">4.99</p>
-                        <input class="add-components" type="text" placeholder="1">
-                        <button class="add-components-button">+</button>
-                    </div>
+                    <form id='update-sale-form'>
+                        {{!-- ID --}}
+                        <label for='input-id-update'>ID:</label>
+                        <input type='number' name='input-id-update' id='input-id-update' required>
+                        {{!-- Date --}}
+                        <label for='input-date-update'>Date:</label>
+                        <input type='date' name='input-date-update' id='input-date-update' required>
+                        {{!-- Customer Name --}}
+                        <label for='input-customer-update'>Customer Name:</label>
+                        <select name='input-customer-update' id='input-customer-update' required>
+                            <option value=''>Select a Customer</option>
+                            {{#each customers}}
+                            <option value='{{this.id_customer}}'>{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                        {{!-- Employee Name --}}
+                        <label for='input-employee-update'>Employee Name:</label>
+                        <select name='input-employee-update' id='input-employee-update' required>
+                            <option value=''>Select an Employee</option>
+                            {{#each employees}}
+                            <option value='{{this.id_employee}}'>{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                        {{!-- Products --}}
+                        <div class="add-sale-grid">
+                            <label class="add-components">Add Products:</label>
+                            <label class="add-components">Price:</label>
+                            <label class="add-components">Quantity:</label>
+                            <p class="add-components">Animal Crossing</p>
+                            <p class="add-components">19.99</p>
+                            <input class="add-components" type="text" placeholder="1">
+                            <p class="add-components">5,000 Bells</p>
+                            <p class="add-components">4.99</p>
+                            <input class="add-components" type="text" placeholder="1">
+                            <button class="add-components-button">+</button>
+                        </div>
 
-                    <div class="update-operations">
-                        <button>Update</button>
-                        <button>Cancel</button>
-                    </div>
+                        <div class='update-operations'>
+                            <input type='submit' class='button' value='Update'>
+                            <input type='reset' class='button' value='Cancel'>
+                        </div>
+                    </form>
                 </fieldset>
         </div>
 
@@ -156,3 +169,5 @@
 
 
 {{!-- Embed JS to handle DOM manipulation and AJAX request --}}
+<script src='./js/add_sale.js'></script>
+<script src='./js/update_sale.js'></script>

@@ -6,7 +6,7 @@ var app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
-PORT = 3030;
+PORT = 3024;
 
 // Database
 var db = require('./database/db-connector');
@@ -485,6 +485,75 @@ app.delete('/delete-product', function (req, res, next) {
             res.sendStatus(400);
         } else {
             res.sendStatus(204);
+        }
+    });
+
+});
+
+/* -------------- Sales -------------- */
+
+// Submit Add Sale Form
+app.post('/add-sale', function(req, res) {
+
+    // Capture incoming data
+    let data = req.body;
+    
+    // Add sale to database
+    addSale = `INSERT INTO Sales (date, total_price, id_customer, id_employee)
+        VALUES ('${data.date}', ${data.total_price}, ${data.id_customer}, ${data.id_employee});`;
+    db.pool.query(addSale, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            // Display newly added sale
+            selectSales = `SELECT id_sale, DATE_FORMAT(date, '%Y-%m-%d') AS date, total_price, Customers.name as customer, Employees.name as employee
+                FROM Sales
+                JOIN Customers ON Sales.id_customer = Customers.id_customer
+                JOIN Employees ON Sales.id_employee = Employees.id_employee;`;
+            db.pool.query(selectSales, function(error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            });
+        }
+    });
+
+});
+
+// Submit Update Sale Form
+app.put('/update-sale', function(req,res) {
+
+    // Capture incoming data
+    let data = req.body;
+    let saleID = parseInt(data.id_sale);
+
+    // Update sale in database
+    updateSale = `UPDATE Sales
+        SET date = '${data.date}', total_price = ${data.total_price}, id_customer = ${data.id_customer}, id_employee = ${data.id_employee}
+        WHERE id_sale = ${saleID};`;
+    db.pool.query(updateSale, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            // Display newly updated sale
+            selectSale = `SELECT id_sale, DATE_FORMAT(date, '%Y-%m-%d') AS date, total_price, Customers.name as customer, Employees.name as employee
+                FROM Sales
+                JOIN Customers ON Sales.id_customer = Customers.id_customer
+                JOIN Employees ON Sales.id_employee = Employees.id_employee
+                WHERE id_sale = ?;`;
+            db.pool.query(selectSale, [saleID], function(error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            });
         }
     });
 
