@@ -103,3 +103,55 @@ function updateRow(data, productID) {
 
 }
 
+// Populate form with selected product information
+function populateUpGroupForm() {
+
+    // Retrieve form fields
+    let deleteForm = document.getElementById('input-id-update');
+    let productID = deleteForm.value;
+    let nameProduct = document.getElementById('input-name-update');
+    let priceProduct = document.getElementById('input-price-update');
+    let stockProduct = document.getElementById('input-stock-update');
+    let typeProduct = document.getElementById('input-type-update');
+
+    // Retrieve specified product information
+    let productsTable = document.getElementById('products-table');
+    let specName = '';
+    let specPrice = '';
+    let specStock = '';
+    let specType = '';
+
+    // Iterate through rows
+    for (let i = 0, row; row = productsTable.rows[i]; i++) {
+        // Find row of specified product
+        if (productsTable.rows[i].getAttribute('data-value') == productID) {
+            let specRow = productsTable.getElementsByTagName('tr')[i];
+            specName = specRow.getElementsByTagName('td')[1].textContent
+            specPrice = specRow.getElementsByTagName('td')[2].textContent
+            specStock = specRow.getElementsByTagName('td')[3].textContent
+            specType = specRow.getElementsByTagName('td')[4].textContent
+        }
+    }
+
+    
+    // Populate type dropdown
+    let count = 0
+    for (var option of typeProduct.options) {
+        console.log(option)
+        if (specType == option.innerHTML) {
+            typeProduct.options[count].selected =  true;
+            break;
+        }  else {
+            typeProduct.options[0].selected = true;
+        }
+        count += 1
+    }
+
+    // Populate form
+    nameProduct.value = specName;
+    priceProduct.value = specPrice;
+    stockProduct.value = specStock;
+
+}
+
+

@@ -74,3 +74,24 @@ function updateRow(data, customerID) {
         }
     }
 }
+
+function updateUpGroupForm () {
+    let deleteForm = document.getElementById('input-id-update')
+    let customerID = deleteForm.value
+    let updatedName = document.getElementById('input-name-update')
+    let updatedEmail = document.getElementById('input-email-update')
+    let currentTable = document.getElementById('customers-table')
+    let specName = ""
+    let specEmail = ""
+
+    for (let i = 0, row; row = currentTable.rows[i]; i++) {
+        if (currentTable.rows[i].getAttribute('data-value') == customerID) {
+            let specRow = currentTable.getElementsByTagName('tr')[i]
+            specName = specRow.getElementsByTagName('td')[1].textContent
+            specEmail = specRow.getElementsByTagName('td')[2].textContent
+        }
+    }
+
+    updatedName.value = specName
+    updatedEmail.value = specEmail
+}

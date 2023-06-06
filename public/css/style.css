@@ -2,6 +2,7 @@ html body {
     margin: 0;
     margin-top: 0;
     font-family: monospace;
+    scroll-behavior: smooth;
 }
 
 .content {
@@ -55,6 +56,7 @@ html body {
     padding: 15px;
     display: flex;
     align-items: center;
+    height: 45px;
 }
 
 .header-menu {
@@ -139,6 +141,10 @@ button {
 }
 
 button:hover {
+    background-color: tan;
+}
+
+.button:hover {
     background-color: tan;
 }
 
@@ -272,4 +278,37 @@ form.delete-fieldset {
     grid-column: 1/span 3;
     justify-self: center;
     width: 80%;
+}
+
+/* Confirmation Modals */
+
+.modal-container {
+}
+
+.confirmation-modal {
+    display: grid;
+    position: fixed;
+    min-height: calc(100vh - 75px);
+    background-color: rgba(26, 22, 22, 0.481);
+    grid-template-columns: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+.conf-container {
+    text-align: center;
+    font-size: 16px;
+    width: 20%;
+    height: 20%;
+    outline: 3px solid lightgreen;
+    background-color: whitesmoke;
+    justify-self: center;
+    align-self: center;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.471);
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: 100%;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: 70% 30%;
 }

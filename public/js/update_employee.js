@@ -85,3 +85,36 @@ function updateRow(data, employeeID) {
         }
     }
 }
+
+function updateUpGroupForm () {
+    let deleteForm = document.getElementById('input-id-update')
+    let employeeID = deleteForm.value
+    let updatedName = document.getElementById('input-name-update')
+    let updatedRate = document.getElementById('input-rate-update')
+    let updatedHours = document.getElementById('input-hours-update')
+    let updatedSales = document.getElementById('input-sales-update')
+
+    let currentTable = document.getElementById('employees-table')
+    let specName = ""
+    let specRate = ""
+    let specHours = ""
+    let specSales = ""
+
+    for (let i = 0, row; row = currentTable.rows[i]; i++) {
+        if (currentTable.rows[i].getAttribute('data-value') == employeeID) {
+            let specRow = currentTable.getElementsByTagName('tr')[i]
+            specName = specRow.getElementsByTagName('td')[1].textContent
+            specRate = specRow.getElementsByTagName('td')[2].textContent
+            specHours = specRow.getElementsByTagName('td')[3].textContent
+            specSales = specRow.getElementsByTagName('td')[4].textContent
+
+        }
+    }
+
+    updatedName.value = specName
+    updatedRate.value = specRate
+    updatedHours.value = specHours
+    updatedSales.value = specSales
+
+    updatedName.ariaPlaceholder = updatedName.value
+}

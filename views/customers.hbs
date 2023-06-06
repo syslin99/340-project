@@ -1,3 +1,16 @@
+<div hidden class="modal-container" id="modal-container-customers">
+    <div class="confirmation-modal" id="confirmation-modal-customers">
+        <form class="conf-container" id="confirmation-container">
+            <h3>Are you sure you would like to delete this entry?</h3>
+            <div>
+                <input type="submit" class="button" value="Confirm">
+                <input type="reset" class="button" value="Cancel" onclick="deleteModalCancel()"> 
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <div class="content">
     <h1 class="page-title"><strong>Customers</strong></h1>
 
@@ -23,7 +36,7 @@
             <fieldset>
                 <form id="update-customer-form">
                     <label for="id">ID: </label>
-                    <input type="number" name="id" id="input-id-update" required/>
+                    <input type="number" name="id" id="input-id-update" oninput="updateUpGroupForm()" required/>
                     <label for="name">Name: </label>
                     <input type="text" name="name" id="input-name-update" required/>
                     <label for="email">E-mail: </label>
@@ -41,7 +54,7 @@
             <fieldset>
                 <form id="delete-customer-form" class="delete-fieldset">
                     <label for="id">ID: </label>
-                    <input type="number" class="input-id-delete" name="id" id="input-id-delete" oninput="updateForm()" required/>
+                    <input type="number" min="0"class="input-id-delete" name="id" id="input-id-delete" oninput="updateForm()" required/>
                     <label class="delete-group-labels">Name: </label>
                     <p id="delete-name"></p>        
                     <label class="delete-group-labels">Email: </label>

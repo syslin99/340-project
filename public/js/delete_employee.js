@@ -1,13 +1,29 @@
 let deleteEmployeeForm = document.getElementById('delete-employee-form')
 // let nameInput = document.getElementById('delete-name')
 
+
+let deleteEmployeeConf = document.getElementById('confirmation-container')
+
+deleteEmployeeConf.addEventListener('submit', function(e) {
+    e.preventDefault()
+
+    delEmployeeModalBg = document.getElementById('modal-container-employees')
+    let idInput = document.getElementById('input-id-delete')
+    let idValue = idInput.value
+    console.log(idValue)
+    delEmployeeModalBg.setAttribute('hidden', true)
+    deleteEmployee(idValue)
+
+})
+
+
 deleteEmployeeForm.addEventListener('submit', function(e) {
     let idInput = document.getElementById('input-id-delete')
     e.preventDefault()
 
-    let idValue = idInput.value
-
-    deleteEmployee(idValue)
+    delProductModalBg = document.getElementById('modal-container-employees')
+    document.getElementById('header').scrollIntoView()
+    delProductModalBg.removeAttribute('hidden')
 })
 
 function deleteEmployee (employeeID) {
@@ -110,4 +126,9 @@ function updateForm () {
     updatedRate.innerText = specRate
     updatedHours.innerText = specHours
     updatedSales.innerText = specSales
+}
+
+function deleteModalCancel () {
+    let modal = document.getElementById('modal-container-employees')
+    modal.setAttribute('hidden', true)
 }

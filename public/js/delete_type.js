@@ -1,16 +1,29 @@
 let deleteTypeForm = document.getElementById('delete-type-form');
+let delTypeModal = document.getElementById('confirmation-container')
 let idInput = document.getElementById('input-id-delete')
 let descInput = document.getElementById('delete-name')
+let deleteTypeConf = document.getElementById('confirmation-container')
 
-// On press of 'Add' button, delete entry
-deleteTypeForm.addEventListener('submit', function(e) {
-
+deleteTypeConf.addEventListener('submit', function (e) {
     e.preventDefault()
+
+    delTypeModalBg = document.getElementById('modal-container-types')
 
     let idInput = document.getElementById('input-id-delete')
     let idValue = idInput.value;
-    
+    delTypeModalBg.setAttribute("hidden", true)
     deleteType(idValue)
+
+})
+
+// On press of 'Delete' button, delete entry
+deleteTypeForm.addEventListener('submit', function(e) {
+    e.preventDefault()
+
+    console.log("no more hidden?")
+    delTypeModalBg = document.getElementById('modal-container-types')
+    // delTypeModalBg.setAttribute("hidden")
+    delTypeModalBg.removeAttribute("hidden");
 
 });
 
@@ -73,13 +86,22 @@ function updateForm () {
     let updatedField = document.getElementById('delete-name')
     let currentTable = document.getElementById('types-table')
     let specVal = ""
-
+    
     for (let i = 0, row; row = currentTable.rows[i]; i++) {
         if (currentTable.rows[i].getAttribute('data-value') == typeID) {
             let specRow = currentTable.getElementsByTagName('tr')[i]
             specVal = specRow.getElementsByTagName('td')[1].textContent
         }
     }
-
+    
     updatedField.innerText = specVal
 }
+
+function deleteModalCancel () {
+    let modal = document.getElementById('modal-container-types')
+    console.log("We're out")
+    modal.setAttribute("hidden", true)
+
+
+}
+

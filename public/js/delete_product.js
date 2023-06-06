@@ -4,6 +4,19 @@ let nameProduct = document.getElementById('delete-name');
 let priceProduct = document.getElementById('delete-price');
 let stockProduct = document.getElementById('delete-stock');
 let typeProduct = document.getElementById('delete-type');
+let deleteProductConf = document.getElementById('confirmation-container')
+
+deleteProductConf.addEventListener('submit', function(e) {
+    e.preventDefault()
+
+    delProductModalBg = document.getElementById('modal-container-products')
+    let idInput = document.getElementById('input-id-delete')
+    let idValue = idInput.value
+    console.log(idValue)
+    delProductModalBg.setAttribute('hidden', true)
+    deleteProduct(idValue)
+
+})
 
 
 // Submit form
@@ -12,11 +25,15 @@ deleteProductForm.addEventListener('submit', function (e) {
     // Prevent form submission
     e.preventDefault();
 
+
+    delProductModalBg = document.getElementById('modal-container-products')
+    document.getElementById('header').scrollIntoView()
+    delProductModalBg.removeAttribute("hidden")
     // Get values of form fields
-    let idValue = idInput.value;
+    // let idValue = idInput.value;
 
     // Delete Product
-    deleteProduct(idValue);
+    // deleteProduct(idValue);
 
 });
 
@@ -52,16 +69,17 @@ function deleteProduct (productID) {
             deleteRow(productID);
 
             // Clear the input fields for another transaction
-            idInput.value = '';
-            nameProduct.innerText = '';
-            priceProduct.innerText = '';
-            stockProduct.innerText = '';
-            typeProduct.innerText = '';
-
+            
         } else if (xhttp.readyState == 4 && xhttp.status != 204) {
             console.log('There was an error with the input.')
         }
     }
+
+    idInput.value = '';
+    nameProduct.innerText = '';
+    priceProduct.innerText = '';
+    stockProduct.innerText = '';
+    typeProduct.innerText = '';
     // Send AJAX request
     xhttp.send(JSON.stringify(data));
 
@@ -121,3 +139,11 @@ function populateForm() {
     typeProduct.innerText = specType;
 
 }
+
+
+function deleteModalCancel () {
+    let modal = document.getElementById('modal-container-products')
+    modal.setAttribute('hidden', true)
+    
+}
+

@@ -1,4 +1,15 @@
 
+<div hidden class="modal-container" id="modal-container-types">
+    <div class="confirmation-modal" id="confirmation-modal-types">
+        <form class="conf-container" id="confirmation-container">
+            <h3>Are you sure you would like to delete this entry?</h3>
+            <div>
+                <input type="submit" class="button" value="Confirm">
+                <input type="reset" class="button" value="Cancel" onclick="deleteModalCancel()"> 
+            </div>
+        </form>
+    </div>
+</div>
 
 <div class="content">
     <h1 class="page-title"><strong>Types</strong></h1>
@@ -24,7 +35,7 @@
                 <fieldset>
                     <form id="update-type-form">
                         <label>ID:</label>
-                        <input type="text" name="input-id" id="input-id-update" required> 
+                        <input type="number" min="0" name="input-id" id="input-id-update" oninput="updateUpGroupForm()" required> 
                         <label for="input-description">Description:</label> 
                         <input type="text" name="input-description" id="input-description-update" required>                  
                         <div class="update-operations">
@@ -40,7 +51,7 @@
                 <fieldset>
                     <form id="delete-type-form" class="delete-fieldset">
                         <label class="delete-group-labels">ID:</label>
-                        <input type="text" class="input-id-delete" name="input-id" id="input-id-delete" oninput='updateForm()' required>
+                        <input type="number" min="0" class="input-id-delete" name="input-id" id="input-id-delete" oninput='updateForm()' required>
                         <label class="delete-group-labels">Description:</label>
                         <p id="delete-name"></p>
                         <div class="delete-operations">

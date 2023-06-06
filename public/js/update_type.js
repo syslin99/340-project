@@ -65,3 +65,21 @@ function updateRow(data, typeID) {
         }
     }
 }
+
+
+function updateUpGroupForm () {
+    let deleteForm = document.getElementById('input-id-update')
+    let typeID = deleteForm.value
+    let updatedField = document.getElementById('input-description-update')
+    let currentTable = document.getElementById('types-table')
+    let specVal = ""
+
+    for (let i = 0, row; row = currentTable.rows[i]; i++) {
+        if (currentTable.rows[i].getAttribute('data-value') == typeID) {
+            let specRow = currentTable.getElementsByTagName('tr')[i]
+            specVal = specRow.getElementsByTagName('td')[1].textContent
+        }
+    }
+
+    updatedField.value = specVal
+}

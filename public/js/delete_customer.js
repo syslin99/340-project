@@ -2,14 +2,29 @@ let deleteCustomerForm = document.getElementById('delete-customer-form')
 let idInput = document.getElementById('input-id-delete')
 let nameCustomer = document.getElementById('delete-name')
 let emailCustomer = document.getElementById('delete-email')
+let deleteCustomerConf = document.getElementById('confirmation-container')
+
+deleteCustomerConf.addEventListener('submit', function (e) {
+    e.preventDefault()
+
+    delCustomerModalBg = document.getElementById('modal-container-customers')
+
+    let idInput = document.getElementById('input-id-delete')
+    let idValue = idInput.value
+    delCustomerModalBg.setAttribute("hidden", true)
+    deleteCustomer(idValue)
+})
 
 deleteCustomerForm.addEventListener('submit', function(e) {
     e.preventDefault()
 
-    console.log(idInput.value)
-    let idValue = idInput.value
 
-    deleteCustomer(idValue)
+    delCustomerModalBg = document.getElementById('modal-container-customers')
+    delCustomerModalBg.removeAttribute('hidden')
+    // console.log(idInput.value)
+    // let idValue = idInput.value
+
+    // deleteCustomer(idValue)
 })
 
 
@@ -87,3 +102,11 @@ function updateForm () {
     updatedName.innerText = specName
     updatedEmail.innerText = specEmail
 }
+
+function deleteModalCancel () {
+    let modal = document.getElementById('modal-container-customers')
+    modal.setAttribute('hidden', true)
+
+}
+
+

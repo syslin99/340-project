@@ -1,3 +1,16 @@
+<div hidden class="modal-container" id="modal-container-products">
+    <div class="confirmation-modal" id="confirmation-modal-products">
+        <form class="conf-container" id="confirmation-container">
+            <h3>Are you sure you would like to delete this entry?</h3>
+            <div>
+                <input type="submit" class="button" value="Confirm">
+                <input type="reset" class="button" value="Cancel" onclick="deleteModalCancel()"> 
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <div class="content">
     <h1 class="page-title">Products</h1>
     
@@ -42,7 +55,7 @@
                     <form id='update-product-form'>
                         {{!-- ID --}}
                         <label for='input-id-update'>ID:</label>
-                        <input type='number' name='input-id-update' id='input-id-update' required>
+                        <input type='number' name='input-id-update' id='input-id-update' oninput="populateUpGroupForm()" required>
                         {{!-- Name --}}
                         <label for='input-name-update'>Name:</label>
                         <input type='text' name='input-name-update' id='input-name-update' required>
