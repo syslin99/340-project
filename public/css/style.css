@@ -159,7 +159,7 @@ fieldset {
 table {
     border: 1px solid;
     border-radius: 10px;
-    min-width: 60%;
+    width: 80%;
 }
 
 legend {
@@ -177,6 +177,7 @@ legend {
     display: grid;
     align-self: flex-start;
     justify-items: center;
+    width: 100%;
 }
 
 th {
@@ -254,10 +255,10 @@ form.delete-fieldset {
 .table-grouping {
     display: grid;
     grid-template-rows: auto auto;
-    align-items: center;
+    align-items: start;
     border-bottom: 1px solid;
     border-top: 1px solid;
-    
+    width: 100%;
 }
 
 .item2 {
