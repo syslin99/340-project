@@ -64,6 +64,12 @@ addSaleForm.addEventListener('reset', function(e) {
     customerInput.value = '';
     employeeInput.value = '';
 
+    // Clear table entries
+    let tableBody = document.getElementById('add-product-table-body')
+    let children = tableBody.children
+    for (var i = children.length - 1; i > 0; i--) {
+        children[i].remove()
+    }
 });
 
 
