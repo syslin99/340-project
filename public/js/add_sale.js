@@ -104,3 +104,13 @@ addRowToTable = (data) => {
     salesTable.appendChild(saleRow);
 
 }
+
+function addProductButton (tableID) {
+
+    var table = document.getElementById(tableID)
+    var row = document.getElementById('sample-row')
+    var cloneRow = row.cloneNode(true)
+    cloneRow.removeAttribute('hidden')
+    table.appendChild(cloneRow)
+    
+}

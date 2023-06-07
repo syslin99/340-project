@@ -266,8 +266,9 @@ form.delete-fieldset {
 }
 
 .add-sale-grid {
+    width: 100%;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 100%;
     align-items: center;
 }
 
@@ -279,6 +280,19 @@ form.delete-fieldset {
     grid-column: 1/span 3;
     justify-self: center;
     width: 80%;
+}
+
+.add-product-table, .update-product-table {
+    border: none;
+    width: 100%;
+}
+
+.product-card {
+}
+
+.row-contents {
+    display: grid;
+    grid-template-columns: 33% 34% 33%;
 }
 
 /* Confirmation Modals */

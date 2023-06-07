@@ -47,9 +47,33 @@
                             {{/each}}
                         </select>
                         {{!-- Products --}}
-                        <div class="add-sale-grid">
-                            <label>Add Products:</label>
-                            <button class="add-components-button">+</button>
+                        <div class="add-sale-grid" id="add-sale-grid">
+                            {{!-- {{> product-card}} --}}
+                                <table class="add-product-table" id="add-product-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Add Products:</th>
+                                            <th>Price:</th>
+                                            <th>Quantity:</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="add-product-table-body">
+                                        <tr id="sample-row" hidden>
+                                            <td>                                            
+                                                <select  id='product-name' required>
+                                                    <option value=''>Select a Product</option>
+                                                    {{#each products}}
+                                                    <option value='{{this.id_product}}'>{{this.name}}</option>
+                                                    {{/each}}
+                                                </select>
+                                            </td>
+                                            <td><p id="product-price" class="add-components"></p></td>
+                                            <td><input id="product-quantity" class="add-components" type="text" placeholder="0"></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            <button type="button"  class="add-components-button" id="add-product-form-btn" onclick="addProductButton('add-product-table-body')">+</button>
                         </div>
 
                         <div class='add-operations'>
@@ -89,16 +113,25 @@
                         </select>
                         {{!-- Products --}}
                         <div class="add-sale-grid">
-                            <label class="add-components">Add Products:</label>
-                            <label class="add-components">Price:</label>
-                            <label class="add-components">Quantity:</label>
-                            <p class="add-components">Animal Crossing</p>
-                            <p class="add-components">19.99</p>
-                            <input class="add-components" type="text" placeholder="1">
-                            <p class="add-components">5,000 Bells</p>
-                            <p class="add-components">4.99</p>
-                            <input class="add-components" type="text" placeholder="1">
-                            <button class="add-components-button">+</button>
+                            <table class="update-product-table">
+                                <thead>
+                                    <tr>
+                                        <th class="add-components">Add Products:</th>
+                                        <th class="add-components">Price:</th>
+                                        <th class="add-components">Quantity:</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="update-product-table-body">
+                                </tbody>
+
+                                {{!-- <p class="add-components">Animal Crossing</p>
+                                <p class="add-components">19.99</p>
+                                <input class="add-components" type="text" placeholder="1">
+                                <p class="add-components">5,000 Bells</p>
+                                <p class="add-components">4.99</p>
+                                <input class="add-components" type="text" placeholder="1"> --}}
+                            </table>
+                            <button type="button" class="add-components-button" id="update-product-form-btn" onclick="addProductButton('update-product-table-body')">+</button>
                         </div>
 
                         <div class='update-operations'>
