@@ -15,16 +15,37 @@ addSaleForm.addEventListener('submit', function(e) {
     let dateValue = dateInput.value;
     let customerValue = customerInput.value;
     let employeeValue = employeeInput.value;
-    // TODO: CALCULATE TOTAL PRICE FROM PRODUCTS, set to 1.23 temporarily
-    let priceValue = 1.23;
+    let priceValue = 0;
+
+    let productSaleData = [];
+    // Get products
+    productCards = document.getElementById('add-product-table-body')
+    products = productCards.getElementsByTagName('tr');
+    for (let i = 0, product; product = products[i]; i++) {
+        // Get values of form fields
+        specProduct = product.getElementsByTagName('td');
+        specID = specProduct[0].getElementsByTagName('select')[0].value;
+        specPrice = specProduct[1].innerText;
+        specQuantity = specProduct[2].getElementsByTagName('input')[0].value;
+        // Update total price of Sale
+        productTotal = specPrice *specQuantity;
+        priceValue += (productTotal);
+        // Create Product_Sale entry
+        let productSale = {
+            id_product: specID,
+            quantity: specQuantity
+        }
+        productSaleData.push(productSale);
+    }
     
     // Package data into JS object
-    let data = {
+    let saleData = {
         date: dateValue,
         total_price: priceValue,
         id_customer: customerValue,
         id_employee: employeeValue
     }
+    let data = [saleData, productSaleData]
 
     // Set up AJAX request
     var xhttp = new XMLHttpRequest();
@@ -33,9 +54,16 @@ addSaleForm.addEventListener('submit', function(e) {
     // Define resolution of AJAX request
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
+            response = JSON.parse(xhttp.response)
+            sale = response[0]
+            saleID = sale[sale.length - 1].id_sale;
+            productsales = response[1]
 
-            // Add new data to table
-            addRowToTable(xhttp.response);
+            // Add new data to sales table
+            addRowToSalesTable(sale);
+
+            // Add new data to product sales table
+            addRowsToProductSalesTable(productsales, saleID)
 
             // Clear input fields for another transaction
             dateInput.value = '';
@@ -73,14 +101,13 @@ addSaleForm.addEventListener('reset', function(e) {
 });
 
 
-// Create a row in the Sale Table
-addRowToTable = (data) => {
+// Create a row in the Sales Table
+addRowToSalesTable = (data) => {
 
     // Retrieve Sales table
     let salesTable = document.getElementById('sales-table');
     // Retrieve new row data
-    let parsedData = JSON.parse(data);
-    let newSaleRow = parsedData[parsedData.length - 1];
+    let newSaleRow = data[data.length - 1];
 
     // Create a row and cells
     let saleRow = document.createElement('tr');
@@ -111,6 +138,44 @@ addRowToTable = (data) => {
 
 }
 
+// Create rows in the Product Sales table
+addRowsToProductSalesTable = (data, saleID) => {
+
+    // Retrieve Product Sales table
+    let productSalesTable = document.getElementById('product-sales-table');
+    // Retrieve new row data
+    let newProductSaleRows = data.filter((productsale) => productsale.id_sale == saleID);
+
+    // Iterate through each Product Sale
+    for (let i = 0, productsale; productsale = newProductSaleRows[i]; i++) {
+
+        // Create a row and cells
+        let productsaleRow = document.createElement('tr');
+        let idCell = document.createElement('td');
+        let saleCell = document.createElement('td');
+        let productCell = document.createElement('td');
+        let quantityCell = document.createElement('td');
+        // Fill cells with new row data
+        idCell.innerText = productsale.id_product_sale;
+        saleCell.innerText = productsale.id_sale;
+        productCell.innerText = productsale.name;
+        quantityCell.innerText = productsale.quantity;
+
+        // Add cells to the row
+        productsaleRow.appendChild(idCell);
+        productsaleRow.appendChild(saleCell);
+        productsaleRow.appendChild(productCell);
+        productsaleRow.appendChild(quantityCell);
+
+        // Add row to the table
+        productSalesTable.appendChild(productsaleRow);
+
+    }
+
+
+}
+
+
 function addProductButton (tableID) {
 
     var table = document.getElementById(tableID)
@@ -119,4 +184,22 @@ function addProductButton (tableID) {
     cloneRow.removeAttribute('hidden')
     table.appendChild(cloneRow)
     
+}
+
+
+function updateUpProductCard(selection, products) {
+
+    let productID = selection.value;
+    let specPrice;
+
+    for (let i = 0, entry; entry = products[i]; i++) {
+        if (entry.id_product == productID) {
+            specPrice = entry.price
+        }
+    }
+
+    productRow = selection.parentElement.parentElement;
+    priceCell = productRow.getElementsByTagName('td')[1];
+    priceCell.innerText = specPrice;
+
 }

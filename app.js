@@ -17,6 +17,10 @@ var exphbs = require('express-handlebars');
 const { resetColumns } = require('forever/lib/forever/cli');
 app.engine('.hbs', engine({extname: '.hbs'}));
 app.set('view engine', '.hbs');
+var hbs = exphbs.create({});
+hbs.handlebars.registerHelper('json', function(context) {
+    return JSON.stringify(context);
+});
 
 
 /* Routes */
@@ -497,10 +501,12 @@ app.post('/add-sale', function(req, res) {
 
     // Capture incoming data
     let data = req.body;
+    let saleData = data[0];
+    let productSaleData = data[1];
     
     // Add sale to database
     addSale = `INSERT INTO Sales (date, total_price, id_customer, id_employee)
-        VALUES ('${data.date}', ${data.total_price}, ${data.id_customer}, ${data.id_employee});`;
+        VALUES ('${saleData.date}', ${saleData.total_price}, ${saleData.id_customer}, ${saleData.id_employee});`;
     db.pool.query(addSale, function(error, rows, fields) {
         if (error) {
             console.log(error);
@@ -510,13 +516,58 @@ app.post('/add-sale', function(req, res) {
             selectSales = `SELECT id_sale, DATE_FORMAT(date, '%Y-%m-%d') AS date, total_price, Customers.name as customer, Employees.name as employee
                 FROM Sales
                 JOIN Customers ON Sales.id_customer = Customers.id_customer
-                JOIN Employees ON Sales.id_employee = Employees.id_employee;`;
+                JOIN Employees ON Sales.id_employee = Employees.id_employee
+                ORDER BY id_sale;`;
             db.pool.query(selectSales, function(error, rows, fields) {
                 if (error) {
                     console.log(error);
                     res.sendStatus(400);
                 } else {
-                    res.send(rows);
+                    let sales = rows;
+
+                    // Retrieve id_sale
+                    getSaleID = `SELECT MAX(id_sale) AS id FROM Sales;`;
+                    db.pool.query(getSaleID, function(error, rows, fields) {
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            saleID = rows[0].id;
+                            let productsales = [];
+
+                            // Add product sales to database
+                            for (let i = 0, ps; ps = productSaleData[i]; i++) {
+                                addProductSale = `INSERT INTO Product_Sales (id_sale, id_product, quantity)
+                                    VALUES (${saleID}, ${productSaleData[i].id_product}, ${productSaleData[i].quantity});`;
+                                db.pool.query(addProductSale, function(error, rows, fields) {
+                                    if (error) {
+                                        console.log(error);
+                                        res.sendStatus(400);
+                                    } else {
+                                        productsales.push(rows);
+
+                                        // Display newly added product sales
+                                        if (productsales.length == productSaleData.length) {
+                                            selectProductSales = `SELECT id_product_sale, id_sale, name, quantity
+                                                FROM Product_Sales
+                                                JOIN Products ON Product_Sales.id_product = Products.id_product
+                                                ORDER BY id_product_sale;`;
+                                            db.pool.query(selectProductSales, function(error, rows, fields) {
+                                                if (error) {
+                                                    console.log(error);
+                                                    res.sendStatus(400);
+                                                } else {
+                                                    res.send([sales, rows]);
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+
+                        }
+                    });
+
                 }
             });
         }
