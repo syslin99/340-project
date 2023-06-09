@@ -91,7 +91,7 @@
                     <form id='update-sale-form'>
                         {{!-- ID --}}
                         <label for='input-id-update'>ID:</label>
-                        <input type='number' name='input-id-update' id='input-id-update' oninput="populateSalesForm()" required>
+                        <input type='number' name='input-id-update' id='input-id-update' oninput="populateSalesForm({{json products}})" required>
                         {{!-- Date --}}
                         <label for='input-date-update'>Date:</label>
                         <input type='date' name='input-date-update' id='input-date-update' required>
