@@ -38,6 +38,8 @@ addSaleForm.addEventListener('submit', function(e) {
         productSaleData.push(productSale);
     }
     
+    console.log(dateValue)
+
     // Package data into JS object
     let saleData = {
         date: dateValue,
@@ -237,4 +239,61 @@ function updateUpProductCard(selection, products) {
     priceCell = productRow.getElementsByTagName('td')[1];
     priceCell.innerText = specPrice;
 
+}
+
+function populateSalesForm() {
+    var inputID = document.getElementById('input-id-update')
+    var idValue = inputID.value
+    var inputDate = document.getElementById('input-date-update')
+    var inputCust = document.getElementById('input-customer-update')
+    var inputEmp = document.getElementById('input-employee-update')
+
+    var salesTable = document.getElementById('sales-table')
+    var prodSalesTable = document.getElementById('product-sales-table')
+    var specDate = ''
+    var specCust = ''
+    var specEmp = ''
+
+    for (let i = 0, row; row = salesTable.rows[i]; i++) {
+        if (salesTable.rows[i].getAttribute('data-value') == idValue) {
+            let specRow = salesTable.getElementsByTagName('tr')[i]
+            specDate = specRow.getElementsByTagName('td')[1].textContent
+            specCust = specRow.getElementsByTagName('td')[3].textContent
+            specEmp = specRow.getElementsByTagName('td')[4].textContent
+        }
+    }
+
+    // for (let i = 0, row; row = prodSalesTable.rows[i]; i++) {
+    //     specRow = prodSalesTable.getElementsByTagName('tr')[i]
+    //     rowEntries = specRow.getElementsByTagName('td')
+    //     // Continue search for sale id...
+
+    // }
+
+    // Populate the customer dropdown
+    let count = 0
+    for (var option of inputCust.options) {
+        if (specCust == option.innerHTML) {
+            inputCust.options[count].selected = true
+            break
+        } else {
+            inputCust.options[0].selected = true
+        }
+        count += 1
+    }
+
+    // Populate the employee dropdown
+    count = 0
+    for (var option of inputEmp.options) {
+        if (specEmp == option.innerHTML) {
+            inputEmp.options[count].selected = true
+            break
+        } else {
+            inputEmp.options[0].selected = true
+        }
+        count += 1
+    }
+
+    // Populate the inputs
+    inputDate.value = specDate
 }
