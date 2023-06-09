@@ -74,6 +74,23 @@ addSaleForm.addEventListener('submit', function(e) {
             console.log('There was an error with the input.')
         }
     }
+
+    // Eliminate product fields from table
+    var table_body = document.getElementById('add-product-table-body')
+    var children_body = table_body.children
+
+    for (var i = children_body.length - 1; i > 0; i--) {
+        children_body[i].remove()
+    }
+
+    var prods = document.getElementById('product-name')
+    var price = document.getElementById('product-price')
+    var quantity = document.getElementById('product-quantity')
+
+    prods.value = ''
+    price.innerText = ''
+    quantity.value = ''
+    
     // Send AJAX request
     xhttp.send(JSON.stringify(data));
 
@@ -98,6 +115,15 @@ addSaleForm.addEventListener('reset', function(e) {
     for (var i = children.length - 1; i > 0; i--) {
         children[i].remove()
     }
+
+    // Clear the initial product entry
+    var prods = document.getElementById('product-name')
+    var price = document.getElementById('product-price')
+    var quantity = document.getElementById('product-quantity')
+
+    prods.value = ''
+    price.innerText = ''
+    quantity.value = ''
 });
 
 
@@ -181,7 +207,16 @@ function addProductButton (tableID) {
     var table = document.getElementById(tableID)
     var row = document.getElementById('sample-row')
     var cloneRow = row.cloneNode(true)
-    cloneRow.removeAttribute('hidden')
+    rowEntries = cloneRow.children
+
+    clonedSelect = rowEntries[0].children[0]
+    clonedTd = rowEntries[1]
+    clonedInput = rowEntries[2].children[0]
+
+    clonedSelect.value = ''
+    clonedTd.innerText  = ''
+    clonedInput.value = ''
+
     table.appendChild(cloneRow)
     
 }
