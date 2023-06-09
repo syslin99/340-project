@@ -28,7 +28,7 @@ addSaleForm.addEventListener('submit', function(e) {
         specPrice = specProduct[1].innerText;
         specQuantity = specProduct[2].getElementsByTagName('input')[0].value;
         // Update total price of Sale
-        productTotal = specPrice *specQuantity;
+        productTotal = specPrice * specQuantity;
         priceValue += (productTotal);
         // Create Product_Sale entry
         let productSale = {
@@ -38,8 +38,6 @@ addSaleForm.addEventListener('submit', function(e) {
         productSaleData.push(productSale);
     }
     
-    console.log(dateValue)
-
     // Package data into JS object
     let saleData = {
         date: dateValue,
@@ -194,6 +192,9 @@ addRowsToProductSalesTable = (data, saleID) => {
         productsaleRow.appendChild(saleCell);
         productsaleRow.appendChild(productCell);
         productsaleRow.appendChild(quantityCell);
+
+        // Add a row attribute so updateRow can find the newly added row
+        productsaleRow.setAttribute('data-value', productsale.id_product_sale);
 
         // Add row to the table
         productSalesTable.appendChild(productsaleRow);

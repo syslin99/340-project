@@ -580,11 +580,13 @@ app.put('/update-sale', function(req,res) {
 
     // Capture incoming data
     let data = req.body;
-    let saleID = parseInt(data.id_sale);
+    let saleData = data[0];
+    let saleID = parseInt(saleData.id_sale);
+    let productSaleData = data[1];
 
     // Update sale in database
     updateSale = `UPDATE Sales
-        SET date = '${data.date}', total_price = ${data.total_price}, id_customer = ${data.id_customer}, id_employee = ${data.id_employee}
+        SET date = '${saleData.date}', total_price = ${saleData.total_price}, id_customer = ${saleData.id_customer}, id_employee = ${saleData.id_employee}
         WHERE id_sale = ${saleID};`;
     db.pool.query(updateSale, function(error, rows, fields) {
         if (error) {
@@ -602,7 +604,68 @@ app.put('/update-sale', function(req,res) {
                     console.log(error);
                     res.sendStatus(400);
                 } else {
-                    res.send(rows);
+                    let sales = rows;
+
+                    // Retrieve existing products
+                    selectProducts = `SELECT id_product
+                        FROM Product_Sales
+                        WHERE id_sale = ?;`;
+                    db.pool.query(selectProducts, [saleID], function(error, rows, fields) {
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            productIDs = [];
+                            rows.map(row => {
+                                productIDs.push(row.id_product);
+                            });
+                            let productsales = [];
+
+                            // Update product sales in database
+                            for (let i = 0, ps; ps = productSaleData[i]; i++) {
+                                let updateProductSale;
+                                // If updating quantity of existing product sale
+                                if (productIDs.includes(parseInt(ps.id_product))) {
+                                    updateProductSale = `UPDATE Product_Sales
+                                    SET quantity = ${ps.quantity}
+                                    WHERE id_sale = ? and id_product = ${ps.id_product};`;
+                                }
+                                // If adding new product sale
+                                else {
+                                    updateProductSale = `INSERT INTO Product_Sales (id_sale, id_product, quantity)
+                                        VALUES (?, ${ps.id_product}, ${ps.quantity});`;
+                                }
+                                db.pool.query(updateProductSale, [saleID], function(error, rows, fields) {
+                                    if (error) {
+                                        console.log(error);
+                                        res.sendStatus(400);
+                                    } else {
+                                        productsales.push(rows);
+
+                                        // Display newly added product sales
+                                        if (productsales.length == productSaleData.length) {
+                                            selectProductSales = `SELECT id_product_sale, id_sale, name, quantity
+                                                FROM Product_Sales
+                                                JOIN Products ON Product_Sales.id_product = Products.id_product
+                                                WHERE id_sale = ${saleID};`;
+                                            db.pool.query(selectProductSales, function(error, rows, fields) {
+                                                if (error) {
+                                                    console.log(error);
+                                                    res.sendStatus(400);
+                                                } else {
+                                                    res.send([sales, rows])
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+
+                            }
+
+                        }
+                    });
+
+                    // res.send(rows);
                 }
             });
         }
