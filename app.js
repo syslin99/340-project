@@ -514,7 +514,11 @@ app.post('/add-sale', function(req, res) {
     let data = req.body;
     let saleData = data[0];
     let productSaleData = data[1];
-    
+    // Capture null values
+    if (saleData.id_employee === '') {
+        saleData.id_employee = null
+    }
+
     // Add sale to database
     addSale = `INSERT INTO Sales (date, total_price, id_customer, id_employee)
         VALUES ('${saleData.date}', ${saleData.total_price}, ${saleData.id_customer}, ${saleData.id_employee});`;
@@ -527,7 +531,7 @@ app.post('/add-sale', function(req, res) {
             selectSales = `SELECT id_sale, DATE_FORMAT(date, '%Y-%m-%d') AS date, total_price, Customers.name as customer, Employees.name as employee
                 FROM Sales
                 JOIN Customers ON Sales.id_customer = Customers.id_customer
-                JOIN Employees ON Sales.id_employee = Employees.id_employee
+                LEFT JOIN Employees ON Sales.id_employee = Employees.id_employee
                 ORDER BY id_sale;`;
             db.pool.query(selectSales, function(error, rows, fields) {
                 if (error) {
@@ -594,6 +598,10 @@ app.put('/update-sale', function(req,res) {
     let saleData = data[0];
     let saleID = parseInt(saleData.id_sale);
     let productSaleData = data[1];
+    // Capture null values
+    if (saleData.id_employee === '') {
+        saleData.id_employee = null
+    }
 
     // Update sale in database
     updateSale = `UPDATE Sales
@@ -608,7 +616,7 @@ app.put('/update-sale', function(req,res) {
             selectSale = `SELECT id_sale, DATE_FORMAT(date, '%Y-%m-%d') AS date, total_price, Customers.name as customer, Employees.name as employee
                 FROM Sales
                 JOIN Customers ON Sales.id_customer = Customers.id_customer
-                JOIN Employees ON Sales.id_employee = Employees.id_employee
+                LEFT JOIN Employees ON Sales.id_employee = Employees.id_employee
                 WHERE id_sale = ?;`;
             db.pool.query(selectSale, [saleID], function(error, rows, fields) {
                 if (error) {

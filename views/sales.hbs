@@ -40,7 +40,7 @@
                         </select>
                         {{!-- Employee Name --}}
                         <label for='input-employee'>Employee Name:</label>
-                        <select name='input-employee' id='input-employee' required>
+                        <select name='input-employee' id='input-employee'>
                             <option value=''>Select an Employee</option>
                             {{#each employees}}
                             <option value='{{this.id_employee}}'>{{this.name}}</option>
@@ -105,7 +105,7 @@
                         </select>
                         {{!-- Employee Name --}}
                         <label for='input-employee-update'>Employee Name:</label>
-                        <select name='input-employee-update' id='input-employee-update' required>
+                        <select name='input-employee-update' id='input-employee-update'>
                             <option value=''>Select an Employee</option>
                             {{#each employees}}
                             <option value='{{this.id_employee}}'>{{this.name}}</option>
