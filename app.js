@@ -625,44 +625,62 @@ app.put('/update-sale', function(req,res) {
                 } else {
                     let sales = rows;
 
-                    // Retrieve existing products
-                    selectProducts = `SELECT id_product
+                    // Retrieve existing product sales
+                    selectExistingPS = `SELECT id_product_sale
                         FROM Product_Sales
-                        WHERE id_sale = ?;`;
-                    db.pool.query(selectProducts, [saleID], function(error, rows, fields) {
+                        WHERE id_sale = ?
+                        ORDER BY id_product_sale;`;
+                    db.pool.query(selectExistingPS, [saleID], function(error, rows, fields) {
                         if (error) {
                             console.log(error);
                             res.sendStatus(400);
                         } else {
-                            productIDs = [];
-                            rows.map(row => {
-                                productIDs.push(row.id_product);
-                            });
-                            let productsales = [];
+                            // productIDs = [];
+                            // rows.map(row => {
+                            //     productIDs.push(row.id_product);
+                            // });
+                            // let productsales = [];
 
-                            // Update product sales in database
-                            for (let i = 0, ps; ps = productSaleData[i]; i++) {
+                            psExist = rows;
+                            
+                            numModified = 0;
+                            deletedIDs = [];
+                            // Iterate through updated product sales
+                            for (let i = 0, psData; psData = productSaleData[i]; i++) {
+
                                 let updateProductSale;
-                                // If updating quantity of existing product sale
-                                if (productIDs.includes(parseInt(ps.id_product))) {
-                                    updateProductSale = `UPDATE Product_Sales
-                                    SET quantity = ${ps.quantity}
-                                    WHERE id_sale = ? and id_product = ${ps.id_product};`;
+                                // If product sale exists already
+                                if (i < psExist.length) {
+                                    // Deleting product sale
+                                    if (psData.quantity == 0) {
+                                        updateProductSale = `DELETE FROM Product_Sales
+                                            WHERE id_product_sale = ${psExist[i].id_product_sale};`;
+                                        deletedIDs.push(psExist[i].id_product_sale);
+                                    }
+                                    // Updating product sale
+                                    else {
+                                        updateProductSale = `UPDATE Product_Sales
+                                            SET id_product = ${psData.id_product}, quantity = ${psData.quantity}
+                                            WHERE id_product_sale = ${psExist[i].id_product_sale};`;
+                                    }
                                 }
-                                // If adding new product sale
+                                // Otherwise
                                 else {
+                                    // Adding product sale
                                     updateProductSale = `INSERT INTO Product_Sales (id_sale, id_product, quantity)
-                                        VALUES (?, ${ps.id_product}, ${ps.quantity});`;
+                                        VALUES (${saleID}, ${psData.id_product}, ${psData.quantity});`;
                                 }
-                                db.pool.query(updateProductSale, [saleID], function(error, rows, fields) {
+                                
+                                // Update product sales in database
+                                db.pool.query(updateProductSale, function(error, rows, fields) {
                                     if (error) {
                                         console.log(error);
                                         res.sendStatus(400);
                                     } else {
-                                        productsales.push(rows);
+                                        numModified += 1;
 
-                                        // Display newly added product sales
-                                        if (productsales.length == productSaleData.length) {
+                                        // Display newly updated product sales
+                                        if (numModified == productSaleData.length) {
                                             selectProductSales = `SELECT id_product_sale, id_sale, name, quantity
                                                 FROM Product_Sales
                                                 JOIN Products ON Product_Sales.id_product = Products.id_product
@@ -672,7 +690,7 @@ app.put('/update-sale', function(req,res) {
                                                     console.log(error);
                                                     res.sendStatus(400);
                                                 } else {
-                                                    res.send([sales, rows])
+                                                    res.send([sales, rows, deletedIDs])
                                                 }
                                             });
                                         }
@@ -684,7 +702,6 @@ app.put('/update-sale', function(req,res) {
                         }
                     });
 
-                    // res.send(rows);
                 }
             });
         }

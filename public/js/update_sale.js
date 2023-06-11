@@ -34,7 +34,6 @@ updateSaleForm.addEventListener('submit', function(e) {
         priceValue += productTotal;
         // Create Product_Sale entry
         let productSale = {
-            // id_sale: idValue,
             id_product: specID,
             quantity: specQuantity
         }
@@ -59,14 +58,16 @@ updateSaleForm.addEventListener('submit', function(e) {
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             response = JSON.parse(xhttp.response)
+
             sale = response[0]
             productsales = response[1]
+            deletedIDs = response[2]
 
             // Update the data in the sales table
             updateSalesTable(sale, idValue)
 
             // Update the data in the product sales table
-            updateProductSalesTable(productsales)
+            updateProductSalesTable(productsales, deletedIDs)
 
             // Clear the input fields for another transaction
             idInput.value = '';
@@ -154,7 +155,7 @@ function updateSalesTable(data, saleID) {
 }
 
 // Update the row in the Product Sales table
-function updateProductSalesTable(data) {
+function updateProductSalesTable(data, deletedIDs) {
 
     // Retrieve Product Sales table
     let productsalesTable = document.getElementById('product-sales-table');
@@ -165,24 +166,34 @@ function updateProductSalesTable(data) {
         productsaleIDs.push(productsaleID);
     }
 
-    // Iterate through each Product Sale
+    // Deleting product sales
+    for (let n = 0, deletedID; deletedID = deletedIDs[n]; n++) {
+        // // Find row to be deleted
+        deleteRow = document.querySelector(`tr[data-value="${deletedID}"]`)
+        // Delete row
+        deleteRow.remove()        
+    }
+
+    // Iterate through each inserted/updated product sale
     for (let n = 0, productsale; productsale = data[n]; n++) {
 
-        // If updating existing product sale
+        // Updating existing product sale
         if (productsaleIDs.includes(productsale.id_product_sale)) {
             // Find row to be updated
             for (let i = 0, row; row = productsalesTable.rows[i]; i++) {
                 if (productsalesTable.rows[i].getAttribute('data-value') == productsale.id_product_sale) {
                     // Retrieve row and cells
                     let updateRowIndex = productsalesTable.getElementsByTagName('tr')[i];
+                    let productTD = updateRowIndex.getElementsByTagName('td')[2];
                     let quantityTD = updateRowIndex.getElementsByTagName('td')[3];
                     // Update row
+                    productTD.innerHTML = productsale.name;
                     quantityTD.innerHTML = productsale.quantity;
                 }
             }
         }
         
-        // If adding new product sale
+        // Adding new product sale
         else {
             // Create a row and cells
             let productsaleRow = document.createElement('tr');
