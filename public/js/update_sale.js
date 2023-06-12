@@ -3,7 +3,6 @@ let updateSaleForm = document.getElementById('update-sale-form');
 
 // Submit form
 updateSaleForm.addEventListener('submit', function(e) {
-
     // Prevent form submission
     e.preventDefault();
 
@@ -88,6 +87,8 @@ updateSaleForm.addEventListener('submit', function(e) {
         children_body[i].remove()
     }
 
+    UpdatedProducts.length = 0
+
     var prods = document.getElementById('product-name')
     var price = document.getElementById('product-price')
     var quantity = document.getElementById('product-quantity')
@@ -115,6 +116,10 @@ updateSaleForm.addEventListener('reset', function(e) {
     dateInput.value = '';
     customerInput.value = '';
     employeeInput.value = '';
+
+    // Reset disabled options
+    UpdatedProducts.length = 0
+    resetSelOptions('update-product-table-body')
 
     // Clear table entries
     let tableBody = document.getElementById('update-product-table-body')
@@ -269,6 +274,11 @@ function populateSalesForm(products) {
             // Populate the fields of the table
             populateFields(numProducts, prodName, prodQuant, products)
             numProducts += 1
+
+            // Find the first select component
+            let select = children[0].children[0].children[0]
+            updateSelOptions(select)
+            
         }
 
     }
