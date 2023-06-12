@@ -3,17 +3,17 @@
 
 
     {{!-- Search bar --}}
-    <div class="search-sl-ps search-grouping">
-        <form id='search-sale' method='GET' action='/sales'>
+    <div class="search-sl-ps ">
+        <form id='search-sale' class="search-sale" method='GET' action='/sales'>
             <div class='search-center'>
-                <label for='sale'>Search by Sale: </label>
-                <input class='search-components search-bar' type='number' name='sale' id='sale'>
+                <label class="search-label" for='sale'>Search by Sale: </label>
+                <input class='search-components search-bar' style="margin: 0; padding-left: 5px" type='number' name='sale' id='sale'>
                 
-                <input type='submit' class='search-components search-reset button' value='Submit'>
-                <a href='/sales'><button class='search-components search-reset'>Reset</button></a>
+                <input type='submit' class='search-buttons' value='Submit'>
+                <a style="display: grid; width: 100%" href='/sales'><button class='search-buttons search-button-last'>Reset</button></a>
             </div>
             <div class='search-sides'>
-                <h3 class='search-components'>{{resultPhrase}}</h3>
+                <h3>{{resultPhrase}}</h3>
             </div>
         </form>
     </div>
@@ -40,7 +40,7 @@
                         </select>
                         {{!-- Employee Name --}}
                         <label for='input-employee'>Employee Name:</label>
-                        <select name='input-employee' id='input-employee' required>
+                        <select name='input-employee' id='input-employee'>
                             <option value=''>Select an Employee</option>
                             {{#each employees}}
                             <option value='{{this.id_employee}}'>{{this.name}}</option>
@@ -60,7 +60,7 @@
                                     <tbody id="add-product-table-body">
                                         <tr id="sample-row">
                                             <td>
-                                                <select name='product-name' id='product-name' onchange='updateUpProductCard(this, {{json products}})' required>
+                                                <select name='product-name' id='product-name' onchange='updateUpProductCard(this, {{json products}}), updateSelOptions(this)' required>
                                                     <option value=''>Select a Product</option>
                                                     {{#each products}}
                                                     <option value='{{this.id_product}}'>{{this.name}}</option>
@@ -68,7 +68,7 @@
                                                 </select>
                                             </td>
                                             <td id="product-price"></td>
-                                            <td><input id="product-quantity" class="add-components" type="text" placeholder="0"></td>
+                                            <td><input id="product-quantity" min="0" class="add-components" type="number" required></td>
                                         </tr>
 
                                     </tbody>
@@ -105,7 +105,7 @@
                         </select>
                         {{!-- Employee Name --}}
                         <label for='input-employee-update'>Employee Name:</label>
-                        <select name='input-employee-update' id='input-employee-update' required>
+                        <select name='input-employee-update' id='input-employee-update'>
                             <option value=''>Select an Employee</option>
                             {{#each employees}}
                             <option value='{{this.id_employee}}'>{{this.name}}</option>
@@ -123,13 +123,6 @@
                                 </thead>
                                 <tbody id="update-product-table-body">
                                 </tbody>
-
-                                {{!-- <p class="add-components">Animal Crossing</p>
-                                <p class="add-components">19.99</p>
-                                <input class="add-components" type="text" placeholder="1">
-                                <p class="add-components">5,000 Bells</p>
-                                <p class="add-components">4.99</p>
-                                <input class="add-components" type="text" placeholder="1"> --}}
                             </table>
                             <button type="button" class="add-components-button" id="update-product-form-btn" onclick="addProductButton('update-product-table-body')">+</button>
                         </div>

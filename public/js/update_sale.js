@@ -3,7 +3,6 @@ let updateSaleForm = document.getElementById('update-sale-form');
 
 // Submit form
 updateSaleForm.addEventListener('submit', function(e) {
-
     // Prevent form submission
     e.preventDefault();
 
@@ -17,17 +16,38 @@ updateSaleForm.addEventListener('submit', function(e) {
     let dateValue = dateInput.value;
     let customerValue = customerInput.value;
     let employeeValue = employeeInput.value;
-    // TODO: CALCULATE TOTAL PRICE FROM PRODUCTS, set to 3.45 temporarily
-    let priceValue = 3.45;
+    let priceValue = 0;
+
+    let productSaleData = [];
+    // Get products
+    productCards = document.getElementById('update-product-table-body');
+    products = productCards.getElementsByTagName('tr');
+    for (let i = 0, product; product = products[i]; i++) {
+        // Get values of form fields
+        specProduct = product.getElementsByTagName('td');
+        specID = specProduct[0].getElementsByTagName('select')[0].value;
+        specPrice = specProduct[1].innerText;
+        specQuantity = specProduct[2].getElementsByTagName('input')[0].value;
+        // Update total price of sale
+        productTotal = specPrice * specQuantity;
+        priceValue += productTotal;
+        // Create Product_Sale entry
+        let productSale = {
+            id_product: specID,
+            quantity: specQuantity
+        }
+        productSaleData.push(productSale);
+    }
 
     // Package data into JS object
-    let data = {
+    let saleData = {
         id_sale: idValue,
         date: dateValue,
         total_price: priceValue,
         id_customer: customerValue,
         id_employee: employeeValue
     }
+    let data = [saleData, productSaleData]
 
     // Set up AJAX request
     var xhttp = new XMLHttpRequest();
@@ -36,9 +56,17 @@ updateSaleForm.addEventListener('submit', function(e) {
     // Define resolution of AJAX request
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
+            response = JSON.parse(xhttp.response)
 
-            // Update the data in the table
-            updateRow(xhttp.response, idValue)
+            sale = response[0]
+            productsales = response[1]
+            deletedIDs = response[2]
+
+            // Update the data in the sales table
+            updateSalesTable(sale, idValue)
+
+            // Update the data in the product sales table
+            updateProductSalesTable(productsales, deletedIDs)
 
             // Clear the input fields for another transaction
             idInput.value = '';
@@ -59,6 +87,8 @@ updateSaleForm.addEventListener('submit', function(e) {
         children_body[i].remove()
     }
 
+    UpdatedProducts.length = 0
+
     var prods = document.getElementById('product-name')
     var price = document.getElementById('product-price')
     var quantity = document.getElementById('product-quantity')
@@ -66,8 +96,6 @@ updateSaleForm.addEventListener('submit', function(e) {
     prods.value = ''
     price.innerText = ''
     quantity.value = ''
-    
-
 
     // Send AJAX request
     xhttp.send(JSON.stringify(data));
@@ -89,6 +117,10 @@ updateSaleForm.addEventListener('reset', function(e) {
     customerInput.value = '';
     employeeInput.value = '';
 
+    // Reset disabled options
+    UpdatedProducts.length = 0
+    resetSelOptions('update-product-table-body')
+
     // Clear table entries
     let tableBody = document.getElementById('update-product-table-body')
     let children = tableBody.children
@@ -100,12 +132,12 @@ updateSaleForm.addEventListener('reset', function(e) {
 
 
 // Update the row in the Sales table
-function updateRow(data, saleID) {
+function updateSalesTable(data, saleID) {
 
     // Retrieve Sales table
     let salesTable = document.getElementById('sales-table');
     // Retrieve updated row data
-    let parsedData = JSON.parse(data);
+    let updatedSaleRow = data[data.length - 1]
 
     // Iterate through rows
     for (let i = 0, row; row = salesTable.rows[i]; i++) {
@@ -118,11 +150,78 @@ function updateRow(data, saleID) {
             let customerTD = updateRowIndex.getElementsByTagName('td')[3];
             let employeeTD = updateRowIndex.getElementsByTagName('td')[4];
             // Update row
-            dateTD.innerHTML = parsedData[0].date;
-            priceTD.innerHTML = parsedData[0].total_price;
-            customerTD.innerHTML = parsedData[0].customer;
-            employeeTD.innerHTML = parsedData[0].employee;
+            dateTD.innerHTML = updatedSaleRow.date;
+            priceTD.innerHTML = updatedSaleRow.total_price;
+            customerTD.innerHTML = updatedSaleRow.customer;
+            employeeTD.innerHTML = updatedSaleRow.employee;
         }
+    }
+
+}
+
+// Update the row in the Product Sales table
+function updateProductSalesTable(data, deletedIDs) {
+
+    // Retrieve Product Sales table
+    let productsalesTable = document.getElementById('product-sales-table');
+    // Retrieve existing product sale IDs
+    let productsaleIDs = [];
+    for (let i = 1, row; row = productsalesTable.rows[i]; i++) {
+        let productsaleID = parseInt(row.getElementsByTagName('td')[0].innerHTML);
+        productsaleIDs.push(productsaleID);
+    }
+
+    // Deleting product sales
+    for (let n = 0, deletedID; deletedID = deletedIDs[n]; n++) {
+        // // Find row to be deleted
+        deleteRow = document.querySelector(`tr[data-value="${deletedID}"]`)
+        // Delete row
+        deleteRow.remove()        
+    }
+
+    // Iterate through each inserted/updated product sale
+    for (let n = 0, productsale; productsale = data[n]; n++) {
+
+        // Updating existing product sale
+        if (productsaleIDs.includes(productsale.id_product_sale)) {
+            // Find row to be updated
+            for (let i = 0, row; row = productsalesTable.rows[i]; i++) {
+                if (productsalesTable.rows[i].getAttribute('data-value') == productsale.id_product_sale) {
+                    // Retrieve row and cells
+                    let updateRowIndex = productsalesTable.getElementsByTagName('tr')[i];
+                    let productTD = updateRowIndex.getElementsByTagName('td')[2];
+                    let quantityTD = updateRowIndex.getElementsByTagName('td')[3];
+                    // Update row
+                    productTD.innerHTML = productsale.name;
+                    quantityTD.innerHTML = productsale.quantity;
+                }
+            }
+        }
+        
+        // Adding new product sale
+        else {
+            // Create a row and cells
+            let productsaleRow = document.createElement('tr');
+            let idCell = document.createElement('td');
+            let saleCell = document.createElement('td');
+            let productCell = document.createElement('td');
+            let quantityCell = document.createElement('td');
+            // Fill cells with new row data
+            idCell.innerText = productsale.id_product_sale;
+            saleCell.innerText = productsale.id_sale;
+            productCell.innerText = productsale.name;
+            quantityCell.innerText = productsale.quantity;
+            // Add cells to the row
+            productsaleRow.appendChild(idCell);
+            productsaleRow.appendChild(saleCell);
+            productsaleRow.appendChild(productCell);
+            productsaleRow.appendChild(quantityCell);
+            // Add a row attribute so updateRow can find the newly added row
+            productsaleRow.setAttribute('data-value', productsale.id_product_sale);
+            // Add row to the table
+            productsalesTable.appendChild(productsaleRow);
+        }
+
     }
 
 }
@@ -164,8 +263,6 @@ function populateSalesForm(products) {
         specRow = prodSalesTable.getElementsByTagName('tr')[i]
         rowEntries = specRow.children
         
-        console.log(rowEntries.length)
-
         // Continue search for sale id...
         if (rowEntries[1].textContent == idValue) {
             var prodName = rowEntries[2].textContent
@@ -177,6 +274,11 @@ function populateSalesForm(products) {
             // Populate the fields of the table
             populateFields(numProducts, prodName, prodQuant, products)
             numProducts += 1
+
+            // Find the first select component
+            let select = children[0].children[0].children[0]
+            updateSelOptions(select)
+            
         }
 
     }

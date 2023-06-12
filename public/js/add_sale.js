@@ -1,5 +1,6 @@
 let addSaleForm = document.getElementById('add-sale-form');
-
+var AddedProducts = []
+var UpdatedProducts = []
 
 // Submit Form
 addSaleForm.addEventListener('submit', function(e) {
@@ -28,7 +29,7 @@ addSaleForm.addEventListener('submit', function(e) {
         specPrice = specProduct[1].innerText;
         specQuantity = specProduct[2].getElementsByTagName('input')[0].value;
         // Update total price of Sale
-        productTotal = specPrice *specQuantity;
+        productTotal = specPrice * specQuantity;
         priceValue += (productTotal);
         // Create Product_Sale entry
         let productSale = {
@@ -38,8 +39,6 @@ addSaleForm.addEventListener('submit', function(e) {
         productSaleData.push(productSale);
     }
     
-    console.log(dateValue)
-
     // Package data into JS object
     let saleData = {
         date: dateValue,
@@ -85,6 +84,10 @@ addSaleForm.addEventListener('submit', function(e) {
         children_body[i].remove()
     }
 
+    // Reset disabled options
+    AddedProducts.length = 0
+    resetSelOptions('add-product-table-body')
+
     var prods = document.getElementById('product-name')
     var price = document.getElementById('product-price')
     var quantity = document.getElementById('product-quantity')
@@ -114,6 +117,10 @@ addSaleForm.addEventListener('reset', function(e) {
     // Clear table entries
     let tableBody = document.getElementById('add-product-table-body')
     let children = tableBody.children
+    
+    // Find the first select component
+    let select = children[0].children[0].children[0]
+    
     for (var i = children.length - 1; i > 0; i--) {
         children[i].remove()
     }
@@ -123,11 +130,28 @@ addSaleForm.addEventListener('reset', function(e) {
     var price = document.getElementById('product-price')
     var quantity = document.getElementById('product-quantity')
 
+    // Reset disabled options
+    AddedProducts.length = 0
+    resetSelOptions('add-product-table-body')
+
     prods.value = ''
     price.innerText = ''
     quantity.value = ''
 });
 
+
+function resetSelOptions (tableID) {
+    // Find the table and its child rows
+    let tableBody = document.getElementById(tableID)
+    let children = tableBody.children
+    // Find the first select component
+    let select = children[0].children[0].children[0]
+
+    // Remove all disabled attributes
+    for (var option of select.options) {
+        option.removeAttribute('disabled')
+    }
+}
 
 // Create a row in the Sales Table
 addRowToSalesTable = (data) => {
@@ -195,12 +219,13 @@ addRowsToProductSalesTable = (data, saleID) => {
         productsaleRow.appendChild(productCell);
         productsaleRow.appendChild(quantityCell);
 
+        // Add a row attribute so updateRow can find the newly added row
+        productsaleRow.setAttribute('data-value', productsale.id_product_sale);
+
         // Add row to the table
         productSalesTable.appendChild(productsaleRow);
 
     }
-
-
 }
 
 
@@ -215,12 +240,88 @@ function addProductButton (tableID) {
     clonedTd = rowEntries[1]
     clonedInput = rowEntries[2].children[0]
 
+    for (var option of clonedSelect.options) {
+        option.removeAttribute('disabled')
+    }
+
     clonedSelect.value = ''
     clonedTd.innerText  = ''
     clonedInput.value = ''
 
     table.appendChild(cloneRow)
+
+    updateSelOptions(clonedSelect)
     
+}
+
+// Update the select options' disabled state
+function updateSelOptions(select) {
+
+    // Get the table of entries
+    var table_body = select.parentElement.parentElement.parentElement
+
+    // Loop through the table to retrieve the products in use -> store in array
+    var counter = 0
+    for (var row of table_body.children) {
+        let td = row.children[0]
+        let idxSelect = td.children[0]
+
+        // Separate by table ids
+        if (table_body.getAttribute('id') == 'add-product-table-body') {
+            AddedProducts[counter] = idxSelect.options[idxSelect.selectedIndex].text
+            AddedProducts.length = counter + 1
+        } else {
+            UpdatedProducts[counter] = idxSelect.options[idxSelect.selectedIndex].text
+            UpdatedProducts.length = counter + 1
+
+        }
+        counter += 1 
+    }
+
+    console.log("Added Products: ", AddedProducts)
+    console.log("Updated Products: ", UpdatedProducts)
+
+
+
+    // For each select, remove the options that have already been selected
+    for (var rows of table_body.children) {
+        let td = rows.children[0]
+        let idxSelect = td.children[0]
+        // let idxValue = idxSelect.options[idxSelect.selectedIndex].text
+        let options = idxSelect.options
+
+        // Evaluate all possible products
+        for (var option of options) {
+            var usedFlag = false
+
+            // Compare the options to those that are being used
+            if (table_body.getAttribute('id') == 'add-product-table-body') {
+                usedFlag = disableOptions(option, AddedProducts)
+            } else {
+                usedFlag = disableOptions(option, UpdatedProducts)
+            }
+
+            // If the option is not being used remove the disabled tag
+            if (!usedFlag || option.text == "Select a Product") {
+                option.removeAttribute('disabled')
+            }
+        }
+    }
+
+}
+
+function disableOptions(option, array) {
+    for (var usedProd of array) {
+
+        // If the any of the used values match, disable the option
+        if (option.text == usedProd) {
+            option.setAttribute('disabled', true)
+            return true
+        }
+    }
+
+    // The option was not found in the used array
+    return false
 }
 
 
@@ -233,6 +334,10 @@ function updateUpProductCard(selection, products) {
         if (entry.id_product == productID) {
             specPrice = entry.price
         }
+    }
+
+    if (selection.options[selection.selectedIndex].text == "Select a Product") {
+        specPrice = ''
     }
 
     productRow = selection.parentElement.parentElement;

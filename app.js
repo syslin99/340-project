@@ -32,7 +32,8 @@ app.get('/', function (req, res) {
 
 // Render Employees page
 app.get('/employees', function (req, res) {
-    let selectEmployees = `SELECT * FROM Employees;`
+    let selectEmployees = `SELECT * FROM Employees
+        ORDER BY id_employee;`
     db.pool.query(selectEmployees, function (error, rows, fields) {
         res.render('employees', {data: rows})
     })
@@ -41,7 +42,8 @@ app.get('/employees', function (req, res) {
 
 // Render Customers page
 app.get('/customers', function (req, res) {
-    let selectCustomers = `SELECT * FROM Customers;`;
+    let selectCustomers = `SELECT * FROM Customers
+        ORDER BY id_customer;`;
     db.pool.query(selectCustomers, function (error, rows, fields) {
         res.render('customers', {data: rows});
     });
@@ -51,7 +53,8 @@ app.get('/customers', function (req, res) {
 app.get('/products', function (req, res) {
 
     // Display products
-    let selectProducts = `SELECT * FROM Products;`;
+    let selectProducts = `SELECT * FROM Products
+        ORDER BY id_product;`;
     db.pool.query(selectProducts, function (error, rows, fields) {
         let products = rows;
 
@@ -78,7 +81,8 @@ app.get('/products', function (req, res) {
 // Render Types page
 app.get('/types', function (req, res) {
 
-    let selectTypes = `SELECT * FROM Types;`;
+    let selectTypes = `SELECT * FROM Types
+        ORDER BY id_type;`;
     db.pool.query(selectTypes, function (error, rows, fields) {
         res.render('types', {data: rows});
     });
@@ -94,17 +98,20 @@ app.get('/sales', function (req, res) {
     // Show all Sales
     if (req.query.sale === undefined || req.query.sale === '') {
         selectSales = `SELECT id_sale, DATE_FORMAT(date, '%Y-%m-%d') AS date, total_price, id_customer, id_employee
-            FROM Sales;`;
-        selectProductSales = `SELECT * FROM Product_Sales;`;
+            FROM Sales
+            ORDER BY id_sale;`;
+        selectProductSales = `SELECT * FROM Product_Sales
+            ORDER BY id_product_sale;`;
         resultPhrase = '';
     }
     // Show search results
     else {
         selectSales = `SELECT id_sale, DATE_FORMAT(date, '%Y-%m-%d') AS date, total_price, id_customer, id_employee
             FROM Sales
-            WHERE id_sale LIKE '${req.query.sale}%';`;
+            WHERE id_sale = '${req.query.sale}%';`;
         selectProductSales = `SELECT * FROM Product_Sales
-            WHERE id_sale LIKE '${req.query.sale}%';`;
+            WHERE id_sale = '${req.query.sale}%'
+            ORDER BY id_product_sale;`;
         resultPhrase = `Results for id_sale ${req.query.sale}`;
     }
 
@@ -187,7 +194,8 @@ app.post('/add-type', function (req, res) {
             console.log(error)
             res.sendStatus(400);
         } else {
-            selectTypes = `SELECT * FROM Types;`;
+            selectTypes = `SELECT * FROM Types
+                ORDER BY id_type;`;
             db.pool.query(selectTypes, function (error, rows, fields) {
                 if (error) {
                     console.log(error);
@@ -264,7 +272,8 @@ app.post('/add-customer', function (req, res) {
             console.log(error)
             res.sendStatus(400);
         } else {
-            selectCustomers = `SELECT * FROM Customers;`;
+            selectCustomers = `SELECT * FROM Customers
+                ORDER BY id_customer;`;
             db.pool.query(selectCustomers, function (error, rows, fields) {
                 if (error) {
                     console.log(error);
@@ -340,7 +349,8 @@ app.post('/add-employee', function (req, res) {
             console.log(error)
             res.sendStatus(400);
         } else {
-            selectEmployees = `SELECT * FROM Employees;`;
+            selectEmployees = `SELECT * FROM Employees
+                ORDER BY id_employee;`;
             db.pool.query(selectEmployees, function (error, rows, fields) {
                 if (error) {
                     console.log(error);
@@ -359,7 +369,7 @@ app.delete('/delete-employee', function (req, res, next) {
     let data = req.body;
     let employeeID = parseInt(data.id_employee);
     let deleteEmployee = `DELETE FROM Employees
-    WHERE id_employee = ?;`;
+        WHERE id_employee = ?;`;
     db.pool.query(deleteEmployee, [employeeID], function (error, rows, fields) {
         if (error) {
             console.log(error);
@@ -425,7 +435,8 @@ app.post('/add-product', function (req, res) {
             // Display newly added product
             selectProducts = `SELECT id_product, name, price, stock, description as type
                 FROM Products
-                JOIN Types ON Products.id_type = Types.id_type;`;
+                JOIN Types ON Products.id_type = Types.id_type
+                ORDER BY id_product;`;
             db.pool.query(selectProducts, function (error, rows, fields) {
                 if (error) {
                     console.log(error);
@@ -503,7 +514,11 @@ app.post('/add-sale', function(req, res) {
     let data = req.body;
     let saleData = data[0];
     let productSaleData = data[1];
-    
+    // Capture null values
+    if (saleData.id_employee === '') {
+        saleData.id_employee = null
+    }
+
     // Add sale to database
     addSale = `INSERT INTO Sales (date, total_price, id_customer, id_employee)
         VALUES ('${saleData.date}', ${saleData.total_price}, ${saleData.id_customer}, ${saleData.id_employee});`;
@@ -516,7 +531,7 @@ app.post('/add-sale', function(req, res) {
             selectSales = `SELECT id_sale, DATE_FORMAT(date, '%Y-%m-%d') AS date, total_price, Customers.name as customer, Employees.name as employee
                 FROM Sales
                 JOIN Customers ON Sales.id_customer = Customers.id_customer
-                JOIN Employees ON Sales.id_employee = Employees.id_employee
+                LEFT JOIN Employees ON Sales.id_employee = Employees.id_employee
                 ORDER BY id_sale;`;
             db.pool.query(selectSales, function(error, rows, fields) {
                 if (error) {
@@ -580,11 +595,17 @@ app.put('/update-sale', function(req,res) {
 
     // Capture incoming data
     let data = req.body;
-    let saleID = parseInt(data.id_sale);
+    let saleData = data[0];
+    let saleID = parseInt(saleData.id_sale);
+    let productSaleData = data[1];
+    // Capture null values
+    if (saleData.id_employee === '') {
+        saleData.id_employee = null
+    }
 
     // Update sale in database
     updateSale = `UPDATE Sales
-        SET date = '${data.date}', total_price = ${data.total_price}, id_customer = ${data.id_customer}, id_employee = ${data.id_employee}
+        SET date = '${saleData.date}', total_price = ${saleData.total_price}, id_customer = ${saleData.id_customer}, id_employee = ${saleData.id_employee}
         WHERE id_sale = ${saleID};`;
     db.pool.query(updateSale, function(error, rows, fields) {
         if (error) {
@@ -595,14 +616,92 @@ app.put('/update-sale', function(req,res) {
             selectSale = `SELECT id_sale, DATE_FORMAT(date, '%Y-%m-%d') AS date, total_price, Customers.name as customer, Employees.name as employee
                 FROM Sales
                 JOIN Customers ON Sales.id_customer = Customers.id_customer
-                JOIN Employees ON Sales.id_employee = Employees.id_employee
+                LEFT JOIN Employees ON Sales.id_employee = Employees.id_employee
                 WHERE id_sale = ?;`;
             db.pool.query(selectSale, [saleID], function(error, rows, fields) {
                 if (error) {
                     console.log(error);
                     res.sendStatus(400);
                 } else {
-                    res.send(rows);
+                    let sales = rows;
+
+                    // Retrieve existing product sales
+                    selectExistingPS = `SELECT id_product_sale
+                        FROM Product_Sales
+                        WHERE id_sale = ?
+                        ORDER BY id_product_sale;`;
+                    db.pool.query(selectExistingPS, [saleID], function(error, rows, fields) {
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            // productIDs = [];
+                            // rows.map(row => {
+                            //     productIDs.push(row.id_product);
+                            // });
+                            // let productsales = [];
+
+                            psExist = rows;
+                            
+                            numModified = 0;
+                            deletedIDs = [];
+                            // Iterate through updated product sales
+                            for (let i = 0, psData; psData = productSaleData[i]; i++) {
+
+                                let updateProductSale;
+                                // If product sale exists already
+                                if (i < psExist.length) {
+                                    // Deleting product sale
+                                    if (psData.quantity == 0) {
+                                        updateProductSale = `DELETE FROM Product_Sales
+                                            WHERE id_product_sale = ${psExist[i].id_product_sale};`;
+                                        deletedIDs.push(psExist[i].id_product_sale);
+                                    }
+                                    // Updating product sale
+                                    else {
+                                        updateProductSale = `UPDATE Product_Sales
+                                            SET id_product = ${psData.id_product}, quantity = ${psData.quantity}
+                                            WHERE id_product_sale = ${psExist[i].id_product_sale};`;
+                                    }
+                                }
+                                // Otherwise
+                                else {
+                                    // Adding product sale
+                                    updateProductSale = `INSERT INTO Product_Sales (id_sale, id_product, quantity)
+                                        VALUES (${saleID}, ${psData.id_product}, ${psData.quantity});`;
+                                }
+                                
+                                // Update product sales in database
+                                db.pool.query(updateProductSale, function(error, rows, fields) {
+                                    if (error) {
+                                        console.log(error);
+                                        res.sendStatus(400);
+                                    } else {
+                                        numModified += 1;
+
+                                        // Display newly updated product sales
+                                        if (numModified == productSaleData.length) {
+                                            selectProductSales = `SELECT id_product_sale, id_sale, name, quantity
+                                                FROM Product_Sales
+                                                JOIN Products ON Product_Sales.id_product = Products.id_product
+                                                WHERE id_sale = ${saleID};`;
+                                            db.pool.query(selectProductSales, function(error, rows, fields) {
+                                                if (error) {
+                                                    console.log(error);
+                                                    res.sendStatus(400);
+                                                } else {
+                                                    res.send([sales, rows, deletedIDs])
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+
+                            }
+
+                        }
+                    });
+
                 }
             });
         }
